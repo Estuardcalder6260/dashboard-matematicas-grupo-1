@@ -14,7 +14,7 @@
         body {
             margin: 0;
             display: flex;
-            font-family: 'Georgia', serif; /* Fuente elegante como la de tu imagen */
+            font-family: 'Georgia', serif;
             height: 100vh;
             overflow: hidden;
             background-color: #fcfcfc;
@@ -35,13 +35,14 @@
 
         .nav-item {
             padding: 15px;
-            font-size: 13px;
+            font-size: 11px;
             color: #bdc3c7;
             cursor: pointer;
             text-transform: uppercase;
             transition: 0.3s;
             font-family: sans-serif;
             font-weight: bold;
+            letter-spacing: 1px;
         }
 
         .nav-item.active {
@@ -59,7 +60,7 @@
 
         .striper {
             display: flex;
-            width: 700%;
+            width: 700%; /* Siete secciones al 100% cada una */
             height: 100%;
             transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -72,42 +73,35 @@
             overflow-y: auto;
         }
 
-        /* Estilos de Texto */
+        /* Estilos de Texto y Tarjetas */
         .label { color: var(--accent-gold); font-weight: bold; font-family: sans-serif; letter-spacing: 2px; font-size: 14px; margin-bottom: 10px; }
-        
         h1 { font-size: 55px; color: var(--text-dark); margin: 0 0 20px 0; }
         h1 span { color: var(--accent-gold); font-style: italic; }
-
         .intro-text { font-family: sans-serif; line-height: 1.6; color: #444; font-size: 16px; max-width: 900px; margin-bottom: 40px; }
 
-        /* Los dos cuadros de abajo */
-        .cards-container {
-            display: flex;
-            gap: 25px;
-            max-width: 900px;
-        }
-
         .card {
-            flex: 1;
             background: white;
-            padding: 30px;
+            padding: 25px;
             border-radius: 15px;
             border: 1px solid #eaeaea;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            transition: 0.3s;
         }
 
-        .card h3 { 
-            font-family: sans-serif; 
-            font-size: 16px; 
-            margin-top: 0; 
-            color: var(--text-dark); 
-            border-bottom: 2px solid var(--accent-gold);
-            display: inline-block;
-            padding-bottom: 5px;
-        }
+        .card h3 { font-family: sans-serif; font-size: 16px; margin-top: 0; color: var(--text-dark); }
+        .card p { font-family: sans-serif; font-size: 14px; color: #666; line-height: 1.5; }
 
-        .card p { font-family: sans-serif; font-size: 14px; color: #666; line-height: 1.5; margin-bottom: 0; }
+        /* Estilo para las secciones nuevas */
+        .card-main {
+            background: white;
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: 10px 10px 0px #eee;
+            border: 1px solid #ddd;
+            max-width: 850px;
+            line-height: 1.8;
+            color: #555;
+            font-family: sans-serif;
+        }
     </style>
 </head>
 <body>
@@ -129,21 +123,17 @@
             <div class="section">
                 <div class="label">01. INTRODUCCIÓN</div>
                 <h1>Análisis <span>Curricular</span></h1>
-                
                 <p class="intro-text">
-                    La enseñanza de la Matemática en Ecuador ha pasado de centrarse en la memorización de fórmulas y 
-                    procedimientos a concebirse como una herramienta lógica para comprender y transformar la realidad. 
-                    Este cambio refleja la transición del conductismo hacia enfoques socio-constructivistas.
+                    La enseñanza de la Matemática en Ecuador ha pasado de centrarse en la memorización de fórmulas a concebirse como una herramienta lógica para comprender y transformar la realidad.
                 </p>
-
-                <div class="cards-container">
+                <div style="display: flex; gap: 25px; max-width: 900px;">
                     <div class="card">
                         <h3>1. ENFOQUE CRÍTICO</h3>
-                        <p>La matemática moderna busca que el estudiante aplique conceptos en situaciones reales, fomentando el pensamiento lógico sobre la memoria.</p>
+                        <p>Fomenta el pensamiento lógico sobre la memoria en situaciones reales.</p>
                     </div>
                     <div class="card">
                         <h3>2. FLEXIBILIDAD</h3>
-                        <p>El sistema permite que cada institución adapte los contenidos según su entorno social, garantizando una educación más pertinente.</p>
+                        <p>El sistema permite que cada institución adapte los contenidos según su entorno social.</p>
                     </div>
                 </div>
             </div>
@@ -151,124 +141,86 @@
             <div class="section">
                 <div class="label">02. EVOLUCIÓN HISTÓRICA</div>
                 <h1>Evolución <span>Histórica Detallada</span></h1>
-                
-                <p class="intro-text" style="margin-bottom: 50px;">
-                    Pasa el cursor sobre los hitos para explorar los detalles técnicos y pedagógicos de cada reforma.
-                </p>
-
-                <div style="max-width: 900px; margin-left: 20px;">
-                    
+                <div style="max-width: 900px;">
                     <table style="width: 100%; border-collapse: collapse;">
-                        
                         <tr style="border-bottom: 1px solid #eee;">
-                            <td style="width: 150px; padding: 30px 0; vertical-align: top;">
-                                <div style="font-size: 36px; color: #b0b0b0; font-family: serif; font-style: italic; font-weight: normal; margin-top: -10px;">1996</div>
-                            </td>
-                            <td style="padding: 30px 0 30px 40px; vertical-align: top;">
-                                <div class="card" style="margin: 0; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                                    <h3 style="margin: 0 0 10px 0; border: none; font-size: 16px; color: var(--text-dark); text-transform: uppercase; font-family: sans-serif;">REFORMA CURRICULAR CONSENSUADA</h3>
-                                    <p style="margin-bottom: 10px; font-family: sans-serif;"><strong>Paradigma:</strong> Conductista y Mecanicista.</p>
-                                    <p style="font-size: 14px; color: #666; font-family: sans-serif;">Enfocada fuertemente en el desarrollo de destrezas instrumentales mediante la repetición. La matemática se enseñaba de forma descontextualizada. El currículo era una lista de contenidos rígidos por año (ej. teoría de conjuntos, operaciones básicas). El docente era un transmisor de algoritmos y el estudiante un receptor pasivo evaluado únicamente de forma sumativa.</p>
+                            <td style="width: 120px; padding: 20px 0; font-size: 36px; color: #b0b0b0; font-style: italic; vertical-align: top;">1996</td>
+                            <td style="padding: 20px 0 20px 30px;">
+                                <div class="card">
+                                    <h3 style="border:none; margin-bottom:5px;">REFORMA CONSENSUADA</h3>
+                                    <p><b>Paradigma:</b> Conductista. Énfasis en repetición y destrezas instrumentales.</p>
                                 </div>
                             </td>
                         </tr>
-
                         <tr style="border-bottom: 1px solid #eee;">
-                            <td style="padding: 30px 0; vertical-align: top;">
-                                <div style="font-size: 36px; color: #b0b0b0; font-family: serif; font-style: italic; font-weight: normal; margin-top: -10px;">2010</div>
-                            </td>
-                            <td style="padding: 30px 0 30px 40px; vertical-align: top;">
-                                <div class="card" style="margin: 0; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                                    <h3 style="margin: 0 0 10px 0; border: none; font-size: 16px; color: var(--text-dark); text-transform: uppercase; font-family: sans-serif;">ACTUALIZACIÓN Y FORTALECIMIENTO CURRICULAR (EGB)</h3>
-                                    <p style="margin-bottom: 10px; font-family: sans-serif;"><strong>Paradigma:</strong> Pedagogía Crítica e introducción de los "Ejes Transversales".</p>
-                                    <p style="font-size: 14px; color: #666; font-family: sans-serif;">Primer intento formal de humanizar la ciencia exacta. Se articuló la matemática con el "Buen Vivir" (Sumak Kawsay). Se introdujeron los bloques curriculares (Numérico, Geométrico, Medida, Estadística). El objetivo ya no era solo calcular, sino resolver problemas cotidianos, promoviendo por primera vez el razonamiento lógico-crítico en el aula.</p>
+                            <td style="padding: 20px 0; font-size: 36px; color: #b0b0b0; font-style: italic; vertical-align: top;">2010</td>
+                            <td style="padding: 20px 0 20px 30px;">
+                                <div class="card">
+                                    <h3 style="border:none; margin-bottom:5px;">ACTUALIZACIÓN EGB</h3>
+                                    <p><b>Paradigma:</b> Pedagogía Crítica. Introducción del "Buen Vivir" y bloques curriculares.</p>
                                 </div>
                             </td>
                         </tr>
-
-                        <tr style="border-bottom: 1px solid #eee;">
-                            <td style="padding: 30px 0; vertical-align: top;">
-                                <div style="font-size: 36px; color: #b0b0b0; font-family: serif; font-style: italic; font-weight: normal; margin-top: -10px;">2016</div>
-                            </td>
-                            <td style="padding: 30px 0 30px 40px; vertical-align: top;">
-                                <div class="card" style="margin: 0; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                                    <h3 style="margin: 0 0 10px 0; border: none; font-size: 16px; color: var(--text-dark); text-transform: uppercase; font-family: sans-serif;">AJUSTE CURRICULAR (LA ERA DE LA FLEXIBILIDAD)</h3>
-                                    <p style="margin-bottom: 10px; font-family: sans-serif;"><strong>Paradigma:</strong> Constructivista / Desarrollo de DCD.</p>
-                                    <p style="font-size: 14px; color: #666; font-family: sans-serif;">Cambio radical en la estructura. Desaparece la exigencia rígida por "año" y se agrupa por Subniveles, dando 3 años al docente para lograr un aprendizaje. Se dividieron los aprendizajes en Básicos Imprescindibles (obligatorios) y Básicos Deseables.</p>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr style="border-bottom: 1px solid #eee;">
-                            <td style="padding: 30px 0; vertical-align: top;">
-                                <div style="font-size: 36px; color: #b0b0b0; font-family: serif; font-style: italic; font-weight: normal; margin-top: -10px;">2020</div>
-                            </td>
-                            <td style="padding: 30px 0 30px 40px; vertical-align: top;">
-                                <div class="card" style="margin: 0; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                                    <h3 style="margin: 0 0 10px 0; border: none; font-size: 16px; color: var(--text-dark); text-transform: uppercase; font-family: sans-serif;">CURRÍCULO PRIORIZADO (EMERGENCIA COVID-19)</h3>
-                                    <p style="margin-bottom: 10px; font-family: sans-serif;"><strong>Paradigma:</strong> Contención emocional y Aprendizaje Basado en Proyectos (ABP).</p>
-                                    <p style="font-size: 14px; color: #666; font-family: sans-serif;">Respuesta a la pandemia. El currículo se comprimió para priorizar únicamente lo esencial, obligando a planificar mediante proyectos interdisciplinares modulares.</p>
-                                </div>
-                            </td>
-                        </tr>
-
                         <tr>
-                            <td style="padding: 30px 0; vertical-align: top;">
-                                <div style="font-size: 36px; color: #b0b0b0; font-family: serif; font-style: italic; font-weight: normal; margin-top: -10px;">2023</div>
-                            </td>
-                            <td style="padding: 30px 0 30px 40px; vertical-align: top;">
-                                <div class="card" style="margin: 0; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); background: #fffdf8;">
-                                    <h3 style="margin: 0 0 10px 0; border: none; font-size: 16px; color: var(--text-dark); text-transform: uppercase; font-family: sans-serif;">MARCO CURRICULAR COMPETENCIAL</h3>
-                                    <p style="margin-bottom: 10px; font-family: sans-serif;"><strong>Paradigma:</strong> Socio-constructivista avanzado y enfoque STEAM.</p>
-                                    <p style="font-size: 14px; color: #666; font-family: sans-serif;">La transformación actual. Se enfoca en desarrollar "Competencias". Énfasis explícito en la alfabetización financiera y la programación. La evaluación se prohíbe cuantitativa en subniveles inferiores.</p>
+                            <td style="padding: 20px 0; font-size: 36px; color: #b0b0b0; font-style: italic; vertical-align: top;">2023</td>
+                            <td style="padding: 20px 0 20px 30px;">
+                                <div class="card" style="background:#fffdf8">
+                                    <h3 style="border:none; margin-bottom:5px;">MARCO COMPETENCIAL</h3>
+                                    <p><b>Paradigma:</b> STEAM. Enfoque en competencias digitales y alfabetización financiera.</p>
                                 </div>
                             </td>
                         </tr>
-
                     </table>
                 </div>
             </div>
 
             <div class="section">
-                <div class="label">03. ESTRUCTURA</div>
-                <h1>Niveles de <span>Concreción</span></h1>
-                <p class="intro-text">Información sobre los niveles Macro, Meso y Micro.</p>
+                <div class="label">03. COMPARATIVA</div>
+                <h1>Tradición e <span>Innovación</span></h1>
+                <div class="card-main">
+                    <p>Aquí colocaremos el cuadro comparativo de los paradigmas educativos.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="label">04. CONCRECIÓN</div>
+                <h1>Niveles de <span>Aplicación</span></h1>
+                <div class="card-main">
+                    <p>Contenido sobre los niveles Macro, Meso y Micro del currículo.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="label">05. COMPLEJIDAD</div>
+                <h1>Flexibilidad <span>vs Norma</span></h1>
+                <div class="card-main">
+                    <p>Análisis de la complejidad en la implementación docente.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="label">06. REFLEXIÓN</div>
+                <h1>Visión <span>Crítica</span></h1>
+                <div class="card-main">
+                    <p>Reflexión personal sobre el futuro de la educación matemática.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="label">07. REFERENCIAS</div>
+                <h1>Fuentes <span>Bibliográficas</span></h1>
+                <div class="card-main">
+                    <p>Listado de fuentes consultadas en formato APA.</p>
+                </div>
             </div>
 
         </div>
     </div>
-<div class="section">
-                <div class="breadcrumb">03. COMPARATIVA</div>
-                <h1>Tradición e <span>Innovación</span></h1>
-                <div class="card-main">Pega aquí el contenido de las dos columnas...</div>
-            </div>
 
-            <div class="section">
-                <div class="breadcrumb">04. CONCRECIÓN</div>
-                <h1>Niveles de <span>Aplicación</span></h1>
-                <div class="card-main">Contenido pendiente...</div>
-            </div>
-
-            <div class="section">
-                <div class="breadcrumb">05. COMPLEJIDAD</div>
-                <h1>Flexibilidad <span>vs Norma</span></h1>
-                <div class="card-main">Contenido pendiente...</div>
-            </div>
-
-            <div class="section">
-                <div class="breadcrumb">06. REFLEXIÓN</div>
-                <h1>Visión <span>Crítica</span></h1>
-                <div class="card-main">Contenido pendiente...</div>
-            </div>
-
-            <div class="section">
-                <div class="breadcrumb">07. REFERENCIAS</div>
-                <h1>Fuentes <span>Bibliográficas</span></h1>
-                <div class="card-main">Contenido pendiente...</div>
-            </div>
     <script>
         function irA(index, element) {
             const striper = document.getElementById('striper');
+            // Cálculo exacto para 7 secciones
             striper.style.transform = `translateX(-${index * (100/7)}%)`;
 
             const items = document.querySelectorAll('.nav-item');
