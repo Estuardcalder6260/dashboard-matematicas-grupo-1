@@ -14,6 +14,7 @@
             --texto: #2c3e50;
         }
 
+        /* RESET ESTRUCTURAL PARA MÁXIMA ESTABILIDAD */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
@@ -21,10 +22,10 @@
             height: 100vh;
             display: flex;
             background: var(--fondo);
-            overflow: hidden;
+            overflow: hidden; /* Evita que la ventana completa se mueva */
         }
 
-        /* SIDEBAR */
+        /* SIDEBAR (BLOQUEADO PARA NO CONSUMIR RECURSOS) */
         .sidebar {
             width: 260px;
             background: var(--azul);
@@ -33,153 +34,175 @@
             flex-shrink: 0;
             display: flex;
             flex-direction: column;
+            border-right: 3px solid var(--dorado);
         }
 
         .sidebar h2 {
             font-family: 'Georgia', serif;
-            font-size: 20px;
-            border-bottom: 2px solid var(--dorado);
-            padding-bottom: 10px;
+            font-size: 18px;
+            text-align: center;
             margin-bottom: 30px;
             color: var(--dorado);
-            text-align: center;
+            line-height: 1.4;
         }
 
         .nav-item {
             padding: 14px 15px;
-            margin: 8px 0;
+            margin: 6px 0;
             cursor: pointer;
-            border-radius: 6px;
+            border-radius: 8px;
             color: #bdc3c7;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
             text-transform: uppercase;
-            transition: 0.2s;
+            letter-spacing: 1px;
+            transition: 0.2s ease;
         }
 
         .nav-item:hover { background: rgba(255,255,255,0.1); color: white; }
-        .nav-item.active { background: var(--dorado); color: var(--azul); }
+        .nav-item.active { background: var(--dorado); color: var(--azul); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
 
-        /* MAIN CONTENT */
-        .main-container {
+        /* CONTENEDOR DE INFORMACIÓN CON RENDERIZADO AISLADO */
+        .main-content {
             flex-grow: 1;
             height: 100vh;
-            overflow-y: auto;
-            padding: 50px;
+            overflow-y: auto; /* El scroll solo sucede aquí */
+            padding: 60px;
         }
 
         .tab-panel {
-            display: none;
-            max-width: 1100px;
+            display: none; /* Oculto totalmente para liberar memoria */
+            max-width: 1000px;
             margin: 0 auto;
         }
 
         .tab-panel.active { display: block; }
 
-        h1 { font-family: 'Georgia', serif; font-size: 40px; color: var(--azul); margin-bottom: 25px; }
+        h1 { font-family: 'Georgia', serif; font-size: 36px; color: var(--azul); margin-bottom: 25px; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
         h1 span { color: var(--dorado); font-style: italic; }
         
         p { font-size: 16px; line-height: 1.8; color: var(--texto); text-align: justify; margin-bottom: 20px; }
-        b { color: var(--azul); }
+        b { color: var(--azul); font-weight: 700; }
 
-        .cards-container {
+        .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 25px;
-            margin-top: 20px;
+            margin-top: 30px;
         }
 
         .card {
             background: var(--blanco);
             border-radius: 12px;
             padding: 30px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            border-top: 6px solid var(--dorado);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            border-top: 5px solid var(--dorado);
         }
 
-        .card h3 { color: var(--azul); margin-bottom: 15px; font-size: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .card h3 { color: var(--azul); margin-bottom: 15px; font-size: 19px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
         
-        .highlight-box {
-            background: #eef2f3;
-            padding: 25px;
-            border-radius: 10px;
-            border-left: 5px solid var(--azul);
-            margin: 20px 0;
+        .timeline-box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 8px solid var(--azul);
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
-        .chart-box { background: white; padding: 25px; border-radius: 15px; border: 1px solid #ddd; height: 450px; margin: 30px 0; }
+        .chart-container { background: white; padding: 25px; border-radius: 15px; border: 1px solid #ddd; height: 400px; margin: 30px 0; }
 
         .reflexion-box {
             background: var(--azul);
             color: white;
-            padding: 40px;
+            padding: 45px;
             border-radius: 20px;
             border-left: 15px solid var(--dorado);
+            margin-top: 20px;
         }
-        .reflexion-box h3 { color: var(--dorado); margin-bottom: 20px; font-size: 26px; }
-        .reflexion-box p { color: #ecf0f1; font-size: 17px; }
+        .reflexion-box h3 { color: var(--dorado); margin-bottom: 20px; font-size: 24px; }
     </style>
 </head>
 <body>
 
     <div class="sidebar">
-        <h2>Dashboard<br>Matemático</h2>
-        <div class="nav-item active" onclick="showTab(0, this)">01. Síntesis</div>
-        <div class="nav-item" onclick="showTab(1, this)">02. Cronología</div>
-        <div class="nav-item" onclick="showTab(2, this)">03. Comparativa</div>
-        <div class="nav-item" onclick="showTab(3, this)">04. Concreción</div>
-        <div class="nav-item" onclick="showTab(4, this)">05. Entropía</div>
-        <div class="nav-item" onclick="showTab(5, this)">06. Reflexión Crítica</div>
-        <div class="nav-item" onclick="showTab(6, this)">07. Referencias</div>
+        <h2>DASHBOARD<br>ANÁLISIS CURRICULAR</h2>
+        <div class="nav-item active" onclick="jump(0, this)">01. Síntesis</div>
+        <div class="nav-item" onclick="jump(1, this)">02. Cronología</div>
+        <div class="nav-item" onclick="jump(2, this)">03. Comparativa</div>
+        <div class="nav-item" onclick="jump(3, this)">04. Concreción</div>
+        <div class="nav-item" onclick="jump(4, this)">05. Entropía</div>
+        <div class="nav-item" onclick="jump(5, this)">06. Reflexión Crítica</div>
+        <div class="nav-item" onclick="jump(6, this)">07. Referencias</div>
     </div>
 
-    <div class="main-container" id="scrollArea">
+    <div class="main-content" id="scrollArea">
 
         <div id="tab0" class="tab-panel active">
-            <h1>Síntesis <span>Curricular</span></h1>
-            <p>El currículo de Matemática en Ecuador ha transitado desde una visión puramente técnica hacia una formación integral, lógica y crítica. Este proceso busca empoderar al estudiante mediante el desarrollo de un pensamiento formal que le permita modelar situaciones de la vida real, integrando el <b>saber</b> con el <b>saber hacer</b>.</p>
-            <div class="cards-container">
+            <h1>Síntesis <span>Académica</span></h1>
+            <p>El currículo de Matemática en Ecuador ha evolucionado desde una visión puramente técnica hacia una formación integral, lógica y crítica. Este proceso busca empoderar al estudiante mediante el desarrollo de un pensamiento formal que le permita modelar situaciones de la vida real, integrando el <b>saber</b> con el <b>saber hacer</b>.</p>
+            <div class="cards-grid">
                 <div class="card">
                     <h3>Socio-constructivismo</h3>
-                    <p>Se ha superado el modelo conductista. Actualmente, el aprendizaje se entiende como un proceso de construcción social donde el estudiante es el protagonista activo, mediado por el docente para alcanzar niveles superiores de abstracción.</p>
+                    <p>Se ha superado el modelo conductista. Actualmente, el aprendizaje se entiende como un proceso de construcción social donde el estudiante es el protagonista activo, mediado por el docente para alcanzar niveles superiores de abstracción y lógica aplicada.</p>
                 </div>
                 <div class="card">
                     <h3>Enfoque en DCD</h3>
-                    <p>Las Destrezas con Criterio de Desempeño combinan el conocimiento disciplinar, la acción cognitiva y el contexto. Esto permite que la matemática no sea vista como reglas aisladas, sino como una herramienta culturalmente relevante.</p>
+                    <p>Las Destrezas con Criterio de Desempeño combinan el conocimiento disciplinar, la acción cognitiva y el contexto. Esto permite que la matemática no sea vista como reglas aisladas, sino como una herramienta culturalmente relevante y práctica.</p>
                 </div>
             </div>
         </div>
 
         <div id="tab1" class="tab-panel">
-            <h1>Cronología <span>Detallada</span></h1>
-            <p>La evolución de las reformas educativas en Ecuador refleja un cambio profundo en la epistemología de la enseñanza matemática:</p>
+            <h1>Cronología <span>de Reformas</span></h1>
             
-            <div class="highlight-box">
+            <div class="timeline-box">
                 <b>1996 - Reforma Curricular Consensuada:</b>
-                <p>Basada en un paradigma técnico-conductista. El currículo era una lista cerrada de contenidos secuenciales. Se priorizaba la mecanización de algoritmos y la instrucción directa. La evaluación era punitiva y centrada en resultados, con nula flexibilidad (Baja Entropía).</p>
+                <p>Marcada por un paradigma técnico-conductista. El currículo se presentaba como una lista cerrada de contenidos secuenciales y obligatorios. La enseñanza se centraba en la mecanización de algoritmos y la instrucción directa. La evaluación era punitiva y orientada exclusivamente al resultado final, con nula flexibilidad (Baja Entropía).</p>
             </div>
 
-            <div class="highlight-box">
+            <div class="timeline-box">
                 <b>2010 - Actualización y Fortalecimiento:</b>
-                <p>Introduce la Pedagogía Crítica y el enfoque por destrezas. Se organizan los contenidos en bloques curriculares articulados y se vinculan con los ejes transversales del Buen Vivir. Se reconoce por primera vez que el estudiante debe "saber hacer" con lo que aprende.</p>
+                <p>Introduce la Pedagogía Crítica y el enfoque por destrezas. Se organizan los contenidos en bloques curriculares articulados (Álgebra, Geometría, Estadística) y se vinculan explícitamente con los ejes transversales del Buen Vivir. Se reconoce por primera vez la importancia de que el estudiante sepa "qué hacer" con el conocimiento en su entorno.</p>
             </div>
 
-            <div class="highlight-box">
+            <div class="timeline-box">
                 <b>2016 - Propuesta de Ajuste Curricular:</b>
-                <p>Establece un currículo organizado por áreas de conocimiento y niveles/subniveles. Promueve la autonomía de los centros educativos para diseñar su propia oferta curricular, permitiendo una mayor atención a la diversidad y ritmos de aprendizaje.</p>
+                <p>Establece un currículo organizado por áreas de conocimiento y niveles/subniveles educativos. Se introduce el concepto de "perfil de salida" y se otorga autonomía a las instituciones para diseñar su propia oferta curricular, permitiendo una mayor atención a la diversidad y a los diferentes ritmos de aprendizaje de los estudiantes.</p>
             </div>
 
-            <div class="highlight-box">
+            <div class="timeline-box">
                 <b>2023 - Marco Curricular Competencial:</b>
-                <p>Consolida la Flexibilidad Curricular. Se enfoca en competencias para la vida (digitales, socioemocionales, comunicacionales y matemáticas). El sistema se vuelve adaptativo, permitiendo que el docente sea el arquitecto de su propia planificación territorial (Alta Entropía Positiva).</p>
+                <p>Consolida la Flexibilidad Curricular como eje central. Se enfoca en competencias matemáticas esenciales para la vida, incluyendo el razonamiento lógico-matemático aplicado a problemas digitales y sociales. El sistema se vuelve adaptativo, permitiendo que el docente sea el diseñador de su propia planificación territorial (Alta Entropía Positiva).</p>
             </div>
         </div>
 
         <div id="tab2" class="tab-panel">
             <h1>Análisis <span>Comparativo</span></h1>
-            <p>A continuación, se contrastan las dimensiones fundamentales entre el modelo tradicional y el modelo contemporáneo:</p>
+            <p>Este análisis contrasta las dimensiones estructurales entre el modelo de enseñanza tradicional y el modelo contemporáneo adaptativo:</p>
             
-            <div class="cards-container">
+            <div class="cards-grid">
                 <div class="card">
-                    <h3>Paradigma de Enseñanza</h3>
-                    <p><b>Tradicional:</b> Instrucción directa
+                    <h3>Paradigma Pedagógico</h3>
+                    <p><b>Tradicional:</b> Instrucción directa y vertical. El aprendizaje es visto como acumulación de datos y algoritmos descontextualizados.<br><br><b>Actual:</b> Mediación y socio-constructivismo. El aprendizaje es una construcción activa basada en el descubrimiento y la resolución de problemas reales.</p>
+                </div>
+                <div class="card">
+                    <h3>Nivel de Entropía</h3>
+                    <p><b>Tradicional:</b> Baja Entropía. Un sistema cerrado, rígido y lineal donde no existe espacio para la innovación o la adaptación al contexto local.<br><br><b>Actual:</b> Alta Entropía Positiva. Sistema abierto y complejo que abraza la incertidumbre del aula para generar respuestas educativas personalizadas y flexibles.</p>
+                </div>
+                <div class="card">
+                    <h3>Evaluación y Logros</h3>
+                    <p><b>Tradicional:</b> Evaluación sumativa enfocada en la exactitud del cálculo. Se premia la memoria sobre el razonamiento.<br><br><b>Actual:</b> Evaluación formativa y competencial. Se valora el proceso de razonamiento y la capacidad de aplicar la lógica en situaciones nuevas y complejas.</p>
+                </div>
+                <div class="card">
+                    <h3>Estructura de Contenidos</h3>
+                    <p><b>Tradicional:</b> Atomizada. Temas aislados y secuenciales que deben cumplirse estrictamente según el calendario ministerial.<br><br><b>Actual:</b> Integrada. Bloques curriculares que permiten la interdisciplinariedad y una visión global de la ciencia matemática.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab3" class="tab-panel">
+            <h1>Niveles de <span>Concreción</span></h1>
+            <div class="cards-grid">
+                <div class="card"><h3>Macro: Estado</h3><p>Ministerio de Educación: Define los estándares obligatorios, las DCD mínimas y el perfil de salida nacional (Justos, Innovadores y Solidarios).</p></div>
+                <div class="card"><h3>Meso: Institución</h3><p>Unidad Educativa: Desarrolla el PCI (Planificación Curricular Institucional) adaptando la norma a
