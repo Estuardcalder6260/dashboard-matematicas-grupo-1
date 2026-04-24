@@ -1,26 +1,173 @@
-<div class="section">
-                <div style="color:var(--accent-gold); font-weight:bold; letter-spacing: 2px; margin-bottom: 10px;">01. INTRODUCCIÓN</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Matemático</title>
+    <style>
+        :root {
+            --bg-sidebar: #1a252f;
+            --accent-gold: #d4af37;
+            --text-dark: #2c3e50;
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            font-family: 'Georgia', serif; /* Fuente elegante como la de tu imagen */
+            height: 100vh;
+            overflow: hidden;
+            background-color: #fcfcfc;
+        }
+
+        /* Barra Lateral */
+        .sidebar {
+            width: 260px;
+            background-color: var(--bg-sidebar);
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            color: white;
+            z-index: 100;
+        }
+
+        .sidebar h2 { font-size: 22px; margin-bottom: 30px; border-bottom: 1px solid var(--accent-gold); padding-bottom: 10px; }
+
+        .nav-item {
+            padding: 15px;
+            font-size: 13px;
+            color: #bdc3c7;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+
+        .nav-item.active {
+            color: white;
+            background: var(--accent-gold);
+            border-radius: 8px;
+        }
+
+        /* Contenedor Desplazable */
+        .viewport {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .striper {
+            display: flex;
+            width: 300%;
+            height: 100%;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section {
+            width: 100%;
+            height: 100%;
+            padding: 60px 80px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        /* Estilos de Texto */
+        .label { color: var(--accent-gold); font-weight: bold; font-family: sans-serif; letter-spacing: 2px; font-size: 14px; margin-bottom: 10px; }
+        
+        h1 { font-size: 55px; color: var(--text-dark); margin: 0 0 20px 0; }
+        h1 span { color: var(--accent-gold); font-style: italic; }
+
+        .intro-text { font-family: sans-serif; line-height: 1.6; color: #444; font-size: 16px; max-width: 900px; margin-bottom: 40px; }
+
+        /* Los dos cuadros de abajo */
+        .cards-container {
+            display: flex;
+            gap: 25px;
+            max-width: 900px;
+        }
+
+        .card {
+            flex: 1;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #eaeaea;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .card h3 { 
+            font-family: sans-serif; 
+            font-size: 16px; 
+            margin-top: 0; 
+            color: var(--text-dark); 
+            border-bottom: 2px solid var(--accent-gold);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .card p { font-family: sans-serif; font-size: 14px; color: #666; line-height: 1.5; margin-bottom: 0; }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>Dashboard <i>Matemático</i></h2>
+        <div class="nav-item active" onclick="irA(0, this)">01. INICIO</div>
+        <div class="nav-item" onclick="irA(1, this)">02. CRONOLOGÍA</div>
+        <div class="nav-item" onclick="irA(2, this)">03. ESTRUCTURA</div>
+    </div>
+
+    <div class="viewport">
+        <div class="striper" id="striper">
+            
+            <div class="section">
+                <div class="label">01. INTRODUCCIÓN</div>
                 <h1>Análisis <span>Curricular</span></h1>
                 
-                <div class="info-card" style="margin-bottom: 30px;">
-                    <p>
-                        La enseñanza de la Matemática en Ecuador ha pasado de centrarse en la memorización de fórmulas y 
-                        procedimientos a concebirse como una herramienta lógica para comprender y transformar la realidad. 
-                        Este cambio refleja la transición del conductismo hacia enfoques socio-constructivistas.
-                    </p>
-                </div>
+                <p class="intro-text">
+                    La enseñanza de la Matemática en Ecuador ha pasado de centrarse en la memorización de fórmulas y 
+                    procedimientos a concebirse como una herramienta lógica para comprender y transformar la realidad. 
+                    Este cambio refleja la transición del conductismo hacia enfoques socio-constructivistas.
+                </p>
 
-                <div style="display: flex; gap: 20px; max-width: 850px; flex-wrap: wrap;">
-                    
-                    <div style="flex: 1; min-width: 300px; background: white; border: 1px solid #ddd; padding: 20px; border-radius: 12px; border-top: 5px solid var(--accent-gold); box-shadow: 5px 5px 0px #eee;">
-                        <h3 style="color: var(--bg-sidebar); margin-top: 0; font-size: 16px;">1. ENFOQUE CRÍTICO</h3>
-                        <p style="font-size: 14px; color: #555;">La matemática moderna busca que el estudiante aplique conceptos en situaciones reales, fomentando el pensamiento lógico sobre la memoria.</p>
+                <div class="cards-container">
+                    <div class="card">
+                        <h3>1. ENFOQUE CRÍTICO</h3>
+                        <p>La matemática moderna busca que el estudiante aplique conceptos en situaciones reales, fomentando el pensamiento lógico sobre la memoria.</p>
                     </div>
-
-                    <div style="flex: 1; min-width: 300px; background: white; border: 1px solid #ddd; padding: 20px; border-radius: 12px; border-top: 5px solid var(--bg-sidebar); box-shadow: 5px 5px 0px #eee;">
-                        <h3 style="color: var(--bg-sidebar); margin-top: 0; font-size: 16px;">2. FLEXIBILIDAD</h3>
-                        <p style="font-size: 14px; color: #555;">El sistema permite que cada institución adapte los contenidos según su entorno social, garantizando una educación más pertinente.</p>
+                    <div class="card">
+                        <h3>2. FLEXIBILIDAD</h3>
+                        <p>El sistema permite que cada institución adapte los contenidos según su entorno social, garantizando una educación más pertinente.</p>
                     </div>
-
                 </div>
             </div>
+
+            <div class="section">
+                <div class="label">02. CRONOLOGÍA</div>
+                <h1>Evolución <span>Temporal</span></h1>
+                <p class="intro-text">Aquí puedes incluir los hitos históricos del currículo nacional.</p>
+            </div>
+
+            <div class="section">
+                <div class="label">03. ESTRUCTURA</div>
+                <h1>Niveles de <span>Concreción</span></h1>
+                <p class="intro-text">Información sobre los niveles Macro, Meso y Micro.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function irA(index, element) {
+            const striper = document.getElementById('striper');
+            striper.style.transform = `translateX(-${index * (100/3)}%)`;
+
+            const items = document.querySelectorAll('.nav-item');
+            items.forEach(i => i.classList.remove('active'));
+            element.classList.add('active');
+        }
+    </script>
+</body>
+</html>
