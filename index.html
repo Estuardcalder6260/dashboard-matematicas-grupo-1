@@ -8,9 +8,9 @@
     <style>
         :root { --azul: #1a252f; --dorado: #d4af37; --fondo: #f4f7f6; --texto: #2c3e50; --blanco: #ffffff; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', sans-serif; height: 100vh; display: flex; background: var(--fondo); overflow: hidden; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; height: 100vh; display: flex; background: var(--fondo); overflow: hidden; }
 
-        /* SIDEBAR ESTABLE */
+        /* SIDEBAR (image_5f5733.png) */
         .sidebar { width: 280px; background: var(--azul); color: white; padding: 40px 0; flex-shrink: 0; border-right: 4px solid var(--dorado); }
         .sidebar h2 { font-family: 'Georgia', serif; font-size: 24px; padding: 0 25px; margin-bottom: 40px; border-bottom: 2px solid var(--dorado); padding-bottom: 10px; margin: 0 20px 30px 20px; }
         .nav-item { padding: 18px 30px; cursor: pointer; color: #bdc3c7; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s; }
@@ -25,24 +25,26 @@
         h1 { font-family: 'Georgia', serif; font-size: 42px; color: var(--azul); margin-bottom: 25px; }
         h1 span { color: var(--dorado); }
 
-        /* ESTILO CRONOLOGÍA (image_5e81ed.png) */
+        /* CRONOLOGÍA (image_5e81ed.png) */
         .timeline-item { display: grid; grid-template-columns: 110px 1fr; gap: 25px; margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 25px; }
         .year-label { font-family: 'Georgia', serif; font-size: 30px; color: #aaa; }
         .reform-title { font-weight: 800; font-size: 17px; text-transform: uppercase; margin-bottom: 8px; color: #222; }
         .paradigm { font-weight: bold; color: #666; margin-bottom: 12px; display: block; font-style: italic; }
+        .reform-detail { line-height: 1.7; color: #444; text-align: justify; }
 
-        /* ESTILO TABLA COMPARATIVA (image_5e8953.png) */
+        /* TABLA COMPARATIVA (image_5e8953.png) */
         .comp-table { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-top: 15px; }
-        .comp-table th { background: #fdfdfd; padding: 20px; text-align: left; border-bottom: 2px solid #eee; font-family: 'Georgia'; }
+        .comp-table th { background: #fdfdfd; padding: 20px; text-align: left; border-bottom: 2px solid #eee; font-family: 'Georgia'; color: var(--azul); }
         .comp-table td { padding: 20px; border-bottom: 1px solid #eee; vertical-align: top; font-size: 14px; line-height: 1.7; }
         .dim-col { font-weight: bold; color: #7f8c8d; width: 180px; background: #fafafa; }
 
-        /* SÍNTESIS Y REFLEXIÓN */
+        /* SÍNTESIS Y REFLEXIÓN (image_5fea11.png) */
         .card { background: white; padding: 35px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 8px solid var(--dorado); margin-bottom: 25px; }
         .reflexion-box { background: white; padding: 45px; border-radius: 15px; border: 1px solid #ddd; position: relative; }
-        .reflexion-box h2 { font-family: 'Georgia'; font-size: 26px; margin-bottom: 20px; color: var(--azul); }
+        .reflexion-box::after { content: "?"; position: absolute; right: 20px; bottom: 10px; font-size: 180px; color: #f9f9f9; font-family: 'Georgia'; z-index: 0; }
+        .reflexion-content { position: relative; z-index: 1; }
 
-        /* GRÁFICA DE ENTROPÍA MEJORADA */
+        /* GRÁFICA */
         .chart-container { background: white; padding: 30px; border-radius: 12px; height: 450px; border: 1px solid #ddd; margin-top: 20px; }
     </style>
 </head>
@@ -59,10 +61,138 @@
         <div class="nav-item" onclick="nav(6, this)">07. REFERENCIAS</div>
     </nav>
 
-    <main class="main-content" id="scrollArea">
+    <main class="main-content" id="viewArea">
 
         <div id="p0" class="tab-panel active">
             <h1>Síntesis <span>Curricular</span></h1>
             <div class="card">
-                <p style="font-size: 17px; line-height: 1.8;">
-                    La educación matemática en el país ha pasado de un enfoque <b>mecanicista</b> (basado en la repetición de procesos) a uno <b>socio-constructivista</b>. Este
+                <p style="font-size: 18px; line-height: 1.8;">
+                    La educación matemática en el país ha pasado de un enfoque <b>mecanicista</b> (basado en la repetición de procesos) a uno <b>socio-constructivista</b>. Este modelo busca que el estudiante sea el protagonista, utilizando la matemática como una herramienta de modelización para resolver problemas reales del entorno.
+                </p>
+            </div>
+        </div>
+
+        <div id="p1" class="tab-panel">
+            <h1>Cronología <span>Matemática</span></h1>
+            
+            <div class="timeline-item">
+                <div class="year-label">1996</div>
+                <div>
+                    <div class="reform-title">Reforma Curricular Consensuada</div>
+                    <span class="paradigm">Paradigma: Conductista y Mecanicista</span>
+                    <p class="reform-detail">Enfocada fuertemente en el desarrollo de destrezas instrumentales mediante la repetición. La matemática se enseñaba de forma descontextualizada. El docente era un transmisor de algoritmos y el estudiante un receptor pasivo evaluado únicamente de forma sumativa.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="year-label">2010</div>
+                <div>
+                    <div class="reform-title">Actualización y Fortalecimiento (EGB)</div>
+                    <span class="paradigm">Paradigma: Pedagogía Crítica y "Ejes Transversales"</span>
+                    <p class="reform-detail">Primer intento formal de humanizar la ciencia exacta. Se articuló la matemática con el "Buen Vivir" (Sumak Kawsay). El objetivo ya no era solo calcular, sino resolver problemas cotidianos, promoviendo por primera vez el razonamiento lógico-crítico en el aula.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="year-label">2016</div>
+                <div>
+                    <div class="reform-title">Ajuste Curricular (La era de la flexibilidad)</div>
+                    <span class="paradigm">Paradigma: Constructivista / Destrezas con Criterio de Desempeño (DCD)</span>
+                    <p class="reform-detail">Cambio radical en la estructura. Desaparece la exigencia rígida por "año" y se agrupa por Subniveles, dando 3 años al docente para lograr un aprendizaje. Se dividieron los aprendizajes en Básicos Imprescindibles y Básicos Deseables.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="year-label">2020</div>
+                <div>
+                    <div class="reform-title">Currículo Priorizado <small>(Emergencia COVID-19)</small></div>
+                    <span class="paradigm">Paradigma: Contención emocional y ABP</span>
+                    <p class="reform-detail">Respuesta a la pandemia. El currículo de 2016 se comprimió para priorizar únicamente lo esencial, obligando a planificar mediante proyectos interdisciplinares para resolver problemas de la vida real.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="year-label">2023</div>
+                <div>
+                    <div class="reform-title">Marco Curricular Competencial</div>
+                    <span class="paradigm">Paradigma: Socio-constructivista avanzado y enfoque STEAM</span>
+                    <p class="reform-detail">La transformación actual. Se enfoca en desarrollar "Competencias" (Comunicacionales, Matemáticas, Digitales y Socioemocionales). Énfasis en la <b>alfabetización financiera</b> y la programación. La evaluación prioriza lo formativo y reflexivo.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="p2" class="tab-panel">
+            <h1>Comparativa <span>Histórica</span></h1>
+            <table class="comp-table">
+                <tr>
+                    <th>DIMENSIÓN</th>
+                    <th>1996 (CONSENSADA)</th>
+                    <th>2010 (EGB)</th>
+                    <th>2016 (AJUSTE)</th>
+                </tr>
+                <tr>
+                    <td class="dim-col">Enfoque Epistemológico</td>
+                    <td><b>Conductista.</b> Matemática como ciencia estática, formal y mecánica. Memorización de algoritmos.</td>
+                    <td><b>Pedagogía Crítica.</b> Matemática vinculada al entorno social y al "Buen Vivir".</td>
+                    <td><b>Constructivista.</b> Desarrollo de DCD (saber hacer en contexto).</td>
+                </tr>
+                <tr>
+                    <td class="dim-col">Estructura y Tiempos</td>
+                    <td>Lineal y Rígida por año básico. Poca flexibilidad.</td>
+                    <td>Bloques Curriculares anuales (4 grandes bloques).</td>
+                    <td>Modular por Subniveles (3 años de margen). Alta flexibilidad.</td>
+                </tr>
+                <tr>
+                    <td class="dim-col">Evaluación</td>
+                    <td>Sumativa Punitiva. Exámenes objetivos. El error determina el fracaso.</td>
+                    <td>Indicadores Esenciales. Inicia enfoque mixto y aplicación práctica.</td>
+                    <td>Formativa. Basada en Criterios e Indicadores de Evaluación.</td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="p5" class="tab-panel">
+            <h1>Reflexión <span>Crítica</span></h1>
+            <div class="reflexion-box">
+                <div class="reflexion-content">
+                    <h2 style="font-family: Georgia; margin-bottom: 20px;">¿Cuál ha sido el <i>'asymptote'</i> (límite) que no hemos podido superar?</h2>
+                    <p style="font-size: 18px; margin-bottom: 20px;">
+                        A pesar de la impecable evolución teórica, el límite asintótico sigue siendo la <b>disonancia entre la prescripción macrocurricular y la realidad fenomenológica del aula</b> (Nivel Micro).
+                    </p>
+                    <p style="margin-bottom: 20px; color: #555;">
+                        La cultura institucional y la inercia de la evaluación estandarizada empujan al docente a regresar a su zona de confort: <b>la mecanización del algoritmo descontextualizado</b>.
+                    </p>
+                    <div style="background: var(--azul); color: white; padding: 25px; border-radius: 10px;">
+                        <p><i>"El papel aguanta todo", pero el aula no ha superado el límite porque hemos cambiado los documentos sin transformar profundamente las creencias epistemológicas de quienes ejecutan la clase.</i></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="p3" class="tab-panel"><h1>Concreción <span>Curricular</span></h1><div class="card"><p>Nivel Macro (Estado), Meso (Institución) y Micro (Aula).</p></div></div>
+        <div id="p4" class="tab-panel"><h1>Entropía <span>del Sistema</span></h1><div class="chart-container"><canvas id="entropiaChart"></canvas></div></div>
+        <div id="p6" class="tab-panel"><h1>Referencias</h1><div class="card"><p>Ministerio de Educación del Ecuador (1996, 2010, 2016, 2023).</p></div></div>
+
+    </main>
+
+    <script>
+        let chartInstance = null;
+
+        function nav(id, el) {
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById('p' + id).classList.add('active');
+            el.classList.add('active');
+            document.getElementById('viewArea').scrollTop = 0;
+
+            if (id === 4) renderChart();
+        }
+
+        function renderChart() {
+            const ctx = document.getElementById('entropiaChart').getContext('2d');
+            if (chartInstance) chartInstance.destroy();
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['1996', '2010', '2016', '2023'],
+                    datasets:
