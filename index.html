@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Matemático - Versión Extendida</title>
+    <title>Dashboard Matemático - Estructura Completa</title>
     <style>
         :root {
             --azul: #1a252f;
@@ -15,13 +15,13 @@
         body {
             margin: 0;
             display: flex;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             height: 100vh;
             overflow: hidden;
             background: var(--fondo);
         }
 
-        /* SIDEBAR NAVEGACIÓN */
+        /* NAVEGACIÓN */
         .sidebar {
             width: 280px;
             background: var(--azul);
@@ -51,13 +51,13 @@
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: all 0.3s ease;
+            transition: 0.3s ease;
         }
 
         .nav-item:hover { background: rgba(255,255,255,0.05); color: white; }
         .nav-item.active { background: var(--dorado); color: var(--azul); transform: translateX(8px); }
 
-        /* VISOR DE SECCIONES */
+        /* VIEWPORT */
         .viewport { flex: 1; position: relative; overflow: hidden; }
 
         .slider-master {
@@ -65,22 +65,21 @@
             height: 100%;
             width: 700%; 
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            will-change: transform;
         }
 
         .section {
-            width: 14.285714%;
+            width: 14.2857%;
             height: 100%;
             padding: 60px 80px;
             box-sizing: border-box;
             overflow-y: auto;
         }
 
-        h1 { font-family: 'Georgia', serif; font-size: 48px; color: var(--azul); margin: 0 0 25px 0; line-height: 1.1; }
+        h1 { font-family: 'Georgia', serif; font-size: 48px; color: var(--azul); margin: 0 0 25px 0; }
         h1 span { color: var(--dorado); font-style: italic; }
-        p { line-height: 1.8; color: #444; font-size: 16px; margin-bottom: 20px; }
+        p { line-height: 1.8; color: #444; font-size: 16px; }
 
-        /* TARJETAS DE CONTENIDO */
+        /* COMPONENTES */
         .card {
             background: var(--blanco);
             border-radius: 12px;
@@ -92,17 +91,31 @@
 
         .card h3 { margin: 0 0 15px 0; color: var(--azul); font-size: 20px; border-bottom: 1px solid #eee; padding-bottom: 12px; }
 
-        /* TABLA COMPARATIVA COMPLETA (PUNTO 3) */
-        .comp-table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-top: 20px; }
-        .comp-table th, .comp-table td { padding: 20px; border: 1px solid #f0f0f0; text-align: left; font-size: 14px; line-height: 1.6; vertical-align: top; }
-        .comp-table th { background: #f8f9fa; color: var(--azul); font-weight: bold; }
-        .dim-col { background: #fafafa; font-weight: bold; width: 180px; color: var(--azul); font-style: italic; }
+        /* TABLA PUNTO 3 */
+        .comp-table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .comp-table th, .comp-table td { padding: 20px; border: 1px solid #f0f0f0; text-align: left; font-size: 14px; line-height: 1.6; }
+        .comp-table th { background: #f8f9fa; color: var(--azul); }
+        .dim-col { background: #fafafa; font-weight: bold; width: 180px; color: var(--azul); }
 
-        /* DISEÑO DE NIVELES (PUNTO 4) */
-        .nivel-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .circle-num { background: var(--dorado); color: var(--azul); width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; }
-        .doc-badge { display: inline-block; background: var(--azul); color: white; padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: bold; margin-top: 15px; border: 1px solid var(--dorado); }
-        .spec-list { background: #f9f9f9; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 3px solid #ddd; font-size: 14px; color: #555; }
+        /* ESTILO ENTROPÍA (PUNTO 5) */
+        .entropy-box {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            border-radius: 15px;
+            background: linear-gradient(to bottom, #ffffff, #fdfbf7);
+            position: relative;
+        }
+        .entropy-label {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: var(--dorado);
+            color: var(--azul);
+            padding: 2px 12px;
+            font-size: 10px;
+            font-weight: bold;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -113,7 +126,7 @@
         <div class="nav-item" onclick="jump(1, this)">02. Cronología</div>
         <div class="nav-item" onclick="jump(2, this)">03. Comparativa</div>
         <div class="nav-item" onclick="jump(3, this)">04. Concreción</div>
-        <div class="nav-item" onclick="jump(4, this)">05. Complejidad</div>
+        <div class="nav-item" onclick="jump(4, this)">05. Entropía</div>
         <div class="nav-item" onclick="jump(5, this)">06. Reflexión</div>
         <div class="nav-item" onclick="jump(6, this)">07. Referencias</div>
     </div>
@@ -123,33 +136,18 @@
             
             <div class="section">
                 <h1>Análisis <span>Curricular</span></h1>
-                <p>La enseñanza de la Matemática en Ecuador ha experimentado una transformación profunda, pasando de un modelo centrado en la repetición de algoritmos hacia una herramienta lógica para comprender y transformar la realidad. Este cambio no es solo técnico, sino pedagógico y social.</p>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div class="card">
-                        <h3>Enfoque Crítico</h3>
-                        <p>Busca que el estudiante no solo memorice, sino que aplique conceptos en situaciones de la vida diaria, fomentando el pensamiento lógico y la toma de decisiones basada en datos.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Flexibilidad Curricular</h3>
-                        <p>El sistema actual permite que cada institución adapte los contenidos mínimos obligatorios a las necesidades específicas de su entorno sociogeográfico y cultural.</p>
-                    </div>
+                <p>La enseñanza de la Matemática en Ecuador ha experimentado una transformación profunda, pasando de un modelo centrado en la repetición de algoritmos hacia una herramienta lógica para comprender y transformar la realidad.</p>
+                <div class="card">
+                    <h3>Enfoque y Flexibilidad</h3>
+                    <p>El sistema actual busca un aprendizaje significativo donde el estudiante aplique conceptos en situaciones reales, permitiendo que cada institución adapte los contenidos mínimos a su entorno.</p>
                 </div>
             </div>
 
             <div class="section">
                 <h1>Hitos <span>Fundamentales</span></h1>
-                <div class="card">
-                    <h3>1996: Reforma Curricular Consensuada</h3>
-                    <p><b>Paradigma Conductista:</b> Ciencia estática, formal y mecánica. Se enfocaba fuertemente en el desarrollo de destrezas instrumentales mediante la repetición y memorización de contenidos rígidos organizados por año.</p>
-                </div>
-                <div class="card">
-                    <h3>2010: Actualización y Fortalecimiento</h3>
-                    <p><b>Pedagogía Crítica:</b> Introducción del concepto de "Buen Vivir". La matemática se humaniza y se vincula al entorno social, organizando los conocimientos en bloques curriculares lógicos.</p>
-                </div>
-                <div class="card" style="border-left-color: var(--azul);">
-                    <h3>2016 - 2023: Ajuste y Competencias</h3>
-                    <p><b>Socio-constructivismo:</b> Desarrollo de Destrezas con Criterio de Desempeño (DCD). Se prioriza el "Saber Hacer" y se introducen competencias digitales, financieras y socioemocionales.</p>
-                </div>
+                <div class="card"><h3>1996: Reforma Consensuada</h3><p>Paradigma conductista: Ciencia estática y mecánica.</p></div>
+                <div class="card"><h3>2010: Actualización</h3><p>Pedagogía crítica vinculada al entorno social y al "Buen Vivir".</p></div>
+                <div class="card"><h3>2016 - Actualidad</h3><p>Socio-constructivismo enfocado en competencias y DCD.</p></div>
             </div>
 
             <div class="section">
@@ -159,74 +157,65 @@
                         <th class="dim-col">DIMENSIÓN</th>
                         <th>1996</th>
                         <th>2010</th>
-                        <th>2016 - ACTUALIDAD</th>
+                        <th>2016 - 2023</th>
                     </tr>
                     <tr>
-                        <td class="dim-col">Enfoque Epistemológico</td>
-                        <td><b>Conductista.</b> Matemática como ciencia mecánica y estática. Memorización de fórmulas.</td>
-                        <td><b>Pedagogía Crítica.</b> Vinculada al razonamiento lógico y al entorno social del estudiante.</td>
-                        <td><b>Constructivista.</b> Desarrollo de competencias y DCD. Aplicación práctica en contextos reales.</td>
+                        <td class="dim-col">Enfoque</td>
+                        <td>Conductista: Memorización de algoritmos.</td>
+                        <td>Crítico: Vinculación social.</td>
+                        <td>Constructivista: Saber hacer en contexto.</td>
                     </tr>
                     <tr>
-                        <td class="dim-col">Estructura y Tiempos</td>
-                        <td><b>Lineal y Rígida.</b> Contenidos obligatorios organizados estrictamente por años básicos.</td>
-                        <td><b>Bloques Curriculares.</b> Organización en 4 grandes áreas pero manteniendo la estructura anual.</td>
-                        <td><b>Modular por Subniveles.</b> Flexibilidad total de 3 años para que el docente desarrolle habilidades.</td>
-                    </tr>
-                    <tr>
-                        <td class="dim-col">Evaluación</td>
-                        <td><b>Sumativa Punitiva.</b> Basada en exámenes objetivos finales donde el error es falla del alumno.</td>
-                        <td><b>Indicadores Esenciales.</b> Evaluación mixta de conocimientos y aplicación práctica básica.</td>
-                        <td><b>Formativa Continua.</b> Basada en criterios de evaluación. Valora el proceso de aprendizaje y el progreso.</td>
+                        <td class="dim-col">Estructura</td>
+                        <td>Lineal y Rígida por año.</td>
+                        <td>Bloques lógicos organizados.</td>
+                        <td>Flexibilidad por subniveles.</td>
                     </tr>
                 </table>
             </div>
 
             <div class="section">
-                <h1>Arquitectura del <span>Sistema</span></h1>
-                <p>Niveles de concreción que aseguran la transferencia de la política educativa al aula:</p>
-                
+                <h1>Niveles de <span>Concreción</span></h1>
                 <div class="card">
-                    <div class="nivel-header">
-                        <div class="circle-num">1</div>
-                        <h3>Nivel Macro (Ministerio de Educación)</h3>
-                    </div>
-                    <p>Es el nivel <b>Prescriptivo</b>. Define las políticas nacionales obligatorias para todas las instituciones del país.</p>
-                    <div class="spec-list"><b>Define:</b> Perfil de salida del bachiller ecuatoriano, objetivos generales y las DCD fundamentales.</div>
-                    <div class="doc-badge">Currículo Nacional Obligatorio</div>
+                    <h3>Nivel Macro (Estado)</h3>
+                    <p>Ministerio de Educación: Define el Currículo Nacional Obligatorio.</p>
                 </div>
-
                 <div class="card">
-                    <div class="nivel-header">
-                        <div class="circle-num">2</div>
-                        <h3>Nivel Meso (Institución Educativa)</h3>
-                    </div>
-                    <p>Es el nivel de <b>Contextualización</b>. La institución adapta el currículo nacional a su propia realidad y cultura.</p>
-                    <div class="spec-list"><b>Define:</b> Enfoque pedagógico del plantel, carga horaria y sistema institucional de evaluación.</div>
-                    <div class="doc-badge">Documentos: PEI y PCI</div>
+                    <h3>Nivel Meso (Institución)</h3>
+                    <p>Autoridades Educativas: Elaboran el PEI y PCI según su contexto.</p>
                 </div>
-
-                <div class="card" style="border-left-color: var(--azul);">
-                    <div class="nivel-header">
-                        <div class="circle-num">3</div>
-                        <h3>Nivel Micro (Docente / Aula)</h3>
-                    </div>
-                    <p>Es el nivel de <b>Operatividad</b>. Aquí radica la máxima flexibilidad y autonomía del profesor frente a sus alumnos.</p>
-                    <div class="spec-list"><b>Define:</b> Estrategias metodológicas diarias (ABP, Aula Invertida) y adaptaciones curriculares para NEE.</div>
-                    <div class="doc-badge">Documentos: PCA y PUD</div>
+                <div class="card">
+                    <h3>Nivel Micro (Aula)</h3>
+                    <p>Docente: Planifica el PCA y PUD para la acción directa con alumnos.</p>
                 </div>
             </div>
 
-            <div class="section"><h1>05. <span>Complejidad</span></h1><div class="card">En espera de contenido...</div></div>
-            <div class="section"><h1>06. <span>Reflexión</span></h1><div class="card">En espera de contenido...</div></div>
-            <div class="section"><h1>07. <span>Referencias</span></h1><div class="card">En espera de contenido...</div></div>
+            <div class="section">
+                <h1>Entropía <span>Curricular</span></h1>
+                <p>Análisis de la degradación o transformación de la información pedagógica a través del sistema:</p>
+                
+                <div class="entropy-box">
+                    <div class="entropy-label">TEORÍA DE SISTEMAS</div>
+                    <div class="card">
+                        <h3>Degradación del Mensaje</h3>
+                        <p>La entropía ocurre cuando la intención original del currículo <b>Macro</b> se distorsiona al llegar al nivel <b>Micro</b> por falta de recursos o capacitación.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Neguentropía (Orden)</h3>
+                        <p>Para combatir el desorden, las instituciones usan el nivel <b>Meso</b> para organizar y dar sentido a la norma nacional, adaptándola sin perder su esencia pedagógica.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section"><h1>06. <span>Reflexión</span></h1></div>
+            <div class="section"><h1>07. <span>Referencias</span></h1></div>
 
         </div>
     </div>
 
     <script>
         function jump(idx, el) {
-            document.getElementById('slider').style.transform = 'translateX(-' + (idx * 14.285714) + '%)';
+            document.getElementById('slider').style.transform = 'translateX(-' + (idx * 14.2857) + '%)';
             const items = document.querySelectorAll('.nav-item');
             items.forEach(i => i.classList.remove('active'));
             el.classList.add('active');
