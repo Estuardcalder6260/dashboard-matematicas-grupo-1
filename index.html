@@ -59,7 +59,7 @@
 
         .striper {
             display: flex;
-            width: 300%;
+            width: 700%;
             height: 100%;
             transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -113,10 +113,14 @@
 <body>
 
     <div class="sidebar">
-        <h2>Dashboard <i>Matemático</i></h2>
-        <div class="nav-item active" onclick="irA(0, this)">01. INICIO</div>
-        <div class="nav-item" onclick="irA(1, this)">02. CRONOLOGÍA</div>
-        <div class="nav-item" onclick="irA(2, this)">03. ESTRUCTURA</div>
+       <h2>Dashboard <i>Matemático</i></h2>
+        <div class="nav-item active" onclick="irA(0, this)">01. Síntesis</div>
+        <div class="nav-item" onclick="irA(1, this)">02. Cronología</div>
+        <div class="nav-item" onclick="irA(2, this)">03. Comparativa</div>
+        <div class="nav-item" onclick="irA(3, this)">04. Concreción</div>
+        <div class="nav-item" onclick="irA(4, this)">05. Complejidad</div>
+        <div class="nav-item" onclick="irA(5, this)">06. Reflexión</div>
+        <div class="nav-item" onclick="irA(6, this)">07. Referencias</div>
     </div>
 
     <div class="viewport">
@@ -233,11 +237,39 @@
 
         </div>
     </div>
+<div class="section">
+                <div class="breadcrumb">03. COMPARATIVA</div>
+                <h1>Tradición e <span>Innovación</span></h1>
+                <div class="card-main">Pega aquí el contenido de las dos columnas...</div>
+            </div>
 
+            <div class="section">
+                <div class="breadcrumb">04. CONCRECIÓN</div>
+                <h1>Niveles de <span>Aplicación</span></h1>
+                <div class="card-main">Contenido pendiente...</div>
+            </div>
+
+            <div class="section">
+                <div class="breadcrumb">05. COMPLEJIDAD</div>
+                <h1>Flexibilidad <span>vs Norma</span></h1>
+                <div class="card-main">Contenido pendiente...</div>
+            </div>
+
+            <div class="section">
+                <div class="breadcrumb">06. REFLEXIÓN</div>
+                <h1>Visión <span>Crítica</span></h1>
+                <div class="card-main">Contenido pendiente...</div>
+            </div>
+
+            <div class="section">
+                <div class="breadcrumb">07. REFERENCIAS</div>
+                <h1>Fuentes <span>Bibliográficas</span></h1>
+                <div class="card-main">Contenido pendiente...</div>
+            </div>
     <script>
         function irA(index, element) {
             const striper = document.getElementById('striper');
-            striper.style.transform = `translateX(-${index * (100/3)}%)`;
+            striper.style.transform = `translateX(-${index * (100/7)}%)`;
 
             const items = document.querySelectorAll('.nav-item');
             items.forEach(i => i.classList.remove('active'));
