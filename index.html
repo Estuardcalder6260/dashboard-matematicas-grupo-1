@@ -51,7 +51,7 @@
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: all 0.3s;
+            transition: 0.3s;
         }
 
         .nav-item:hover { background: rgba(255,255,255,0.05); color: white; }
@@ -67,12 +67,13 @@
         .slider {
             display: flex;
             height: 100%;
-            width: 700%; /* Para las 7 secciones */
-            transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+            width: 700%; 
+            transition: transform 0.5s ease-in-out; /* Transición más simple para evitar lag */
+            will-change: transform; /* Optimiza el rendimiento del navegador */
         }
 
         .section {
-            width: 14.2857%;
+            width: 14.285714%; /* Precisión total para 7 secciones */
             height: 100%;
             padding: 60px 80px;
             box-sizing: border-box;
@@ -81,7 +82,7 @@
 
         /* TIPOGRAFÍA */
         .label { color: var(--dorado); font-weight: bold; font-size: 13px; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; }
-        h1 { font-family: 'Georgia', serif; font-size: 50px; color: var(--azul); margin: 0 0 20px 0; line-height: 1.1; }
+        h1 { font-family: 'Georgia', serif; font-size: 45px; color: var(--azul); margin: 0 0 20px 0; }
         h1 span { color: var(--dorado); font-style: italic; }
         p { line-height: 1.8; color: #444; font-size: 16px; }
 
@@ -89,25 +90,18 @@
         .card {
             background: white;
             border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             border-left: 6px solid var(--dorado);
         }
 
-        .card h3 { margin-top: 0; color: var(--azul); border-bottom: 1px solid #eee; padding-bottom: 10px; font-size: 19px; }
+        .card h3 { margin-top: 0; color: var(--azul); font-size: 18px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
 
-        .comp-table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            background: white; 
-            border-radius: 10px; 
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-        .comp-table th { background: #f8f9fa; padding: 20px; text-align: left; border-bottom: 2px solid #eee; color: var(--azul); }
-        .comp-table td { padding: 20px; border-bottom: 1px solid #f0f0f0; vertical-align: top; font-size: 14px; line-height: 1.6; }
-        .dim-col { background: #fafafa; font-weight: bold; font-style: italic; width: 200px; color: var(--azul); border-right: 1px solid #eee; }
+        .comp-table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; }
+        .comp-table th { background: #f8f9fa; padding: 15px; text-align: left; border-bottom: 2px solid #eee; }
+        .comp-table td { padding: 15px; border-bottom: 1px solid #f0f0f0; font-size: 14px; vertical-align: top; }
+        .dim-col { background: #fafafa; font-weight: bold; width: 180px; color: var(--azul); }
 
         .doc-badge { background: var(--azul); color: white; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; display: inline-block; margin-top: 10px; }
     </style>
@@ -116,30 +110,30 @@
 
     <div class="sidebar">
         <h2>Dashboard<br><i>Matemático</i></h2>
-        <div class="nav-item active" onclick="navegar(0, this)">01. Síntesis</div>
-        <div class="nav-item" onclick="navegar(1, this)">02. Cronología</div>
-        <div class="nav-item" onclick="navegar(2, this)">03. Comparativa</div>
-        <div class="nav-item" onclick="navegar(3, this)">04. Concreción</div>
-        <div class="nav-item" onclick="navegar(4, this)">05. Complejidad</div>
-        <div class="nav-item" onclick="navegar(5, this)">06. Reflexión</div>
-        <div class="nav-item" onclick="navegar(6, this)">07. Referencias</div>
+        <div class="nav-item active" onclick="ir(0, this)">01. Síntesis</div>
+        <div class="nav-item" onclick="ir(1, this)">02. Cronología</div>
+        <div class="nav-item" onclick="ir(2, this)">03. Comparativa</div>
+        <div class="nav-item" onclick="ir(3, this)">04. Concreción</div>
+        <div class="nav-item" onclick="ir(4, this)">05. Complejidad</div>
+        <div class="nav-item" onclick="ir(5, this)">06. Reflexión</div>
+        <div class="nav-item" onclick="ir(6, this)">07. Referencias</div>
     </div>
 
     <div class="viewport">
-        <div class="slider" id="mainSlider">
+        <div class="slider" id="slider">
             
             <div class="section">
                 <div class="label">01. INTRODUCCIÓN</div>
                 <h1>Análisis <span>Curricular</span></h1>
-                <p>La enseñanza de la Matemática en Ecuador ha pasado de centrarse en la memorización de fórmulas y procedimientos a concebirse como una herramienta lógica para comprender y transformar la realidad. Este cambio refleja la transición del conductismo hacia enfoques socio-constructivistas.</p>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 30px;">
+                <p>La enseñanza de la Matemática en Ecuador ha evolucionado de un modelo basado en la repetición hacia un enfoque socio-constructivista que prioriza el razonamiento lógico.</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                     <div class="card">
-                        <h3>1. ENFOQUE CRÍTICO</h3>
-                        <p>La matemática moderna busca que el estudiante aplique conceptos en situaciones reales, fomentando el pensamiento lógico sobre la memoria.</p>
+                        <h3>Enfoque Crítico</h3>
+                        <p>Aplicación de conceptos en situaciones reales para transformar el entorno del estudiante.</p>
                     </div>
                     <div class="card">
-                        <h3>2. FLEXIBILIDAD</h3>
-                        <p>El sistema permite que cada institución adapte los contenidos según su entorno social, garantizando una educación más pertinente.</p>
+                        <h3>Autonomía</h3>
+                        <p>Capacidad de las instituciones para adaptar el currículo a su contexto social.</p>
                     </div>
                 </div>
             </div>
@@ -149,15 +143,15 @@
                 <h1>Hitos <span>Fundamentales</span></h1>
                 <div class="card">
                     <h3>1996: Reforma Consensuada</h3>
-                    <p><b>Paradigma Conductista y Mecanicista.</b> Enfocada fuertemente en el desarrollo de destrezas instrumentales mediante la repetición. El currículo era una lista de contenidos rígidos por año y la enseñanza era descontextualizada.</p>
+                    <p><b>Modelo Conductista:</b> El docente transmite algoritmos y el estudiante los repite. Contenidos descontextualizados.</p>
                 </div>
                 <div class="card">
                     <h3>2010: Actualización y Fortalecimiento</h3>
-                    <p><b>Pedagogía Crítica.</b> Intento de humanizar la ciencia exacta. Se articuló con el "Buen Vivir" e introdujo bloques curriculares para organizar mejor el conocimiento (Numérico, Geométrico, Medida, Estadística).</p>
+                    <p><b>Pedagogía Crítica:</b> Introducción de los Ejes Transversales y el Buen Vivir. Primer paso hacia la flexibilidad.</p>
                 </div>
-                <div class="card" style="border-left-color: var(--azul);">
-                    <h3>2023: Marco Competencial</h3>
-                    <p><b>Socio-constructivista avanzado.</b> El enfoque actual se centra en "Competencias" para la vida, incluyendo alfabetización financiera, digital y programación.</p>
+                <div class="card">
+                    <h3>2016 - 2023: Ajuste y Competencias</h3>
+                    <p><b>Constructivismo:</b> Organización por subniveles y enfoque en competencias digitales y financieras.</p>
                 </div>
             </div>
 
@@ -165,74 +159,67 @@
                 <div class="label">03. COMPARATIVA</div>
                 <h1>Dimensiones <span>de Cambio</span></h1>
                 <table class="comp-table">
-                    <thead>
-                        <tr>
-                            <th class="dim-col">DIMENSIÓN</th>
-                            <th>1996</th>
-                            <th>2010</th>
-                            <th>2016</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="dim-col">Enfoque Epistemológico</td>
-                            <td><b>Conductista.</b> Ciencia estática y mecánica. Memorización.</td>
-                            <td><b>Pedagogía Crítica.</b> Vinculada al entorno social.</td>
-                            <td><b>Constructivista.</b> Desarrollo de DCD (Saber hacer).</td>
-                        </tr>
-                        <tr>
-                            <td class="dim-col">Estructura y Tiempos</td>
-                            <td><b>Lineal.</b> Contenidos estrictos por año.</td>
-                            <td><b>Bloques.</b> Agrupación por grandes temas.</td>
-                            <td><b>Subniveles.</b> Flexibilidad en ciclos de 3 años.</td>
-                        </tr>
-                        <tr>
-                            <td class="dim-col">Evaluación</td>
-                            <td><b>Sumativa.</b> Resultados finales y exámenes rígidos.</td>
-                            <td><b>Mixta.</b> Uso de indicadores esenciales.</td>
-                            <td><b>Formativa.</b> Evaluación continua por criterios.</td>
-                        </tr>
-                    </tbody>
+                    <tr>
+                        <th class="dim-col">DIMENSIÓN</th>
+                        <th>1996</th>
+                        <th>2010</th>
+                        <th>2016</th>
+                    </tr>
+                    <tr>
+                        <td class="dim-col">Enfoque</td>
+                        <td>Conductista</td>
+                        <td>Crítico</td>
+                        <td>Constructivista</td>
+                    </tr>
+                    <tr>
+                        <td class="dim-col">Estructura</td>
+                        <td>Anual / Rígida</td>
+                        <td>Bloques Curriculares</td>
+                        <td>Subniveles Flexibles</td>
+                    </tr>
                 </table>
             </div>
 
             <div class="section">
                 <div class="label">04. NIVELES DE CONCRECIÓN</div>
                 <h1>Arquitectura del <span>Sistema</span></h1>
+                <p>El currículo se concreta en tres niveles para garantizar que la teoría nacional se convierta en práctica de aula.</p>
+                
                 <div class="card">
-                    <h3>Nivel Macro: Nacional</h3>
-                    <p>Ministerio de Educación. Define el perfil de salida y objetivos generales obligatorios para todo el país.</p>
-                    <div class="doc-badge">Documento: Currículo Nacional</div>
+                    <h3>Nivel 1: Macrocurriculo (Estado)</h3>
+                    <p>Elaborado por el <span style="color:var(--dorado); font-weight:bold;">Ministerio de Educación</span>. Es de carácter obligatorio y establece el Perfil de Salida del Bachiller ecuatoriano.</p>
+                    <div class="doc-badge">Documento: Currículo Nacional Obligatorio</div>
                 </div>
+
                 <div class="card">
-                    <h3>Nivel Meso: Institucional</h3>
-                    <p>Las instituciones educativas adaptan la norma nacional a su contexto local y cultural.</p>
-                    <div class="doc-badge">Documentos: PEI - PCI</div>
+                    <h3>Nivel 2: Mesocurriculo (Institución)</h3>
+                    <p>Las instituciones educativas adaptan la norma nacional a su contexto local. Es liderado por la Junta Académica de cada plantel.</p>
+                    <div class="doc-badge">Documentos: PEI y PCI</div>
                 </div>
+
                 <div class="card">
-                    <h3>Nivel Micro: Aula</h3>
-                    <p>El docente planifica la experiencia directa según las necesidades específicas de sus alumnos.</p>
-                    <div class="doc-badge">Documentos: PCA - PUD</div>
+                    <h3>Nivel 3: Microcurriculo (Aula)</h3>
+                    <p>El docente diseña la planificación para su grupo específico. Es el nivel de mayor autonomía y permite realizar adaptaciones individuales.</p>
+                    <div class="doc-badge">Documentos: PCA y PUD</div>
                 </div>
             </div>
 
-            <div class="section"><h1>05. <span>Complejidad</span></h1><p>Próximamente...</p></div>
-            <div class="section"><h1>06. <span>Reflexión</span></h1><p>Próximamente...</p></div>
-            <div class="section"><h1>07. <span>Referencias</span></h1><p>Próximamente...</p></div>
+            <div class="section"><h1>05. <span>Complejidad</span></h1><div class="card">Análisis pendiente...</div></div>
+            <div class="section"><h1>06. <span>Reflexión</span></h1><div class="card">Reflexión pendiente...</div></div>
+            <div class="section"><h1>07. <span>Referencias</span></h1><div class="card">Bibliografía pendiente...</div></div>
 
         </div>
     </div>
 
     <script>
-        function navegar(index, elemento) {
-            // Mover el slider (14.2857% es 100/7)
-            const slider = document.getElementById('mainSlider');
-            slider.style.transform = `translateX(-${index * 14.2857}%)`;
-
-            // Cambiar clase activa en el menú
+        function ir(idx, el) {
+            // Mover el slider usando la constante exacta para evitar congelamientos
+            document.getElementById('slider').style.transform = 'translateX(-' + (idx * 14.285714) + '%)';
+            
+            // Actualizar menú
             const items = document.querySelectorAll('.nav-item');
-            items.forEach(item => item.classList.remove('active'));
-            elemento.classList.add('active');
+            items.forEach(i => i.classList.remove('active'));
+            el.classList.add('active');
         }
     </script>
 </body>
