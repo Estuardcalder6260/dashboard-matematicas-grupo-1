@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Académico</title>
+    <title>Dashboard Académico Interactivo</title>
     <style>
         :root {
-            /* NUEVA PALETA DE COLORES: Azul y Dorado */
-            --bg-sidebar: #1a252f;      /* Azul oscuro profundo */
-            --accent-gold: #d4af37;      /* Dorado elegante */
+            --bg-sidebar: #1a252f;
+            --accent-gold: #d4af37;
             --text-light: #ffffff;
             --text-dark: #2c3e50;
             --bg-main: #fcfcfc;
@@ -17,12 +16,12 @@
         body {
             margin: 0;
             display: flex;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             height: 100vh;
-            background-color: var(--bg-main);
+            overflow: hidden;
         }
 
-        /* Sidebar - Ahora es oscura para resaltar */
+        /* Sidebar */
         .sidebar {
             width: 260px;
             background-color: var(--bg-sidebar);
@@ -30,18 +29,16 @@
             display: flex;
             flex-direction: column;
             color: var(--text-light);
+            z-index: 10;
         }
 
         .sidebar h2 {
             font-family: 'Georgia', serif;
-            font-size: 24px;
+            font-size: 22px;
             border-bottom: 2px solid var(--accent-gold);
             padding-bottom: 10px;
             margin-bottom: 40px;
-            text-align: center;
         }
-
-        .nav-menu { list-style: none; padding: 0; }
 
         .nav-item {
             padding: 12px 15px;
@@ -51,25 +48,31 @@
             text-transform: uppercase;
             margin-bottom: 8px;
             transition: 0.3s;
-            border-radius: 4px;
-        }
-
-        .nav-item:hover {
-            background: rgba(255,255,255,0.1);
-            color: var(--accent-gold);
         }
 
         .nav-item.active {
             color: var(--text-light);
             background: var(--accent-gold);
             font-weight: bold;
+            border-radius: 4px;
         }
 
-        /* Contenido Principal */
+        /* Main Content con Animación */
         .main {
             flex: 1;
             padding: 80px;
+            background-color: var(--bg-main);
             overflow-y: auto;
+        }
+
+        /* Clase para el efecto de transición */
+        .fade-in {
+            animation: fadeInEffect 0.6s ease-in-out;
+        }
+
+        @keyframes fadeInEffect {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .breadcrumb {
@@ -82,64 +85,64 @@
 
         h1 {
             font-family: 'Georgia', serif;
-            font-size: 60px;
+            font-size: 55px;
             color: var(--text-dark);
             margin: 0 0 30px 0;
         }
 
-        h1 span {
-            color: var(--accent-gold);
-            font-style: italic;
-        }
-
-        /* Tarjeta de información mejorada */
         .info-card {
             background: white;
             padding: 40px;
             border-radius: 4px;
-            box-shadow: 10px 10px 0px #eee; /* Sombra sólida moderna */
+            box-shadow: 10px 10px 0px #eee;
             border: 1px solid #ddd;
             max-width: 850px;
         }
 
-        .info-card h2 {
-            font-size: 20px;
-            color: var(--text-dark);
-            line-height: 1.5;
-            margin-top: 0;
-        }
-
-        .info-card p {
-            font-size: 16px;
-            color: #555;
-            line-height: 1.8;
-        }
+        p { line-height: 1.8; color: #555; }
     </style>
 </head>
 <body>
 
     <div class="sidebar">
-        <h2>Dashboard <i>Educativo</i></h2>
-        <ul class="nav-menu">
-            <li class="nav-item active" onclick="update('INTRODUCCIÓN', 'Marco <span>Conceptual</span> del Área', 'Aquí inicia la explicación del proyecto de matemáticas...')">01. Inicio</li>
-            <li class="nav-item" onclick="update('HISTORIA', 'Línea de <span>Tiempo</span> Educativa', 'Contenido proporcionado por tus compañeros sobre la evolución...')">02. Cronología</li>
-            <li class="nav-item" onclick="update('ESTRUCTURA', 'Niveles de <span>Concreción</span>', 'Detalles sobre los niveles Macro, Meso y Micro del sistema.')">03. Estructura</li>
-        </ul>
+        <h2>Dashboard <i>Matemático</i></h2>
+        <div class="nav-menu">
+            <div class="nav-item active" onclick="update(this, '01. INTRODUCCIÓN', 'Análisis <i>Curricular</i>', 'Aquí puedes poner la síntesis inicial de la tarea...')">01. Inicio</div>
+            <div class="nav-item" onclick="update(this, '02. CRONOLOGÍA', 'Evolución <span>Histórica</span>', 'Contenido sobre la historia del currículo...')">02. Cronología</div>
+            <div class="nav-item" onclick="update(this, '04. CONCRECIÓN', 'Arquitectura del <span>Sistema</span>', 'Niveles Macro, Meso y Micro del sistema educativo.')">04. Concreción</div>
+        </div>
     </div>
 
-    <div class="main">
-        <div id="breadcrumb" class="breadcrumb">INTRODUCCIÓN</div>
-        <h1 id="main-title">Marco <span>Conceptual</span> del Área</h1>
+    <div class="main" id="content-area">
+        <div id="breadcrumb" class="breadcrumb">01. INTRODUCCIÓN</div>
+        <h1 id="main-title">Análisis <i>Curricular</i></h1>
         
         <div class="info-card">
-            <h2 id="card-desc">Selecciona una sección del menú lateral para cargar la información detallada de la tarea.</h2>
-            <p id="card-detail">Este dashboard interactivo presenta el análisis curricular de forma dinámica y profesional.</p>
+            <p id="card-detail">Bienvenido al dashboard interactivo. Haz clic en las opciones del menú para navegar por la información.</p>
         </div>
     </div>
 
     <script>
-        function update(label, title, detail) {
+        function update(element, label, title, detail) {
+            const contentArea = document.getElementById('content-area');
+            
+            // 1. Quitar la animación anterior para poder reiniciarla
+            contentArea.classList.remove('fade-in');
+            void contentArea.offsetWidth; // Truco técnico para reiniciar la animación
+            
+            // 2. Cambiar los textos
             document.getElementById('breadcrumb').innerText = label;
             document.getElementById('main-title').innerHTML = title;
-            document.getElementById('card-desc').innerText = detail;
-            document.getElementById('card-detail').
+            document.getElementById('card-detail').innerHTML = detail;
+
+            // 3. Añadir la animación de nuevo
+            contentArea.classList.add('fade-in');
+
+            // 4. Actualizar el botón activo
+            const items = document.querySelectorAll('.nav-item');
+            items.forEach(i => i.classList.remove('active'));
+            element.classList.add('active');
+        }
+    </script>
+</body>
+</html>
