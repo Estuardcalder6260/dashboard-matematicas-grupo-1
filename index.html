@@ -6,174 +6,165 @@
     <title>Dashboard Matemático</title>
     <style>
         :root {
-            --azul-oscuro: #1a252f;
+            --azul: #1a252f;
             --dorado: #d4af37;
             --texto: #2c3e50;
-            --gris-claro: #f4f7f6;
+            --gris: #f8f9fa;
         }
 
         body {
             margin: 0;
-            padding: 0;
             display: flex;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             height: 100vh;
-            background-color: #fff;
-            overflow: hidden;
+            background: #fff;
         }
 
-        /* BARRA LATERAL FIJA */
+        /* SIDEBAR */
         .sidebar {
-            width: 280px;
-            background-color: var(--azul-oscuro);
+            width: 250px;
+            background: var(--azul);
             color: white;
-            display: flex;
-            flex-direction: column;
-            padding: 30px 20px;
-            box-sizing: border-box;
+            padding: 30px 15px;
             flex-shrink: 0;
         }
 
         .sidebar h2 {
-            font-family: 'Georgia', serif;
-            font-size: 24px;
+            font-family: serif;
+            font-size: 22px;
             border-bottom: 2px solid var(--dorado);
             padding-bottom: 10px;
             margin-bottom: 30px;
         }
 
         .nav-item {
-            padding: 12px 15px;
-            margin-bottom: 8px;
+            padding: 12px;
+            margin: 5px 0;
             cursor: pointer;
-            border-radius: 6px;
-            transition: 0.3s;
-            font-weight: 600;
-            font-size: 13px;
-            text-transform: uppercase;
+            border-radius: 4px;
             color: #bdc3c7;
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
         }
 
-        .nav-item:hover { background: rgba(255,255,255,0.05); color: white; }
-        .nav-item.active { background: var(--dorado); color: var(--azul-oscuro); }
+        .nav-item:hover { background: rgba(255,255,255,0.1); }
+        .nav-item.active { background: var(--dorado); color: var(--azul); }
 
-        /* CONTENEDOR DE CONTENIDO */
-        .main-content {
+        /* CONTENIDO */
+        .content-area {
             flex-grow: 1;
+            padding: 40px 60px;
+            overflow-y: auto;
             position: relative;
-            overflow: hidden;
-        }
-
-        .section-wrapper {
-            display: flex;
-            width: 700%; /* 7 secciones */
-            height: 100%;
-            transition: transform 0.5s ease-in-out;
         }
 
         .section {
-            width: 14.285%; /* 100 / 7 */
-            height: 100%;
-            padding: 50px 70px;
-            box-sizing: border-box;
-            overflow-y: auto;
+            display: none; /* Escondemos todas por defecto */
         }
 
-        h1 { font-family: 'Georgia', serif; font-size: 45px; color: var(--azul-oscuro); margin-bottom: 10px; }
-        h1 span { color: var(--dorado); font-style: italic; }
-        .label { color: var(--dorado); font-weight: bold; font-size: 14px; margin-bottom: 5px; }
+        .section.active {
+            display: block; /* Solo mostramos la activa */
+        }
 
-        /* TABLAS Y TARJETAS */
+        h1 { font-family: serif; font-size: 40px; color: var(--azul); }
+        h1 span { color: var(--dorado); }
+        .label { color: var(--dorado); font-weight: bold; font-size: 12px; letter-spacing: 2px; }
+
         .card {
             background: white;
-            border-left: 5px solid var(--azul-oscuro);
+            border-left: 5px solid var(--azul);
             padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            border-radius: 4px;
+            margin: 20px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; }
-        th { background: var(--gris-claro); padding: 15px; text-align: left; border-bottom: 2px solid #ddd; }
-        td { padding: 15px; border-bottom: 1px solid #eee; vertical-align: top; line-height: 1.6; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th { background: var(--gris); padding: 12px; text-align: left; border-bottom: 2px solid #ddd; }
+        td { padding: 12px; border-bottom: 1px solid #eee; font-size: 14px; }
     </style>
 </head>
 <body>
 
     <div class="sidebar">
-        <h2>Dashboard<br><i>Matemático</i></h2>
-        <div class="nav-item active" onclick="mover(0, this)">01. Síntesis</div>
-        <div class="nav-item" onclick="mover(1, this)">02. Cronología</div>
-        <div class="nav-item" onclick="mover(2, this)">03. Comparativa</div>
-        <div class="nav-item" onclick="mover(3, this)">04. Concreción</div>
-        <div class="nav-item" onclick="mover(4, this)">05. Complejidad</div>
-        <div class="nav-item" onclick="mover(5, this)">06. Reflexión</div>
-        <div class="nav-item" onclick="mover(6, this)">07. Referencias</div>
+        <h2>Dashboard<br>Matemático</h2>
+        <div class="nav-item active" onclick="cambiarSeccion(0, this)">01. Síntesis</div>
+        <div class="nav-item" onclick="cambiarSeccion(1, this)">02. Cronología</div>
+        <div class="nav-item" onclick="cambiarSeccion(2, this)">03. Comparativa</div>
+        <div class="nav-item" onclick="cambiarSeccion(3, this)">04. Concreción</div>
+        <div class="nav-item" onclick="cambiarSeccion(4, this)">05. Complejidad</div>
+        <div class="nav-item" onclick="cambiarSeccion(5, this)">06. Reflexión</div>
+        <div class="nav-item" onclick="cambiarSeccion(6, this)">07. Referencias</div>
     </div>
 
-    <div class="main-content">
-        <div class="section-wrapper" id="wrapper">
+    <div class="content-area">
+        
+        <div class="section active" id="sec0">
+            <div class="label">01. INTRODUCCIÓN</div>
+            <h1>Análisis <span>Curricular</span></h1>
+            <div class="card">
+                <p>La Matemática en Ecuador: De la memorización al pensamiento lógico y crítico.</p>
+            </div>
+        </div>
+
+        <div class="section" id="sec1">
+            <div class="label">02. CRONOLOGÍA</div>
+            <h1>Evolución <span>Histórica</span></h1>
+            <div class="card"><b>1996:</b> Reforma Consensuada.</div>
+            <div class="card"><b>2010:</b> Actualización EGB.</div>
+            <div class="card"><b>2023:</b> Marco Competencial.</div>
+        </div>
+
+        <div class="section" id="sec2">
+            <div class="label">03. COMPARATIVA</div>
+            <h1>Dimensiones <span>de Cambio</span></h1>
+            <table>
+                <tr><th>Dimensión</th><th>1996</th><th>2010</th><th>2016</th></tr>
+                <tr><td>Enfoque</td><td>Conductista</td><td>Crítico</td><td>Constructivista</td></tr>
+            </table>
+        </div>
+
+        <div class="section" id="sec3">
+            <div class="label">04. CONCRECIÓN</div>
+            <h1>Arquitectura del <span>Sistema</span></h1>
+            <div class="card">
+                <h3 style="color:var(--dorado)">Nivel Macro</h3>
+                <p><b>Ministerio de Educación:</b> Currículo Nacional Obligatorio.</p>
+            </div>
+            <div class="card">
+                <h3 style="color:var(--dorado)">Nivel Meso</h3>
+                <p><b>Institución:</b> PCI y PEI. Contextualización escolar.</p>
+            </div>
+            <div class="card">
+                <h3 style="color:var(--dorado)">Nivel Micro</h3>
+                <p><b>Aula:</b> PCA y PUD. El docente decide el "cómo".</p>
+            </div>
+        </div>
+
+        <div class="section" id="sec4"><h1>05. <span>Complejidad</span></h1></div>
+        <div class="section" id="sec5"><h1>06. <span>Reflexión</span></h1></div>
+        <div class="section" id="sec6"><h1>07. <span>Referencias</span></h1></div>
+
+    </div>
+
+    <script>
+        function cambiarSeccion(index, elemento) {
+            // Ocultar todas las secciones
+            var secciones = document.getElementsByClassName('section');
+            for (var i = 0; i < secciones.length; i++) {
+                secciones[i].classList.remove('active');
+            }
             
-            <div class="section">
-                <div class="label">01. INTRODUCCIÓN</div>
-                <h1>Análisis <span>Curricular</span></h1>
-                <p>La enseñanza de la Matemática en Ecuador ha pasado de centrarse en la memorización de fórmulas y procedimientos a concebirse como una herramienta lógica para comprender y transformar la realidad.</p>
-            </div>
+            // Mostrar la seleccionada
+            document.getElementById('sec' + index).classList.add('active');
 
-            <div class="section">
-                <div class="label">02. CRONOLOGÍA</div>
-                <h1>Evolución <span>Histórica</span></h1>
-                <div class="card">
-                    <b>1996: REFORMA CONSENSUADA.</b> Paradigma Conductista y Mecanicista. Matemática descontextualizada y rígida.
-                </div>
-                <div class="card">
-                    <b>2010: ACTUALIZACIÓN EGB.</b> Pedagogía Crítica. Vinculación con el "Buen Vivir" y bloques curriculares.
-                </div>
-            </div>
-
-            <div class="section">
-                <div class="label">03. COMPARATIVA HISTÓRICA</div>
-                <h1>Dimensiones <span>de Cambio</span></h1>
-                <table>
-                    <tr>
-                        <th>Dimensión</th>
-                        <th>1996</th>
-                        <th>2010</th>
-                        <th>2016</th>
-                    </tr>
-                    <tr>
-                        <td><b>Enfoque</b></td>
-                        <td>Conductista</td>
-                        <td>Pedagogía Crítica</td>
-                        <td>Constructivista</td>
-                    </tr>
-                    <tr>
-                        <td><b>Estructura</b></td>
-                        <td>Lineal y Rígida</td>
-                        <td>Bloques Curriculares</td>
-                        <td>Modular por Subniveles</td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="section">
-                <div class="label">04. NIVELES DE CONCRECIÓN</div>
-                <h1>Niveles de <span>Aplicación</span></h1>
-                <p>Arquitectura del Sistema Curricular: Cómo se transfiere la autonomía desde el Estado hasta el estudiante.</p>
-                
-                <div class="card">
-                    <h3 style="margin-top:0; color:var(--dorado)">1. Nivel Macro (Ministerio de Educación)</h3>
-                    <p>Es el paraguas normativo obligatorio a nivel nacional. Define las intenciones educativas del país.</p>
-                    <small><b>Documento:</b> Currículo Nacional Obligatorio.</small>
-                </div>
-
-                <div class="card">
-                    <h3 style="margin-top:0; color:var(--dorado)">2. Nivel Meso (Institución Educativa)</h3>
-                    <p>Contextualiza el currículo nacional a la realidad propia de la escuela o colegio.</p>
-                    <small><b>Documentos:</b> PEI y PCI.</small>
-                </div>
-
-                <div class="card">
-                    <h3 style="margin-top:0; color:var(--dorado)">3. Nivel Micro (Docente en el Aula)</h3>
-                    <p>Es el momento de máxima flexibilidad donde el docente decide el "Cómo" y "Cuándo" enseñar.</p>
-                    <small><b>Documentos:</b> PCA y PUD.</
+            // Actualizar menú
+            var items = document.getElementsByClassName('nav-item');
+            for (var i = 0; i < items.length; i++) {
+                items[i].classList.remove('active');
+            }
+            elemento.classList.add('active');
+        }
+    </script>
+</body>
+</html>
