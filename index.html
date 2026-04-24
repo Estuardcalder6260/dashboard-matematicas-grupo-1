@@ -60,7 +60,7 @@
 
         .striper {
             display: flex;
-            width: 700%; /* Siete secciones al 100% cada una */
+            width: 700%; 
             height: 100%;
             transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -73,7 +73,7 @@
             overflow-y: auto;
         }
 
-        /* Estilos de Texto y Tarjetas */
+        /* Estilos de Texto */
         .label { color: var(--accent-gold); font-weight: bold; font-family: sans-serif; letter-spacing: 2px; font-size: 14px; margin-bottom: 10px; }
         h1 { font-size: 55px; color: var(--text-dark); margin: 0 0 20px 0; }
         h1 span { color: var(--accent-gold); font-style: italic; }
@@ -87,10 +87,18 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
 
-        .card h3 { font-family: sans-serif; font-size: 16px; margin-top: 0; color: var(--text-dark); }
+        .card h3 { 
+            font-family: sans-serif; 
+            font-size: 16px; 
+            margin-top: 0; 
+            color: var(--text-dark); 
+            border-bottom: 2px solid var(--accent-gold);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
         .card p { font-family: sans-serif; font-size: 14px; color: #666; line-height: 1.5; }
 
-        /* Estilo para las secciones nuevas */
+        /* Estilo para secciones vacías */
         .card-main {
             background: white;
             padding: 40px;
@@ -123,17 +131,19 @@
             <div class="section">
                 <div class="label">01. INTRODUCCIÓN</div>
                 <h1>Análisis <span>Curricular</span></h1>
+                
                 <p class="intro-text">
-                    La enseñanza de la Matemática en Ecuador ha pasado de centrarse en la memorización de fórmulas a concebirse como una herramienta lógica para comprender y transformar la realidad.
+                    La enseñanza de la Matemática en Ecuador ha pasado de centrarse en la memorización de fórmulas y procedimientos a concebirse como una herramienta lógica para comprender y transformar la realidad. Este cambio refleja la transición del conductismo hacia enfoques socio-constructivistas.
                 </p>
+
                 <div style="display: flex; gap: 25px; max-width: 900px;">
                     <div class="card">
                         <h3>1. ENFOQUE CRÍTICO</h3>
-                        <p>Fomenta el pensamiento lógico sobre la memoria en situaciones reales.</p>
+                        <p>La matemática moderna busca que el estudiante aplique conceptos en situaciones reales, fomentando el pensamiento lógico sobre la memoria en situaciones reales.</p>
                     </div>
                     <div class="card">
                         <h3>2. FLEXIBILIDAD</h3>
-                        <p>El sistema permite que cada institución adapte los contenidos según su entorno social.</p>
+                        <p>El sistema permite que cada institución adapte los contenidos según su entorno social, garantizando una educación más pertinente.</p>
                     </div>
                 </div>
             </div>
@@ -141,35 +151,79 @@
             <div class="section">
                 <div class="label">02. EVOLUCIÓN HISTÓRICA</div>
                 <h1>Evolución <span>Histórica Detallada</span></h1>
-                <div style="max-width: 900px;">
+                
+                <p class="intro-text" style="margin-bottom: 50px;">
+                    Pasa el cursor sobre los hitos para explorar los detalles técnicos y pedagógicos de cada reforma.
+                </p>
+
+                <div style="max-width: 900px; margin-left: 20px;">
                     <table style="width: 100%; border-collapse: collapse;">
+                        
                         <tr style="border-bottom: 1px solid #eee;">
-                            <td style="width: 120px; padding: 20px 0; font-size: 36px; color: #b0b0b0; font-style: italic; vertical-align: top;">1996</td>
-                            <td style="padding: 20px 0 20px 30px;">
-                                <div class="card">
-                                    <h3 style="border:none; margin-bottom:5px;">REFORMA CONSENSUADA</h3>
-                                    <p><b>Paradigma:</b> Conductista. Énfasis en repetición y destrezas instrumentales.</p>
+                            <td style="width: 150px; padding: 30px 0; vertical-align: top;">
+                                <div style="font-size: 36px; color: #b0b0b0; font-family: serif; font-style: italic;">1996</div>
+                            </td>
+                            <td style="padding: 30px 0 30px 40px; vertical-align: top;">
+                                <div class="card" style="box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                    <h3 style="border:none;">REFORMA CURRICULAR CONSENSUADA</h3>
+                                    <p><strong>Paradigma:</strong> Conductista y Mecanicista.</p>
+                                    <p>Enfocada fuertemente en el desarrollo de destrezas instrumentales mediante la repetición. La matemática se enseñaba de forma descontextualizada. El currículo era una lista de contenidos rígidos por año (ej. teoría de conjuntos, operaciones básicas). El docente era un transmisor de algoritmos y el estudiante un receptor pasivo evaluado únicamente de forma sumativa.</p>
                                 </div>
                             </td>
                         </tr>
+
                         <tr style="border-bottom: 1px solid #eee;">
-                            <td style="padding: 20px 0; font-size: 36px; color: #b0b0b0; font-style: italic; vertical-align: top;">2010</td>
-                            <td style="padding: 20px 0 20px 30px;">
+                            <td style="padding: 30px 0; vertical-align: top;">
+                                <div style="font-size: 36px; color: #b0b0b0; font-family: serif; font-style: italic;">2010</div>
+                            </td>
+                            <td style="padding: 30px 0 30px 40px; vertical-align: top;">
                                 <div class="card">
-                                    <h3 style="border:none; margin-bottom:5px;">ACTUALIZACIÓN EGB</h3>
-                                    <p><b>Paradigma:</b> Pedagogía Crítica. Introducción del "Buen Vivir" y bloques curriculares.</p>
+                                    <h3 style="border:none;">ACTUALIZACIÓN Y FORTALECIMIENTO CURRICULAR (EGB)</h3>
+                                    <p><strong>Paradigma:</strong> Pedagogía Crítica e introducción de los "Ejes Transversales".</p>
+                                    <p>Primer intento formal de humanizar la ciencia exacta. Se articuló la matemática con el "Buen Vivir" (Sumak Kawsay). Se introdujeron los bloques curriculares (Numérico, Geométrico, Medida, Estadística). El objetivo ya no era solo calcular, sino resolver problemas cotidianos, promoviendo por primera vez el razonamiento lógico-crítico en el aula.</p>
                                 </div>
                             </td>
                         </tr>
+
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 30px 0; vertical-align: top;">
+                                <div style="font-size: 36px; color: #b0b0b0; font-family: serif; font-style: italic;">2016</div>
+                            </td>
+                            <td style="padding: 30px 0 30px 40px; vertical-align: top;">
+                                <div class="card">
+                                    <h3 style="border:none;">AJUSTE CURRICULAR (LA ERA DE LA FLEXIBILIDAD)</h3>
+                                    <p><strong>Paradigma:</strong> Constructivista / Desarrollo de DCD.</p>
+                                    <p>Cambio radical en la estructura. Desaparece la exigencia rígida por "año" y se agrupa por Subniveles, dando 3 años al docente para lograr un aprendizaje. Se dividieron los aprendizajes en Básicos Imprescindibles (obligatorios) y Básicos Deseables.</p>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 30px 0; vertical-align: top;">
+                                <div style="font-size: 36px; color: #b0b0b0; font-family: serif; font-style: italic;">2020</div>
+                            </td>
+                            <td style="padding: 30px 0 30px 40px; vertical-align: top;">
+                                <div class="card">
+                                    <h3 style="border:none;">CURRÍCULO PRIORIZADO (EMERGENCIA COVID-19)</h3>
+                                    <p><strong>Paradigma:</strong> Contención emocional y Aprendizaje Basado en Proyectos (ABP).</p>
+                                    <p>Respuesta a la pandemia. El currículo se comprimió para priorizar únicamente lo esencial, obligando a planificar mediante proyectos interdisciplinares modulares.</p>
+                                </div>
+                            </td>
+                        </tr>
+
                         <tr>
-                            <td style="padding: 20px 0; font-size: 36px; color: #b0b0b0; font-style: italic; vertical-align: top;">2023</td>
-                            <td style="padding: 20px 0 20px 30px;">
-                                <div class="card" style="background:#fffdf8">
-                                    <h3 style="border:none; margin-bottom:5px;">MARCO COMPETENCIAL</h3>
-                                    <p><b>Paradigma:</b> STEAM. Enfoque en competencias digitales y alfabetización financiera.</p>
+                            <td style="padding: 30px 0; vertical-align: top;">
+                                <div style="font-size: 36px; color: #b0b0b0; font-family: serif; font-style: italic;">2023</div>
+                            </td>
+                            <td style="padding: 30px 0 30px 40px; vertical-align: top;">
+                                <div class="card" style="background: #fffdf8;">
+                                    <h3 style="border:none;">MARCO CURRICULAR COMPETENCIAL</h3>
+                                    <p><strong>Paradigma:</strong> Socio-constructivista avanzado y enfoque STEAM.</p>
+                                    <p>La transformación actual. Se enfoca en desarrollar "Competencias". Énfasis explícito en la alfabetización financiera y la programación. La evaluación se prohíbe cuantitativa en subniveles inferiores.</p>
                                 </div>
                             </td>
                         </tr>
+
                     </table>
                 </div>
             </div>
@@ -178,7 +232,7 @@
                 <div class="label">03. COMPARATIVA</div>
                 <h1>Tradición e <span>Innovación</span></h1>
                 <div class="card-main">
-                    <p>Aquí colocaremos el cuadro comparativo de los paradigmas educativos.</p>
+                    <p>Contenido pendiente para el cuadro comparativo...</p>
                 </div>
             </div>
 
@@ -186,7 +240,7 @@
                 <div class="label">04. CONCRECIÓN</div>
                 <h1>Niveles de <span>Aplicación</span></h1>
                 <div class="card-main">
-                    <p>Contenido sobre los niveles Macro, Meso y Micro del currículo.</p>
+                    <p>Contenido sobre los niveles Macro, Meso y Micro...</p>
                 </div>
             </div>
 
@@ -194,7 +248,7 @@
                 <div class="label">05. COMPLEJIDAD</div>
                 <h1>Flexibilidad <span>vs Norma</span></h1>
                 <div class="card-main">
-                    <p>Análisis de la complejidad en la implementación docente.</p>
+                    <p>Contenido sobre los desafíos de la implementación...</p>
                 </div>
             </div>
 
@@ -202,7 +256,7 @@
                 <div class="label">06. REFLEXIÓN</div>
                 <h1>Visión <span>Crítica</span></h1>
                 <div class="card-main">
-                    <p>Reflexión personal sobre el futuro de la educación matemática.</p>
+                    <p>Reflexión personal final...</p>
                 </div>
             </div>
 
@@ -210,7 +264,7 @@
                 <div class="label">07. REFERENCIAS</div>
                 <h1>Fuentes <span>Bibliográficas</span></h1>
                 <div class="card-main">
-                    <p>Listado de fuentes consultadas en formato APA.</p>
+                    <p>Listado de fuentes en formato APA...</p>
                 </div>
             </div>
 
@@ -220,7 +274,6 @@
     <script>
         function irA(index, element) {
             const striper = document.getElementById('striper');
-            // Cálculo exacto para 7 secciones
             striper.style.transform = `translateX(-${index * (100/7)}%)`;
 
             const items = document.querySelectorAll('.nav-item');
