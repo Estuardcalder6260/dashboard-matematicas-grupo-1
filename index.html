@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Curricular Matemática</title>
+    <title>Dashboard Matemático - Versión Académica Completa</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
@@ -11,20 +11,19 @@
             --dorado: #d4af37;
             --fondo: #f4f7f6;
             --blanco: #ffffff;
-            --verde: #27ae60;
-            --rojo: #c0392b;
+            --texto: #2c3e50;
         }
 
         body {
             margin: 0;
             display: flex;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             height: 100vh;
             overflow: hidden;
             background: var(--fondo);
         }
 
-        /* SIDEBAR */
+        /* NAVEGACIÓN */
         .sidebar {
             width: 280px;
             background: var(--azul);
@@ -38,11 +37,10 @@
 
         .sidebar h2 {
             font-family: 'Georgia', serif;
-            font-size: 22px;
+            font-size: 24px;
             border-bottom: 2px solid var(--dorado);
             padding-bottom: 10px;
             margin-bottom: 30px;
-            line-height: 1.2;
         }
 
         .nav-item {
@@ -61,14 +59,14 @@
         .nav-item:hover { background: rgba(255,255,255,0.05); color: white; }
         .nav-item.active { background: var(--dorado); color: var(--azul); transform: translateX(8px); }
 
-        /* ESCENARIO */
+        /* VIEWPORT */
         .viewport { flex: 1; position: relative; overflow: hidden; }
 
         .slider-master {
             display: flex;
             height: 100%;
             width: 700%; 
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .section {
@@ -79,35 +77,40 @@
             overflow-y: auto;
         }
 
-        h1 { font-family: 'Georgia', serif; font-size: 42px; color: var(--azul); margin: 0 0 20px 0; }
+        h1 { font-family: 'Georgia', serif; font-size: 48px; color: var(--azul); margin: 0 0 25px 0; }
         h1 span { color: var(--dorado); font-style: italic; }
-        p { line-height: 1.8; color: #444; font-size: 16px; margin-bottom: 20px; text-align: justify; }
+        p { line-height: 1.8; color: var(--texto); font-size: 16px; margin-bottom: 20px; text-align: justify; }
 
         .card {
             background: var(--blanco);
             border-radius: 12px;
-            padding: 25px;
+            padding: 30px;
             margin-bottom: 25px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            border-left: 5px solid var(--dorado);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border-left: 6px solid var(--dorado);
         }
 
-        .card h3 { margin: 0 0 12px 0; color: var(--azul); font-size: 19px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .card h3 { margin: 0 0 15px 0; color: var(--azul); font-size: 20px; border-bottom: 1px solid #eee; padding-bottom: 12px; }
+
+        /* TABLA COMPARATIVA PUNTO 3 */
+        .comp-table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; border-radius: 10px; overflow: hidden; }
+        .comp-table th, .comp-table td { padding: 20px; border: 1px solid #eee; text-align: left; font-size: 15px; line-height: 1.6; }
+        .comp-table th { background: #f8f9fa; color: var(--azul); font-weight: bold; }
 
         /* GRÁFICA PUNTO 5 */
-        .analysis-box {
+        .analysis-grid {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 25px;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
             margin-top: 20px;
         }
 
-        .chart-area {
+        .chart-container {
             background: white;
             padding: 20px;
             border-radius: 15px;
-            border: 2px dashed #ddd;
-            height: 350px;
+            border: 2px dashed #ccc;
+            height: 400px;
         }
     </style>
 </head>
@@ -129,73 +132,104 @@
             
             <div class="section">
                 <h1>Síntesis <span>Curricular</span></h1>
-                <p>El currículo de Matemática en Ecuador se ha transformado en una herramienta dinámica. No se trata solo de números, sino de desarrollar capacidades cognitivas superiores a través de un enfoque basado en procesos.</p>
+                <p>La educación matemática en Ecuador ha transitado desde una visión técnica hacia una formación integral. El currículo actual se fundamenta en el desarrollo del pensamiento lógico y crítico, permitiendo a los estudiantes interpretar y resolver problemas del entorno real.</p>
                 
                 <div class="card">
-                    <h3>Modelo Pedagógico</h3>
-                    <p>Se fundamenta en el <b>Socio-Constructivismo</b>. El aprendizaje es un proceso social donde el estudiante construye significados a partir de sus experiencias previas y la interacción con su entorno, guiado por las <b>DCD (Destrezas con Criterio de Desempeño)</b>.</p>
+                    <h3>Enfoque Socio-Constructivista</h3>
+                    <p>Este paradigma sitúa al estudiante como el centro del proceso. El aprendizaje no es una recepción pasiva, sino una construcción activa basada en experiencias previas y la mediación social. Se enfoca en las <b>DCD (Destrezas con Criterio de Desempeño)</b>, que definen el saber hacer en contexto.</p>
                 </div>
 
                 <div class="card">
-                    <h3>Componentes Esenciales</h3>
-                    <p>El diseño curricular actual integra el uso de las TIC, la resolución de problemas de la vida cotidiana y la conexión interdisciplinar, permitiendo que la Matemática sea el lenguaje de la ciencia y la tecnología.</p>
+                    <h3>Habilidades y TIC</h3>
+                    <p>La integración de tecnologías de la información y la comunicación (TIC) se presenta como un eje transversal para potenciar el razonamiento numérico, la geometría dinámica y la interpretación estadística en la era digital.</p>
                 </div>
             </div>
 
             <div class="section">
-                <h1>Línea de <span>Evolución</span></h1>
+                <h1>Hitos <span>Fundamentales</span></h1>
                 <div class="card">
-                    <h3>1996: El Enfoque Técnico</h3>
-                    <p>Predominio del <b>conductismo</b>. El currículo era rígido, basado en la memorización de algoritmos y procedimientos descontextualizados.</p>
+                    <h3>1996: Reforma Consensuada</h3>
+                    <p><b>Conductismo puro:</b> Ciencia estática, formal y mecánica. El currículo se centraba en la memorización de algoritmos. El docente era el único poseedor de la verdad académica y la evaluación era meramente sumativa.</p>
                 </div>
                 <div class="card">
-                    <h3>2010: El Enfoque Crítico</h3>
-                    <p>Actualización que introdujo el concepto de "Saber Hacer" y la organización por bloques lógicos (Álgebra, Geometría, Estadística).</p>
+                    <h3>2010: Actualización y Fortalecimiento</h3>
+                    <p><b>Pedagogía Crítica:</b> Introducción del "Buen Vivir". La matemática se vincula al entorno social. Se organizan los conocimientos en bloques curriculares: Álgebra y Funciones, Geometría y Medida, y Estadística y Probabilidad.</p>
                 </div>
                 <div class="card">
-                    <h3>2023: El Enfoque por Competencias</h3>
-                    <p>Integración de competencias comunicacionales, matemáticas y digitales para responder a los desafíos globales.</p>
+                    <h3>2016 - 2023: Marco Competencial</h3>
+                    <p><b>Socio-constructivismo:</b> Desarrollo de competencias comunicacionales, matemáticas, digitales y socioemocionales. Se introduce la flexibilidad por subniveles (3 años) en lugar de una progresión anual rígida.</p>
                 </div>
             </div>
 
             <div class="section">
-                <h1>Análisis <span>Comparativo</span></h1>
-                <div class="card">
-                    <p>Se observa una transición clara de la <b>Linealidad (Pasado)</b> a la <b>Complejidad (Presente)</b>, donde el docente pasa de ser un instructor a un facilitador de experiencias.</p>
-                </div>
+                <h1>Dimensiones <span>de Cambio</span></h1>
+                <table class="comp-table">
+                    <tr>
+                        <th style="width: 25%;">Dimensión</th>
+                        <th>Modelo Tradicional (1996)</th>
+                        <th>Modelo Actual (2023)</th>
+                    </tr>
+                    <tr>
+                        <td><b>Enfoque</b></td>
+                        <td>Conductista: Memorización de fórmulas y procesos mecánicos.</td>
+                        <td>Socio-constructivista: Resolución de problemas y saber hacer.</td>
+                    </tr>
+                    <tr>
+                        <td><b>Rol Docente</b></td>
+                        <td>Centro del proceso; transmisor de información lineal.</td>
+                        <td>Facilitador y guía; diseñador de experiencias de aprendizaje.</td>
+                    </tr>
+                    <tr>
+                        <td><b>Evaluación</b></td>
+                        <td>Cuantitativa y sumativa. El error es penalizado.</td>
+                        <td>Formativa y cualitativa. El error es una oportunidad de aprendizaje.</td>
+                    </tr>
+                </table>
             </div>
 
             <div class="section">
                 <h1>Niveles de <span>Concreción</span></h1>
-                <div class="card"><h3>Nivel Macro (Estado)</h3><p>Establece los lineamientos nacionales y el perfil de salida obligatorio.</p></div>
-                <div class="card"><h3>Nivel Meso (Institución)</h3><p>Contextualización mediante el PEI y el Proyecto Curricular Institucional.</p></div>
-                <div class="card"><h3>Nivel Micro (Aula)</h3><p>Planificación de Unidad Didáctica donde se ejecuta la acción pedagógica.</p></div>
+                <div class="card">
+                    <h3>Nivel 1: Macrocurrículo (Estado)</h3>
+                    <p>Elaborado por expertos del Ministerio de Educación. Es de carácter prescriptivo (obligatorio) y determina el Perfil de Salida del Bachiller ecuatoriano.</p>
+                </div>
+                <div class="card">
+                    <h3>Nivel 2: Mesocurrículo (Institución)</h3>
+                    <p>Contextualización realizada por las instituciones educativas. Se materializa en el PEI (Proyecto Educativo Institucional) y el PCI (Planificación Curricular Institucional).</p>
+                </div>
+                <div class="card">
+                    <h3>Nivel 3: Microcurrículo (Aula)</h3>
+                    <p>Es la planificación de unidad didáctica (PUD) realizada por el docente. Es el nivel de mayor flexibilidad, donde se ajustan las actividades a las necesidades reales de cada estudiante.</p>
+                </div>
             </div>
 
             <div class="section">
-                <h1>Entropía <span>Curricular</span></h1>
-                <div class="analysis-box">
-                    <div class="chart-area">
-                        <canvas id="miGrafica"></canvas>
+                <h1>Entropía y <span>Flexibilidad</span></h1>
+                <p>Análisis sistémico: La transición del orden rígido estatal hacia la complejidad adaptativa del aula.</p>
+                
+                <div class="analysis-grid">
+                    <div class="chart-container">
+                        <canvas id="evolucionChart"></canvas>
                     </div>
-                    <div class="card">
-                        <h3>Análisis Sistémico</h3>
-                        <p>La gráfica muestra cómo la <b>Flexibilidad</b> ha crecido para combatir la rigidez del sistema.</p>
-                        <p style="font-weight: bold; border-top: 1px solid #ddd; padding-top: 10px;">
+                    <div class="card" style="margin-bottom: 0;">
+                        <h3>Interpretación de Sistemas</h3>
+                        <p>La gráfica demuestra que conforme aumenta la <b>Flexibilidad</b> (línea verde), el sistema educativo se vuelve capaz de gestionar una mayor complejidad.</p>
+                        <p>A pesar de que la <b>Rigidez</b> (línea roja) disminuye, la calidad del aprendizaje aumenta debido a la contextualización microcurricular.</p>
+                        <div style="font-weight: bold; color: var(--azul); border-top: 1px solid #ddd; padding-top: 15px; margin-top: 10px;">
                             "A mayor flexibilidad, existe mayor aprendizaje significativo."
-                        </p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="section"><h1>06. <span>Reflexión</span></h1></div>
-            <div class="section"><h1>07. <span>Referencias</span></h1></div>
+            <div class="section"><h1>06. <span>Reflexión</span></h1><div class="card">Espacio para la síntesis personal sobre la evolución del currículo.</div></div>
+            <div class="section"><h1>07. <span>Referencias</span></h1><div class="card">Bibliografía basada en el currículo nacional de Ecuador y teorías de sistemas.</div></div>
 
         </div>
     </div>
 
     <script>
-        // Función de navegación fluida
+        // Sistema de navegación suave
         function jump(idx, el) {
             const slider = document.getElementById('slider');
             slider.style.transform = `translateX(-${idx * 14.2857}%)`;
@@ -205,23 +239,23 @@
             el.classList.add('active');
         }
 
-        // Inicialización de Gráfica sin congelar el navegador
-        document.addEventListener('DOMContentLoaded', function() {
-            const ctx = document.getElementById('miGrafica').getContext('2d');
+        // Carga de gráfica sin bloquear el hilo principal
+        window.onload = function() {
+            const ctx = document.getElementById('evolucionChart').getContext('2d');
             new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: ['1996', '2010', '2016', '2023'],
                     datasets: [{
-                        label: 'Flexibilidad',
-                        data: [10, 35, 75, 95],
+                        label: 'Flexibilidad Curricular',
+                        data: [10, 38, 72, 98],
                         borderColor: '#27ae60',
-                        tension: 0.4,
+                        backgroundColor: 'rgba(39, 174, 96, 0.1)',
                         fill: true,
-                        backgroundColor: 'rgba(39, 174, 96, 0.05)'
+                        tension: 0.4
                     }, {
-                        label: 'Rigidez',
-                        data: [95, 60, 30, 5],
+                        label: 'Rigidez Estatal',
+                        data: [95, 65, 35, 8],
                         borderColor: '#c0392b',
                         borderDash: [5, 5],
                         tension: 0.4
@@ -230,10 +264,15 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { position: 'bottom' } }
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, max: 100, title: { display: true, text: 'Porcentaje de Impacto (%)' } }
+                    }
                 }
             });
-        });
+        };
     </script>
 </body>
 </html>
