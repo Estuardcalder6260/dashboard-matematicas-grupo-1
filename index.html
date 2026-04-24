@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Matemático Pro</title>
+    <title>Dashboard Matemático Final</title>
     <style>
         :root {
             --azul: #1a252f;
             --dorado: #d4af37;
-            --texto: #2c3e50;
             --fondo: #f4f7f6;
         }
 
         body {
             margin: 0;
             display: flex;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             height: 100vh;
             overflow: hidden;
             background: var(--fondo);
@@ -30,12 +29,10 @@
             display: flex;
             flex-direction: column;
             z-index: 100;
-            box-shadow: 5px 0 15px rgba(0,0,0,0.2);
         }
 
         .sidebar h2 {
             font-family: 'Georgia', serif;
-            font-size: 22px;
             border-bottom: 2px solid var(--dorado);
             padding-bottom: 10px;
             margin-bottom: 30px;
@@ -50,176 +47,122 @@
             font-size: 11px;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 1px;
             transition: 0.3s;
         }
 
-        .nav-item:hover { background: rgba(255,255,255,0.05); color: white; }
-        .nav-item.active { background: var(--dorado); color: var(--azul); transform: translateX(5px); }
+        .nav-item.active { background: var(--dorado); color: var(--azul); }
 
-        /* VIEWPORT Y SLIDER */
-        .viewport {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-        }
+        /* VIEWPORT */
+        .viewport { flex: 1; position: relative; overflow: hidden; }
 
-        .slider {
+        .slider-master {
             display: flex;
             height: 100%;
             width: 700%; 
-            transition: transform 0.5s ease-in-out; /* Transición más simple para evitar lag */
-            will-change: transform; /* Optimiza el rendimiento del navegador */
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .section {
-            width: 14.285714%; /* Precisión total para 7 secciones */
+            width: 14.2857%;
             height: 100%;
             padding: 60px 80px;
             box-sizing: border-box;
             overflow-y: auto;
         }
 
-        /* TIPOGRAFÍA */
-        .label { color: var(--dorado); font-weight: bold; font-size: 13px; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; }
         h1 { font-family: 'Georgia', serif; font-size: 45px; color: var(--azul); margin: 0 0 20px 0; }
         h1 span { color: var(--dorado); font-style: italic; }
-        p { line-height: 1.8; color: #444; font-size: 16px; }
 
-        /* COMPONENTES */
         .card {
             background: white;
             border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             border-left: 6px solid var(--dorado);
         }
 
-        .card h3 { margin-top: 0; color: var(--azul); font-size: 18px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-
-        .comp-table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; }
-        .comp-table th { background: #f8f9fa; padding: 15px; text-align: left; border-bottom: 2px solid #eee; }
-        .comp-table td { padding: 15px; border-bottom: 1px solid #f0f0f0; font-size: 14px; vertical-align: top; }
-        .dim-col { background: #fafafa; font-weight: bold; width: 180px; color: var(--azul); }
-
-        .doc-badge { background: var(--azul); color: white; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; display: inline-block; margin-top: 10px; }
+        .card h3 { margin-top: 0; color: var(--azul); border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .doc-badge { background: var(--azul); color: white; padding: 6px 12px; border-radius: 4px; font-size: 12px; font-weight: bold; display: inline-block; margin-top: 10px; }
+        
+        table { width: 100%; border-collapse: collapse; background: white; margin-top: 20px; }
+        th, td { padding: 15px; border: 1px solid #eee; text-align: left; font-size: 14px; }
+        th { background: #f8f9fa; color: var(--azul); }
     </style>
 </head>
 <body>
 
     <div class="sidebar">
         <h2>Dashboard<br><i>Matemático</i></h2>
-        <div class="nav-item active" onclick="ir(0, this)">01. Síntesis</div>
-        <div class="nav-item" onclick="ir(1, this)">02. Cronología</div>
-        <div class="nav-item" onclick="ir(2, this)">03. Comparativa</div>
-        <div class="nav-item" onclick="ir(3, this)">04. Concreción</div>
-        <div class="nav-item" onclick="ir(4, this)">05. Complejidad</div>
-        <div class="nav-item" onclick="ir(5, this)">06. Reflexión</div>
-        <div class="nav-item" onclick="ir(6, this)">07. Referencias</div>
+        <div class="nav-item active" onclick="forzarSalto(0, this)">01. Síntesis</div>
+        <div class="nav-item" onclick="forzarSalto(1, this)">02. Cronología</div>
+        <div class="nav-item" onclick="forzarSalto(2, this)">03. Comparativa</div>
+        <div class="nav-item" onclick="forzarSalto(3, this)">04. Concreción</div>
+        <div class="nav-item" onclick="forzarSalto(4, this)">05. Complejidad</div>
+        <div class="nav-item" onclick="forzarSalto(5, this)">06. Reflexión</div>
+        <div class="nav-item" onclick="forzarSalto(6, this)">07. Referencias</div>
     </div>
 
     <div class="viewport">
-        <div class="slider" id="slider">
+        <div class="slider-master" id="sliderMaster">
             
             <div class="section">
-                <div class="label">01. INTRODUCCIÓN</div>
                 <h1>Análisis <span>Curricular</span></h1>
-                <p>La enseñanza de la Matemática en Ecuador ha evolucionado de un modelo basado en la repetición hacia un enfoque socio-constructivista que prioriza el razonamiento lógico.</p>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div class="card">
-                        <h3>Enfoque Crítico</h3>
-                        <p>Aplicación de conceptos en situaciones reales para transformar el entorno del estudiante.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Autonomía</h3>
-                        <p>Capacidad de las instituciones para adaptar el currículo a su contexto social.</p>
-                    </div>
-                </div>
+                <p>La enseñanza de la Matemática en Ecuador ha pasado de centrarse en la memorización de fórmulas a concebirse como una herramienta lógica...</p>
             </div>
 
             <div class="section">
-                <div class="label">02. EVOLUCIÓN HISTÓRICA</div>
                 <h1>Hitos <span>Fundamentales</span></h1>
-                <div class="card">
-                    <h3>1996: Reforma Consensuada</h3>
-                    <p><b>Modelo Conductista:</b> El docente transmite algoritmos y el estudiante los repite. Contenidos descontextualizados.</p>
-                </div>
-                <div class="card">
-                    <h3>2010: Actualización y Fortalecimiento</h3>
-                    <p><b>Pedagogía Crítica:</b> Introducción de los Ejes Transversales y el Buen Vivir. Primer paso hacia la flexibilidad.</p>
-                </div>
-                <div class="card">
-                    <h3>2016 - 2023: Ajuste y Competencias</h3>
-                    <p><b>Constructivismo:</b> Organización por subniveles y enfoque en competencias digitales y financieras.</p>
-                </div>
+                <div class="card"><h3>1996: Reforma Consensuada</h3><p>Conductista y mecanicista...</p></div>
+                <div class="card"><h3>2010: Actualización EGB</h3><p>Pedagogía crítica...</p></div>
             </div>
 
             <div class="section">
-                <div class="label">03. COMPARATIVA</div>
                 <h1>Dimensiones <span>de Cambio</span></h1>
-                <table class="comp-table">
-                    <tr>
-                        <th class="dim-col">DIMENSIÓN</th>
-                        <th>1996</th>
-                        <th>2010</th>
-                        <th>2016</th>
-                    </tr>
-                    <tr>
-                        <td class="dim-col">Enfoque</td>
-                        <td>Conductista</td>
-                        <td>Crítico</td>
-                        <td>Constructivista</td>
-                    </tr>
-                    <tr>
-                        <td class="dim-col">Estructura</td>
-                        <td>Anual / Rígida</td>
-                        <td>Bloques Curriculares</td>
-                        <td>Subniveles Flexibles</td>
-                    </tr>
+                <table>
+                    <tr><th>Dimensión</th><th>1996</th><th>2010</th><th>2016</th></tr>
+                    <tr><td>Enfoque</td><td>Conductista</td><td>Crítico</td><td>Constructivista</td></tr>
                 </table>
             </div>
 
             <div class="section">
-                <div class="label">04. NIVELES DE CONCRECIÓN</div>
                 <h1>Arquitectura del <span>Sistema</span></h1>
-                <p>El currículo se concreta en tres niveles para garantizar que la teoría nacional se convierta en práctica de aula.</p>
                 
                 <div class="card">
-                    <h3>Nivel 1: Macrocurriculo (Estado)</h3>
-                    <p>Elaborado por el <span style="color:var(--dorado); font-weight:bold;">Ministerio de Educación</span>. Es de carácter obligatorio y establece el Perfil de Salida del Bachiller ecuatoriano.</p>
-                    <div class="doc-badge">Documento: Currículo Nacional Obligatorio</div>
+                    <h3>Nivel Macro (Ministerio de Educación)</h3>
+                    <p>Es el gran paraguas normativo y obligatorio. Define las intenciones educativas del país, respondiendo al "Qué" y "Para qué" enseñar Matemática.</p>
+                    <div class="doc-badge">Documento rector: Currículo Nacional Obligatorio</div>
                 </div>
 
                 <div class="card">
-                    <h3>Nivel 2: Mesocurriculo (Institución)</h3>
-                    <p>Las instituciones educativas adaptan la norma nacional a su contexto local. Es liderado por la Junta Académica de cada plantel.</p>
+                    <h3>Nivel Meso (Institución Educativa)</h3>
+                    <p>El puente crítico. La escuela contextualiza el currículo nacional a su propia realidad sociogeográfica y cultural.</p>
                     <div class="doc-badge">Documentos: PEI y PCI</div>
                 </div>
 
                 <div class="card">
-                    <h3>Nivel 3: Microcurriculo (Aula)</h3>
-                    <p>El docente diseña la planificación para su grupo específico. Es el nivel de mayor autonomía y permite realizar adaptaciones individuales.</p>
+                    <h3>Nivel Micro (El Docente)</h3>
+                    <p>El momento de la verdad pedagógica. El docente decide el "Cómo" y "Cuándo" enseñar a sus estudiantes específicos.</p>
                     <div class="doc-badge">Documentos: PCA y PUD</div>
                 </div>
             </div>
 
-            <div class="section"><h1>05. <span>Complejidad</span></h1><div class="card">Análisis pendiente...</div></div>
-            <div class="section"><h1>06. <span>Reflexión</span></h1><div class="card">Reflexión pendiente...</div></div>
-            <div class="section"><h1>07. <span>Referencias</span></h1><div class="card">Bibliografía pendiente...</div></div>
+            <div class="section"><h1>05. <span>Complejidad</span></h1></div>
+            <div class="section"><h1>06. <span>Reflexión</span></h1></div>
+            <div class="section"><h1>07. <span>Referencias</span></h1></div>
 
         </div>
     </div>
 
     <script>
-        function ir(idx, el) {
-            // Mover el slider usando la constante exacta para evitar congelamientos
-            document.getElementById('slider').style.transform = 'translateX(-' + (idx * 14.285714) + '%)';
+        function forzarSalto(num, bot) {
+            // Movimiento forzado
+            document.getElementById('sliderMaster').style.transform = 'translateX(-' + (num * 14.285714) + '%)';
             
-            // Actualizar menú
-            const items = document.querySelectorAll('.nav-item');
-            items.forEach(i => i.classList.remove('active'));
-            el.classList.add('active');
+            // Limpieza de botones
+            const botones = document.querySelectorAll('.nav-item');
+            botones.forEach(b => b.classList.remove('active'));
+            bot.classList.add('active');
         }
     </script>
 </body>
