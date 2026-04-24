@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Interactivo - Tarea</title>
+    <style>
+        :root {
+            --bg-sidebar: #f4f7f6;
+            --accent-green: #5d7c67;
+            --text-gray: #666;
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            color: #333;
+        }
+
+        /* Barra Lateral */
+        .sidebar {
+            width: 280px;
+            background-color: var(--bg-sidebar);
+            padding: 50px 30px;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #e0e0e0;
+        }
+
+        .sidebar h2 {
+            font-size: 24px;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .sidebar h2 span {
+            display: block;
+            font-style: italic;
+            color: var(--accent-green);
+            font-family: serif;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 0;
+        }
+
+        .nav-item {
+            padding: 12px 0;
+            font-size: 14px;
+            color: var(--text-gray);
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .nav-item:hover { color: #000; }
+
+        .nav-item.active {
+            color: #000;
+            font-weight: bold;
+            position: relative;
+        }
+
+        /* Contenido Principal */
+        .main {
+            flex: 1;
+            padding: 80px;
+            overflow-y: auto;
+        }
+
+        .breadcrumb {
+            font-size: 12px;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb::before {
+            content: "●";
+            color: #cbd5e0;
+            margin-right: 10px;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin: 0 0 10px 0;
+            font-weight: 500;
+        }
+
+        .subtitle {
+            color: var(--text-gray);
+            margin-bottom: 50px;
+        }
+
+        /* Tarjeta de Contenido */
+        .content-card {
+            background: #ffffff;
+            border: 1px solid #f0f0f0;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+
+        .badge {
+            background: #edf2f1;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div style="width: 40px; height: 5px; background: var(--accent-green); margin-bottom: 20px;"></div>
+        <h2>Análisis <span>Curricular</span></h2>
+        
+        <ul class="nav-menu">
+            <li class="nav-item">01. SÍNTESIS</li>
+            <li class="nav-item">02. CRONOLOGÍA</li>
+            <li class="nav-item">03. COMPARATIVA</li>
+            <li class="nav-item active">04. CONCRECIÓN</li>
+            <li class="nav-item">05. COMPLEJIDAD</li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="breadcrumb">04. Niveles de Concreción</div>
+        <h1>Arquitectura del Sistema Curricular</h1>
+        <p class="subtitle">Cómo se transfiere la autonomía desde el Estado hasta el pupitre.</p>
+
+        <div class="content-card">
+            <div style="display: flex; align-items: flex-start;">
+                <div style="background: #f1f1f1; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px;">01</div>
+                <div>
+                    <h3 style="margin: 0; font-size: 24px;">Nivel Macro <span class="badge">Prescriptivo Base</span></h3>
+                    <p style="color: var(--accent-green); font-weight: bold; margin: 5px 0;">MINISTERIO DE EDUCACIÓN</p>
+                    <p>Es el gran paraguas normativo y obligatorio a nivel nacional...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
