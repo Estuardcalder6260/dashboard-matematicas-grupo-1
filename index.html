@@ -8,152 +8,103 @@
     <style>
         :root { --azul: #1a252f; --dorado: #d4af37; --fondo: #f4f7f6; --texto: #2c3e50; --blanco: #ffffff; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; height: 100vh; display: flex; background: var(--fondo); overflow: hidden; }
+        body { font-family: 'Segoe UI', sans-serif; height: 100vh; display: flex; background: var(--fondo); overflow: hidden; }
 
-        /* SIDEBAR (Diseño de la imagen) */
-        .sidebar { width: 260px; background: var(--azul); color: white; padding: 30px 0; flex-shrink: 0; }
-        .sidebar h2 { font-family: 'Georgia', serif; font-size: 22px; padding: 0 25px; margin-bottom: 30px; line-height: 1.2; }
-        .sidebar h2 span { color: var(--blanco); border-bottom: 2px solid var(--dorado); padding-bottom: 5px; display: inline-block; width: 100%; }
+        /* SIDEBAR (Estilo image_5f5733.png) */
+        .sidebar { width: 280px; background: var(--azul); color: white; padding: 40px 0; flex-shrink: 0; border-right: 4px solid var(--dorado); }
+        .sidebar h2 { font-family: 'Georgia', serif; font-size: 24px; padding: 0 25px; margin-bottom: 40px; line-height: 1.2; border-bottom: 2px solid var(--dorado); padding-bottom: 10px; margin-left: 20px; margin-right: 20px; }
         
-        .nav-item { padding: 15px 25px; cursor: pointer; color: #bdc3c7; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s; }
-        .nav-item:hover { background: rgba(255,255,255,0.05); }
+        .nav-item { padding: 18px 30px; cursor: pointer; color: #bdc3c7; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .nav-item:hover { background: rgba(255,255,255,0.05); color: white; }
         .nav-item.active { background: var(--dorado); color: var(--azul); }
 
-        /* CONTENIDO PRINCIPAL */
-        .main-content { flex-grow: 1; height: 100vh; overflow-y: auto; padding: 50px 60px; }
-        .tab-panel { display: none; }
+        /* CONTENIDO */
+        .main-content { flex-grow: 1; height: 100vh; overflow-y: auto; padding: 60px; scroll-behavior: smooth; }
+        .tab-panel { display: none; max-width: 1100px; margin: 0 auto; }
         .tab-panel.active { display: block; }
 
-        h1 { font-family: 'Georgia', serif; font-size: 45px; color: var(--azul); margin-bottom: 30px; }
+        h1 { font-family: 'Georgia', serif; font-size: 48px; color: var(--azul); margin-bottom: 30px; }
         h1 span { color: var(--dorado); }
 
-        /* TABLA COMPARATIVA (Fiel a la imagen) */
-        .tabla-comparativa { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-top: 20px; }
-        .tabla-comparativa th { background: #f8f5f0; color: #7f8c8d; font-size: 12px; text-transform: uppercase; padding: 20px; text-align: left; border-bottom: 2px solid #eee; }
-        .tabla-comparativa td { padding: 20px; border-bottom: 1px solid #eee; vertical-align: top; font-size: 14px; line-height: 1.6; }
-        .col-header { font-family: 'Georgia', serif; font-size: 18px; color: var(--azul); display: block; margin-bottom: 5px; }
-        .dim-header { font-weight: bold; font-style: italic; color: #7f8c8d; width: 20%; }
-        
-        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-left: 8px solid var(--dorado); margin-bottom: 20px; }
-        .reflexion-pro { background: white; padding: 40px; border-radius: 15px; border: 1px solid #ddd; position: relative; }
-        .reflexion-pro::before { content: "?"; position: absolute; right: 30px; top: 10px; font-size: 150px; color: #eee; font-family: 'Georgia'; z-index: 0; }
+        /* ESTILOS DE CRONOLOGÍA (image_5e81ed.png) */
+        .timeline-item { display: grid; grid-template-columns: 120px 1fr; gap: 30px; margin-bottom: 50px; border-bottom: 1px solid #eee; padding-bottom: 30px; }
+        .year-label { font-family: 'Georgia', serif; font-size: 32px; color: #999; }
+        .reform-title { font-weight: 900; font-size: 18px; text-transform: uppercase; margin-bottom: 10px; color: #333; }
+        .paradigm { font-weight: bold; color: #555; margin-bottom: 15px; display: block; }
+        .reform-detail { line-height: 1.8; color: #444; text-align: justify; }
+
+        /* ESTILOS DE TABLA (image_5e8953.png) */
+        .comp-table { width: 100%; border-collapse: collapse; background: white; margin-top: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .comp-table th { background: #f9f9f9; padding: 25px; text-align: left; border-bottom: 2px solid #eee; }
+        .comp-table td { padding: 25px; border-bottom: 1px solid #eee; vertical-align: top; line-height: 1.6; font-size: 14px; }
+        .dim-col { font-weight: bold; font-style: italic; color: #7f8c8d; width: 180px; }
+        .year-header { font-family: 'Georgia', serif; font-size: 20px; color: var(--azul); display: block; }
+
+        /* SÍNTESIS Y REFLEXIÓN */
+        .card { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-left: 10px solid var(--dorado); margin-bottom: 30px; }
+        .reflexion-box { background: white; padding: 50px; border-radius: 20px; border: 1px solid #ddd; position: relative; overflow: hidden; }
+        .reflexion-box::after { content: "?"; position: absolute; right: -20px; bottom: -20px; font-size: 250px; color: #f0f0f0; font-family: 'Georgia'; z-index: 0; }
         .reflexion-content { position: relative; z-index: 1; }
-        
-        .chart-box { background: white; padding: 20px; border-radius: 12px; height: 400px; border: 1px solid #ddd; }
     </style>
 </head>
 <body>
 
     <nav class="sidebar">
         <h2>Dashboard<br><i>Matemático</i></h2>
-        <div class="nav-item active" onclick="nav(0, this)">01. Síntesis</div>
-        <div class="nav-item" onclick="nav(1, this)">02. Cronología</div>
-        <div class="nav-item" onclick="nav(2, this)">03. Comparativa</div>
-        <div class="nav-item" onclick="nav(3, this)">04. Concreción</div>
-        <div class="nav-item" onclick="nav(4, this)">05. Entropía</div>
-        <div class="nav-item" onclick="nav(5, this)">06. Reflexión</div>
-        <div class="nav-item" onclick="nav(6, this)">07. Referencias</div>
+        <div class="nav-item active" onclick="nav(0, this)">01. SÍNTESIS</div>
+        <div class="nav-item" onclick="nav(1, this)">02. CRONOLOGÍA</div>
+        <div class="nav-item" onclick="nav(2, this)">03. COMPARATIVA</div>
+        <div class="nav-item" onclick="nav(3, this)">04. CONCRECIÓN</div>
+        <div class="nav-item" onclick="nav(4, this)">05. ENTROPÍA</div>
+        <div class="nav-item" onclick="nav(5, this)">06. REFLEXIÓN</div>
+        <div class="nav-item" onclick="nav(6, this)">07. REFERENCIAS</div>
     </nav>
 
-    <main class="main-content" id="view">
+    <main class="main-content" id="scrollContainer">
 
         <div id="p0" class="tab-panel active">
             <h1>Síntesis <span>Curricular</span></h1>
             <div class="card">
-                <p style="font-size: 18px;">La evolución del currículo ecuatoriano en el área de Matemática refleja una transición profunda hacia el <b>socio-constructivismo</b>. El objetivo central es dotar al estudiante de herramientas de modelización que le permitan resolver problemas reales, superando la antigua enseñanza basada en la repetición.</p>
+                <p style="font-size: 18px; line-height: 1.9; color: #333;">
+                    El currículo de Matemática en Ecuador ha transitado desde una visión puramente técnica y mecánica hacia una formación integral, lógica y crítica. Esta evolución busca que el estudiante desarrolle un pensamiento formal para modelar situaciones de la vida real, integrando el <b>saber con el "saber hacer"</b> mediante las Destrezas con Criterio de Desempeño (DCD). Actualmente, se fundamenta en el <b>socio-constructivismo</b>, donde el aprendizaje es un proceso de construcción social y el docente actúa como un mediador de experiencias significativas.
+                </p>
             </div>
         </div>
 
         <div id="p1" class="tab-panel">
-            <h1>Cronología <span>Evolutiva</span></h1>
-            <div class="card"><h3>1996: Reforma Consensuada</h3><p>Paradigma conductista centrado en contenidos técnicos y mecánicos.</p></div>
-            <div class="card"><h3>2010: Actualización EGB</h3><p>Introducción de la Pedagogía Crítica y bloques curriculares.</p></div>
-            <div class="card"><h3>2016: Ajuste Curricular</h3><p>Enfoque constructivista y flexibilidad por subniveles (DCD).</p></div>
-        </div>
-
-        <div id="p2" class="tab-panel">
-            <h1>Comparativa <span>Histórica</span></h1>
-            <table class="tabla-comparativa">
-                <tr>
-                    <th>Dimensión de Análisis</th>
-                    <th><span class="col-header">1996</span>REFORMA CONSENSUADA</th>
-                    <th><span class="col-header">2010</span>ACTUALIZACIÓN EGB</th>
-                    <th><span class="col-header">2016</span>AJUSTE CURRICULAR</th>
-                </tr>
-                <tr>
-                    <td class="dim-header">Enfoque Epistemológico</td>
-                    <td><b>Conductista.</b> Matemática como ciencia estática, formal y mecánica. Memorización de algoritmos.</td>
-                    <td><b>Pedagogía Crítica.</b> Matemática vinculada al entorno social y al "Buen Vivir". Razonamiento lógico.</td>
-                    <td><b>Constructivista.</b> Desarrollo de Destrezas con Criterio de Desempeño (saber hacer en contexto).</td>
-                </tr>
-                <tr>
-                    <td class="dim-header">Estructura y Tiempos</td>
-                    <td><b>Lineal y Rígida.</b> Contenidos obligatorios organizados estrictamente por año básico. Poca flexibilidad.</td>
-                    <td><b>Bloques Curriculares.</b> Mantiene la estructura anual pero agrupa contenidos en 4 grandes bloques de conocimiento.</td>
-                    <td><b>Modular por Subniveles.</b> Otorga 3 años al docente para desarrollar habilidades imprescindibles. Alta flexibilidad.</td>
-                </tr>
-                <tr>
-                    <td class="dim-header">Evaluación</td>
-                    <td><b>Sumativa Punitiva.</b> Exámenes objetivos finales. El error determina el fracaso escolar.</td>
-                    <td><b>Indicadores Esenciales.</b> Inicia un enfoque mixto, evaluando la aplicación práctica, no solo la memoria.</td>
-                    <td><b>Formativa (Criterios).</b> Evaluación basada en Criterios e Indicadores de Evaluación a lo largo del subnivel.</td>
-                </tr>
-            </table>
-        </div>
-
-        <div id="p3" class="tab-panel">
-            <h1>Niveles de <span>Concreción</span></h1>
-            <div class="card"><h3>Macro</h3><p>Estado/Ministerio: Currículo Nacional Obligatorio.</p></div>
-            <div class="card"><h3>Meso</h3><p>Institución: Proyecto Educativo Institucional (PEI/PCI).</p></div>
-            <div class="card"><h3>Micro</h3><p>Docente: Planificación de Unidad Didáctica (PUD) y Adaptaciones.</p></div>
-        </div>
-
-        <div id="p4" class="tab-panel">
-            <h1>Entropía <span>Curricular</span></h1>
-            <div class="chart-box"><canvas id="graf"></canvas></div>
-        </div>
-
-        <div id="p5" class="tab-panel">
-            <h1>Reflexión <span>Crítica</span></h1>
-            <div class="reflexion-pro">
-                <div class="reflexion-content">
-                    <h2 style="font-family: Georgia; margin-bottom: 20px;">¿Cuál ha sido el <i>'asymptote'</i> (límite) que no hemos podido superar en la enseñanza de la Matemática en Ecuador?</h2>
-                    <p>A pesar de la impecable evolución teórica, el límite asintótico sigue siendo <b>la disonancia entre la prescripción macrocurricular y la realidad fenomenológica del aula</b> (Nivel Micro).</p>
-                    <p>La inercia de la evaluación estandarizada y la formación tradicional empujan al docente a regresar a su zona de confort: <b>la mecanización del algoritmo descontextualizado.</b></p>
-                    <div style="background: var(--azul); color: white; padding: 25px; border-radius: 10px; margin-top: 20px;">
-                        <h3>Propuesta 2030: Teoría de Grafos y Lógica Difusa</h3>
-                        <p>Para superar este límite, propongo un currículo basado en redes de aprendizaje (Grafos) y una evaluación que reconozca los grados de verdad en el razonamiento (Lógica Difusa).</p>
-                    </div>
+            <h1>Cronología <span>Matemática</span></h1>
+            
+            <div class="timeline-item">
+                <div class="year-label">1996</div>
+                <div>
+                    <div class="reform-title">REFORMA CURRICULAR CONSENSUADA</div>
+                    <span class="paradigm">Paradigma: Conductista y Mecanicista</span>
+                    <p class="reform-detail">Enfocada fuertemente en el desarrollo de destrezas instrumentales mediante la repetición. El currículo era una lista de contenidos rígidos por año (teoría de conjuntos, operaciones básicas). El docente era un transmisor de algoritmos y el estudiante un receptor pasivo evaluado únicamente de forma sumativa.</p>
                 </div>
             </div>
-        </div>
 
-        <div id="p6" class="tab-panel">
-            <h1>Referencias</h1>
-            <div class="card"><p>Ministerio de Educación (2016). Currículo de Matemática.</p></div>
-        </div>
+            <div class="timeline-item">
+                <div class="year-label">2010</div>
+                <div>
+                    <div class="reform-title">ACTUALIZACIÓN Y FORTALECIMIENTO CURRICULAR (EGB)</div>
+                    <span class="paradigm">Paradigma: Pedagogía Crítica e introducción de los "Ejes Transversales"</span>
+                    <p class="reform-detail">Primer intento formal de humanizar la ciencia exacta articulando la matemática con el "Buen Vivir" (Sumak Kawsay). Se introdujeron bloques curriculares (Numérico, Geométrico, Medida, Estadística) con el objetivo de resolver problemas cotidianos, promoviendo por primera vez el razonamiento lógico-crítico.</p>
+                </div>
+            </div>
 
-    </main>
+            <div class="timeline-item">
+                <div class="year-label">2016</div>
+                <div>
+                    <div class="reform-title">AJUSTE CURRICULAR (LA ERA DE LA FLEXIBILIDAD)</div>
+                    <span class="paradigm">Paradigma: Constructivista / Desarrollo de Destrezas con Criterio de Desempeño (DCD)</span>
+                    <p class="reform-detail">Cambio radical desapareciendo la exigencia rígida por "año" para agrupar por <b>Subniveles</b> (Elemental, Media, Superior), dando 3 años al docente para lograr un aprendizaje. Los aprendizajes se dividieron en <i>Básicos Imprescindibles</i> y <i>Básicos Deseables</i>, estructurados en 3 grandes bloques.</p>
+                </div>
+            </div>
 
-    <script>
-        function nav(id, el) {
-            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            document.getElementById('p' + id).classList.add('active');
-            el.classList.add('active');
-            document.getElementById('view').scrollTop = 0;
-        }
-
-        window.onload = function() {
-            new Chart(document.getElementById('graf'), {
-                type: 'line',
-                data: {
-                    labels: ['1996', '2010', '2016', '2023'],
-                    datasets: [{ label: 'Flexibilidad', data: [5, 40, 80, 95], borderColor: '#27ae60', tension: 0.1 }]
-                },
-                options: { responsive: true, maintainAspectRatio: false, animation: false }
-            });
-        };
-    </script>
-</body>
-</html>
+            <div class="timeline-item">
+                <div class="year-label">2020</div>
+                <div>
+                    <div class="reform-title">CURRÍCULO PRIORIZADO <span style="background:#ff7675; color:white; padding:2px 8px; border-radius:4px; font-size:10px;">EMERGENCIA COVID-19</span></div>
+                    <span class="paradigm">Paradigma: Contención emocional y Aprendizaje Basado en Proyectos (ABP)</span>
+                    <p class="reform-detail">El currículo de 2016 se comprimió para priorizar únicamente lo esencial, obligando a los docentes a planificar mediante proyectos interdisciplinares donde la matemática se articulaba con ciencias naturales y lenguaje para resolver problemas de la vida real.</p>
+                </div>
