@@ -10,62 +10,127 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Segoe UI', sans-serif; height: 100vh; display: flex; background: var(--fondo); overflow: hidden; }
 
-        /* NAVEGACIÓN LATERAL */
-        .sidebar { width: 260px; background: var(--azul); color: white; padding: 30px 0; flex-shrink: 0; border-right: 4px solid var(--dorado); }
-        .sidebar h2 { font-family: 'Georgia', serif; font-size: 22px; padding: 0 25px; margin-bottom: 30px; color: var(--dorado); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
-        .nav-item { padding: 15px 25px; cursor: pointer; color: #bdc3c7; font-size: 11px; font-weight: bold; text-transform: uppercase; transition: 0.2s; }
+        /* SIDEBAR */
+        .sidebar { width: 280px; background: var(--azul); color: white; padding: 40px 0; flex-shrink: 0; border-right: 4px solid var(--dorado); }
+        .sidebar h2 { font-family: 'Georgia', serif; font-size: 24px; padding: 0 25px; margin-bottom: 35px; color: var(--dorado); border-bottom: 2px solid rgba(212, 175, 55, 0.3); padding-bottom: 10px; margin-left: 20px; margin-right: 20px; }
+        .nav-item { padding: 16px 30px; cursor: pointer; color: #bdc3c7; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s; }
         .nav-item:hover { background: rgba(255,255,255,0.05); color: white; }
         .nav-item.active { background: var(--dorado); color: var(--azul); }
 
-        /* ÁREA DE CONTENIDO */
-        .main-content { flex-grow: 1; height: 100vh; overflow-y: auto; padding: 40px 60px; }
+        /* CONTENIDO */
+        .main-content { flex-grow: 1; height: 100vh; overflow-y: auto; padding: 50px 60px; }
         .tab-panel { display: none; max-width: 1000px; margin: 0 auto; }
         .tab-panel.active { display: block; }
 
-        h1 { font-family: 'Georgia', serif; font-size: 38px; color: var(--azul); margin-bottom: 25px; }
+        h1 { font-family: 'Georgia', serif; font-size: 42px; color: var(--azul); margin-bottom: 25px; }
         h1 span { color: var(--dorado); }
 
-        /* CARTAS Y TABLAS */
-        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-left: 8px solid var(--dorado); margin-bottom: 20px; }
-        .comp-table { width: 100%; border-collapse: collapse; background: white; margin-top: 15px; }
-        .comp-table th { background: #f8f9fa; padding: 15px; text-align: left; border-bottom: 2px solid #eee; font-size: 13px; color: #7f8c8d; }
-        .comp-table td { padding: 15px; border-bottom: 1px solid #eee; font-size: 14px; vertical-align: top; line-height: 1.6; }
-        .dim-header { font-weight: bold; color: var(--azul); width: 150px; }
-
-        /* CRONOLOGÍA */
-        .timeline-box { display: flex; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
-        .year { font-family: 'Georgia'; font-size: 28px; color: #ccc; width: 100px; flex-shrink: 0; }
-        .details h3 { font-size: 16px; text-transform: uppercase; margin-bottom: 5px; color: #333; }
-
-        /* CONTENEDOR DE GRÁFICA */
-        .chart-box { background: white; padding: 20px; border-radius: 12px; border: 1px solid #ddd; height: 400px; }
+        /* TARJETAS */
+        .card { background: white; padding: 35px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); border-left: 10px solid var(--dorado); margin-bottom: 30px; }
+        p { font-size: 16px; line-height: 1.8; color: var(--texto); text-align: justify; margin-bottom: 15px; }
+        
+        /* TABLA */
+        .comp-table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; }
+        .comp-table th { background: #fdfdfd; padding: 20px; text-align: left; border-bottom: 2px solid #eee; color: var(--azul); }
+        .comp-table td { padding: 20px; border-bottom: 1px solid #eee; vertical-align: top; font-size: 14px; line-height: 1.7; }
+        
+        /* GRÁFICA */
+        .chart-box { background: white; padding: 30px; border-radius: 15px; border: 1px solid #ddd; height: 400px; }
     </style>
 </head>
 <body>
 
     <nav class="sidebar">
-        <h2>Dashboard<br>Matemático</h2>
+        <h2>Dashboard<br><i>Matemático</i></h2>
         <div class="nav-item active" onclick="nav(0, this)">01. SÍNTESIS</div>
         <div class="nav-item" onclick="nav(1, this)">02. CRONOLOGÍA</div>
         <div class="nav-item" onclick="nav(2, this)">03. COMPARATIVA</div>
         <div class="nav-item" onclick="nav(3, this)">04. CONCRECIÓN</div>
         <div class="nav-item" onclick="nav(4, this)">05. ENTROPÍA</div>
         <div class="nav-item" onclick="nav(5, this)">06. REFLEXIÓN</div>
+        <div class="nav-item" onclick="nav(6, this)">07. REFERENCIAS</div>
     </nav>
 
-    <main class="main-content" id="scrollContainer">
+    <main class="main-content" id="scrollArea">
 
         <div id="p0" class="tab-panel active">
             <h1>Síntesis <span>Curricular</span></h1>
             <div class="card">
-                <p style="font-size: 18px; line-height: 1.8;">
-                    La educación matemática en Ecuador ha evolucionado desde un enfoque <b>mecanicista</b> basado en la repetición hacia un modelo <b>socio-constructivista</b>. Actualmente, se busca que el estudiante sea el protagonista, utilizando las <b>DCD</b> (Destrezas con Criterio de Desempeño) para modelar y resolver problemas reales de su entorno.
-                </p>
+                <p>La educación matemática en el Ecuador ha experimentado una evolución profunda, transitando desde un enfoque <b>mecanicista y conductista</b> hacia un modelo <b>socio-constructivista</b>. Este cambio es de esencia: se ha dejado de lado la simple repetición de algoritmos descontextualizados para dar paso a la <b>modelización matemática</b>.</p>
+                <p>Bajo la estructura de las <b>Destrezas con Criterio de Desempeño (DCD)</b>, el currículo actual busca que el estudiante utilice el lenguaje matemático para representar y resolver situaciones de la vida real. En este nuevo paradigma, el <b>estudiante</b> es el protagonista y constructor de su propio aprendizaje, desarrollando un pensamiento formal y lógico-crítico.</p>
+                <p>El <b>docente</b> actúa como un mediador que diseña experiencias significativas. La meta final es alcanzar el Perfil de Salida del Bachiller Ecuatoriano, fundamentado en la justicia, la innovación y la solidaridad.</p>
             </div>
         </div>
 
         <div id="p1" class="tab-panel">
-            <h1>Cronología <span>Histórica</span></h1>
-            <div class="timeline-box"><div class="year">1996</div><div class="details"><h3>Reforma Consensuada</h3><p>Enfoque conductista. Memorización de algoritmos y procesos mecánicos.</p></div></div>
-            <div class="timeline-box"><div class="year">2010</div><div class="details"><h3>Actualización EGB</h3><p>Pedagogía crítica. Vínculo con el Buen Vivir y razonamiento lógico.</p></div></div>
-            <div class="timeline-box"><div
+            <h1>Cronología <span>Evolutiva</span></h1>
+            <div class="card"><h3>1996: Reforma Consensuada</h3><p>Conductismo. Énfasis en contenidos técnicos y memorización de procesos lineales.</p></div>
+            <div class="card"><h3>2010: Actualización EGB</h3><p>Pedagogía Crítica. Vinculación con el "Buen Vivir" y resolución de problemas sociales.</p></div>
+            <div class="card"><h3>2016: Ajuste Curricular</h3><p>Constructivismo. Organización por Subniveles (Modular) y flexibilidad para el docente.</p></div>
+            <div class="card"><h3>2023: Marco Competencial</h3><p>Socio-constructivismo. Enfoque STEAM y alfabetización financiera.</p></div>
+        </div>
+
+        <div id="p2" class="tab-panel">
+            <h1>Comparativa <span>Histórica</span></h1>
+            <table class="comp-table">
+                <tr><th>DIMENSIÓN</th><th>1996</th><th>2010</th><th>2016 / Actual</th></tr>
+                <tr><td>Epistemología</td><td>Conductista. Estática.</td><td>Crítica. Social.</td><td>Constructivista. Saber hacer.</td></tr>
+                <tr><td>Estructura</td><td>Rígida anual.</td><td>Bloques anuales.</td><td>Flexible por Subniveles.</td></tr>
+                <tr><td>Evaluación</td><td>Sumativa/Punitiva.</td><td>Indicadores técnicos.</td><td>Formativa por criterios.</td></tr>
+            </table>
+        </div>
+
+        <div id="p3" class="tab-panel">
+            <h1>Niveles de <span>Concreción</span></h1>
+            <div class="card"><p><b>Macro:</b> Estado/Ministerio (Currículo Nacional).<br><b>Meso:</b> Institución (PCI).<br><b>Micro:</b> Aula (PUD elaborado por el docente).</p></div>
+        </div>
+
+        <div id="p4" class="tab-panel">
+            <h1>Entropía <span>del Sistema</span></h1>
+            <div class="chart-box"><canvas id="graficoEntropia"></canvas></div>
+        </div>
+
+        <div id="p5" class="tab-panel">
+            <h1>Reflexión <span>Crítica</span></h1>
+            <div class="card">
+                <p>El límite asintótico (asymptote) no superado es la brecha entre la teoría macrocurricular y la práctica en el aula. La inercia de la evaluación tradicional suele frenar la innovación real del docente.</p>
+            </div>
+        </div>
+
+        <div id="p6" class="tab-panel">
+            <h1>Referencias <span>Bibliográficas</span></h1>
+            <div class="card">
+                <p>• Ministerio de Educación del Ecuador (1996, 2010, 2016, 2023).<br>• Teoría General de Sistemas aplicada al currículo de Matemática.<br>• Documentos de actualización competencial 2023.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        let myChart = null;
+        function nav(id, el) {
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById('p' + id).classList.add('active');
+            el.classList.add('active');
+            document.getElementById('scrollArea').scrollTop = 0;
+            
+            // Si salimos de la pestaña 4, borramos la gráfica para liberar RAM
+            if (myChart) { myChart.destroy(); myChart = null; }
+            if (id === 4) renderChart();
+        }
+
+        function renderChart() {
+            const ctx = document.getElementById('graficoEntropia').getContext('2d');
+            myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['1996', '2010', '2016', '2023'],
+                    datasets: [{ label: 'Flexibilidad Curricular', data: [10, 40, 85, 95], borderColor: '#27ae60', tension: 0.1 }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, animation: false }
+            });
+        }
+    </script>
+</body>
+</html>
