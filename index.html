@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -6,245 +6,174 @@
     <title>Dashboard Matemático</title>
     <style>
         :root {
-            --bg-sidebar: #1a252f;
-            --accent-gold: #d4af37;
-            --text-dark: #2c3e50;
-            --bg-table-header: #f8f6f2;
-            --line-color: #e0e0e0;
+            --azul-oscuro: #1a252f;
+            --dorado: #d4af37;
+            --texto: #2c3e50;
+            --gris-claro: #f4f7f6;
         }
 
         body {
             margin: 0;
+            padding: 0;
             display: flex;
-            font-family: 'Georgia', serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             height: 100vh;
+            background-color: #fff;
             overflow: hidden;
-            background-color: #fcfcfc;
         }
 
-        /* Barra Lateral */
+        /* BARRA LATERAL FIJA */
         .sidebar {
-            width: 260px;
-            background-color: var(--bg-sidebar);
-            padding: 40px 20px;
+            width: 280px;
+            background-color: var(--azul-oscuro);
+            color: white;
             display: flex;
             flex-direction: column;
-            color: white;
-            z-index: 100;
+            padding: 30px 20px;
+            box-sizing: border-box;
+            flex-shrink: 0;
         }
 
-        .sidebar h2 { font-size: 22px; margin-bottom: 30px; border-bottom: 1px solid var(--accent-gold); padding-bottom: 10px; }
+        .sidebar h2 {
+            font-family: 'Georgia', serif;
+            font-size: 24px;
+            border-bottom: 2px solid var(--dorado);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
 
         .nav-item {
-            padding: 15px;
-            font-size: 11px;
-            color: #bdc3c7;
+            padding: 12px 15px;
+            margin-bottom: 8px;
             cursor: pointer;
-            text-transform: uppercase;
+            border-radius: 6px;
             transition: 0.3s;
-            font-family: sans-serif;
-            font-weight: bold;
-            letter-spacing: 1px;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            color: #bdc3c7;
         }
 
-        .nav-item.active {
-            color: white;
-            background: var(--accent-gold);
-            border-radius: 8px;
+        .nav-item:hover { background: rgba(255,255,255,0.05); color: white; }
+        .nav-item.active { background: var(--dorado); color: var(--azul-oscuro); }
+
+        /* CONTENEDOR DE CONTENIDO */
+        .main-content {
+            flex-grow: 1;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Contenedor Desplazable */
-        .viewport { flex: 1; overflow: hidden; position: relative; }
-
-        .striper {
+        .section-wrapper {
             display: flex;
-            width: 700%; 
+            width: 700%; /* 7 secciones */
             height: 100%;
-            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.5s ease-in-out;
         }
 
         .section {
-            width: 100%;
+            width: 14.285%; /* 100 / 7 */
             height: 100%;
-            padding: 60px 80px;
+            padding: 50px 70px;
             box-sizing: border-box;
             overflow-y: auto;
         }
 
-        /* Estilos Generales */
-        .label { color: var(--accent-gold); font-weight: bold; font-family: sans-serif; letter-spacing: 2px; font-size: 14px; margin-bottom: 10px; }
-        h1 { font-size: 55px; color: var(--text-dark); margin: 0 0 20px 0; }
-        h1 span { color: var(--accent-gold); font-style: italic; }
-        .intro-text { font-family: sans-serif; line-height: 1.6; color: #444; font-size: 16px; max-width: 900px; margin-bottom: 40px; }
+        h1 { font-family: 'Georgia', serif; font-size: 45px; color: var(--azul-oscuro); margin-bottom: 10px; }
+        h1 span { color: var(--dorado); font-style: italic; }
+        .label { color: var(--dorado); font-weight: bold; font-size: 14px; margin-bottom: 5px; }
 
-        /* Estilos Sección 4: Cascada de Concreción */
-        .concrecion-container {
-            position: relative;
-            max-width: 900px;
-            margin-top: 40px;
-            padding-left: 50px;
-        }
-
-        .concrecion-line {
-            position: absolute;
-            left: 24px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--line-color);
-            z-index: 1;
-        }
-
-        .step {
-            position: relative;
-            margin-bottom: 50px;
-            z-index: 2;
-        }
-
-        .step-circle {
-            position: absolute;
-            left: -40px;
-            width: 30px;
-            height: 30px;
+        /* TABLAS Y TARJETAS */
+        .card {
             background: white;
-            border: 3px solid var(--accent-gold);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: var(--bg-sidebar);
-            font-family: sans-serif;
-            font-size: 14px;
+            border-left: 5px solid var(--azul-oscuro);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-radius: 4px;
         }
 
-        .step-content {
-            background: white;
-            padding: 25px;
-            border-radius: 8px;
-            border-left: 5px solid var(--bg-sidebar);
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.03);
-        }
-
-        .step-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .step-header h3 { margin: 0; font-family: sans-serif; color: var(--text-dark); font-size: 20px; }
-        .badge { 
-            font-size: 10px; 
-            background: #f0f0f0; 
-            padding: 4px 8px; 
-            border-radius: 4px; 
-            text-transform: uppercase; 
-            letter-spacing: 1px;
-            color: #777;
-        }
-
-        .doc-box {
-            background: #fdfdfd;
-            border: 1px dashed #ccc;
-            padding: 15px;
-            margin-top: 15px;
-            font-size: 14px;
-            font-family: sans-serif;
-        }
-
-        /* Estilos Secciones Previas */
-        .card { background: white; padding: 25px; border-radius: 15px; border: 1px solid #eaeaea; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .comp-table { width: 100%; max-width: 1000px; border-collapse: collapse; background: white; font-family: sans-serif; font-size: 13px; }
-        .comp-table th { background: var(--bg-table-header); padding: 20px; text-align: left; border-bottom: 2px solid #eee; }
-        .comp-table td { padding: 18px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
-        .dim-col { background: #fafafa; font-weight: bold; width: 180px; border-right: 2px solid #eee; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; }
+        th { background: var(--gris-claro); padding: 15px; text-align: left; border-bottom: 2px solid #ddd; }
+        td { padding: 15px; border-bottom: 1px solid #eee; vertical-align: top; line-height: 1.6; }
     </style>
 </head>
 <body>
 
     <div class="sidebar">
-       <h2>Dashboard <i>Matemático</i></h2>
-        <div class="nav-item active" onclick="irA(0, this)">01. Síntesis</div>
-        <div class="nav-item" onclick="irA(1, this)">02. Cronología</div>
-        <div class="nav-item" onclick="irA(2, this)">03. Comparativa</div>
-        <div class="nav-item" onclick="irA(3, this)">04. Concreción</div>
-        <div class="nav-item" onclick="irA(4, this)">05. Complejidad</div>
-        <div class="nav-item" onclick="irA(5, this)">06. Reflexión</div>
-        <div class="nav-item" onclick="irA(6, this)">07. Referencias</div>
+        <h2>Dashboard<br><i>Matemático</i></h2>
+        <div class="nav-item active" onclick="mover(0, this)">01. Síntesis</div>
+        <div class="nav-item" onclick="mover(1, this)">02. Cronología</div>
+        <div class="nav-item" onclick="mover(2, this)">03. Comparativa</div>
+        <div class="nav-item" onclick="mover(3, this)">04. Concreción</div>
+        <div class="nav-item" onclick="mover(4, this)">05. Complejidad</div>
+        <div class="nav-item" onclick="mover(5, this)">06. Reflexión</div>
+        <div class="nav-item" onclick="mover(6, this)">07. Referencias</div>
     </div>
 
-    <div class="viewport">
-        <div class="striper" id="striper">
+    <div class="main-content">
+        <div class="section-wrapper" id="wrapper">
             
             <div class="section">
                 <div class="label">01. INTRODUCCIÓN</div>
                 <h1>Análisis <span>Curricular</span></h1>
-                <p class="intro-text">La enseñanza de la Matemática en Ecuador ha pasado de centrarse en la memorización de fórmulas y procedimientos a concebirse como una herramienta lógica... [Contenido completo mantenido]</p>
+                <p>La enseñanza de la Matemática en Ecuador ha pasado de centrarse en la memorización de fórmulas y procedimientos a concebirse como una herramienta lógica para comprender y transformar la realidad.</p>
             </div>
 
             <div class="section">
-                <div class="label">02. EVOLUCIÓN HISTÓRICA</div>
-                <h1>Evolución <span>Histórica Detallada</span></h1>
+                <div class="label">02. CRONOLOGÍA</div>
+                <h1>Evolución <span>Histórica</span></h1>
+                <div class="card">
+                    <b>1996: REFORMA CONSENSUADA.</b> Paradigma Conductista y Mecanicista. Matemática descontextualizada y rígida.
                 </div>
+                <div class="card">
+                    <b>2010: ACTUALIZACIÓN EGB.</b> Pedagogía Crítica. Vinculación con el "Buen Vivir" y bloques curriculares.
+                </div>
+            </div>
 
             <div class="section">
-                <div class="label">03. COMPARATIVA</div>
+                <div class="label">03. COMPARATIVA HISTÓRICA</div>
                 <h1>Dimensiones <span>de Cambio</span></h1>
-                <table class="comp-table">
-                    </table>
+                <table>
+                    <tr>
+                        <th>Dimensión</th>
+                        <th>1996</th>
+                        <th>2010</th>
+                        <th>2016</th>
+                    </tr>
+                    <tr>
+                        <td><b>Enfoque</b></td>
+                        <td>Conductista</td>
+                        <td>Pedagogía Crítica</td>
+                        <td>Constructivista</td>
+                    </tr>
+                    <tr>
+                        <td><b>Estructura</b></td>
+                        <td>Lineal y Rígida</td>
+                        <td>Bloques Curriculares</td>
+                        <td>Modular por Subniveles</td>
+                    </tr>
+                </table>
             </div>
 
             <div class="section">
                 <div class="label">04. NIVELES DE CONCRECIÓN</div>
-                <h1>Arquitectura del <span>Sistema Curricular</span></h1>
-                <p class="intro-text">Cómo se transfiere la autonomía desde el Estado hasta el pupitre del estudiante.</p>
-
-                <div class="concrecion-container">
-                    <div class="concrecion-line"></div>
-
-                    <div class="step">
-                        <div class="step-circle">01</div>
-                        <div class="step-content">
-                            <div class="step-header">
-                                <h3>Nivel Macro</h3>
-                                <span class="badge">Prescriptivo / Estado</span>
-                            </div>
-                            <p style="font-family: sans-serif; font-size: 14px; color: #555;">Es el gran paraguas normativo y obligatorio a nivel nacional. Define las intenciones educativas del país, respondiendo al <b>"Qué"</b> y <b>"Para qué"</b> enseñar Matemática.</p>
-                            <div class="doc-box">
-                                <b>Documento rector:</b> Currículo Nacional Obligatorio.<br>
-                                <b>Define:</b> Perfil de Salida, Objetivos Generales y Matriz de DCD Imprescindibles y Deseables.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-circle">02</div>
-                        <div class="step-content">
-                            <div class="step-header">
-                                <h3>Nivel Meso</h3>
-                                <span class="badge">Directivo / Institucional</span>
-                            </div>
-                            <p style="font-family: sans-serif; font-size: 14px; color: #555;">El puente crítico. La institución educativa contextualiza el currículo nacional a su propia realidad sociogeográfica y cultural, definiendo su identidad pedagógica.</p>
-                            <div class="doc-box">
-                                <b>Documentos rectores:</b> PEI (Proyecto Educativo Institucional) y PCI (Planificación Curricular Institucional).<br>
-                                <b>Define:</b> Enfoque pedagógico del plantel, carga horaria adaptada y sistema de evaluación.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-circle">03</div>
-                        <div class="step-content">
-                            <div class="step-header">
-                                <h3>Nivel Micro</h3>
-                                <span class="badge">Operativo / Áulico</span>
-                            </div>
-                            <p style="font-family: sans-serif; font-size: 14px; color: #555;">El momento de la verdad pedagógica. Aquí radica la máxima flexibilidad. El docente decide el <b>"Cómo"</b> y <b>"Cuándo"</b> enseñar a sus estudiantes específicos.</p>
-                            <div class="doc-box">
-                                <b>Documentos rectores:</b> PCA (Planificación Curricular Anual) y PUD (Plan de Unidad Didáctica).<br>
-                                <b>Define:</b> Estrategias metodológicas diarias (ABP, Aula Invertida), recursos didácticos y Adaptaciones Curriculares (NEE).
-                            </div>
-                        </div>
-                    </div>
-
+                <h1>Niveles de <span>Aplicación</span></h1>
+                <p>Arquitectura del Sistema Curricular: Cómo se transfiere la autonomía desde el Estado hasta el estudiante.</p>
+                
+                <div class="card">
+                    <h3 style="margin-top:0; color:var(--dorado)">1. Nivel Macro (Ministerio de Educación)</h3>
+                    <p>Es el paraguas normativo obligatorio a nivel nacional. Define las intenciones educativas del país.</p>
+                    <small><b>Documento:</b> Currículo Nacional Obligatorio.</small>
                 </div>
-            </div>
 
-            <div class="section"><div class="label">05. COMPLEJIDAD</div><h1>Flexibilidad <span>vs Norma</span></h1></div>
-            <div class="section"><div class="label">06. REFLEXIÓN</div><h1>Visión <span>Crítica</span></h1></div>
-            <div class="
+                <div class="card">
+                    <h3 style="margin-top:0; color:var(--dorado)">2. Nivel Meso (Institución Educativa)</h3>
+                    <p>Contextualiza el currículo nacional a la realidad propia de la escuela o colegio.</p>
+                    <small><b>Documentos:</b> PEI y PCI.</small>
+                </div>
+
+                <div class="card">
+                    <h3 style="margin-top:0; color:var(--dorado)">3. Nivel Micro (Docente en el Aula)</h3>
+                    <p>Es el momento de máxima flexibilidad donde el docente decide el "Cómo" y "Cuándo" enseñar.</p>
+                    <small><b>Documentos:</b> PCA y PUD.</
