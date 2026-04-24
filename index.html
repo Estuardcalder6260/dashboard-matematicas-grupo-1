@@ -7,11 +7,10 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --azul-oscuro: #1a252f;
+            --azul: #1a252f;
             --dorado: #d4af37;
             --fondo: #f4f7f6;
             --blanco: #ffffff;
-            --texto: #2c3e50;
         }
 
         * { box-sizing: border-box; }
@@ -19,21 +18,22 @@
         body {
             margin: 0;
             display: flex;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
             height: 100vh;
             background: var(--fondo);
-            overflow: hidden;
+            overflow: hidden; /* Evita scroll global */
         }
 
-        /* SIDEBAR */
+        /* SIDEBAR FIJO */
         .sidebar {
             width: 260px;
-            background: var(--azul-oscuro);
+            background: var(--azul);
             color: white;
             padding: 30px 15px;
             display: flex;
             flex-direction: column;
             flex-shrink: 0;
+            z-index: 100;
         }
 
         .sidebar h2 {
@@ -54,40 +54,45 @@
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: 0.3s;
+            transition: 0.2s;
         }
 
-        .nav-item:hover { background: rgba(255,255,255,0.05); color: white; }
-        .nav-item.active { background: var(--dorado); color: var(--azul-oscuro); }
+        .nav-item:hover { background: rgba(255,255,255,0.1); color: white; }
+        .nav-item.active { background: var(--dorado); color: var(--azul); }
 
-        /* VIEWPORT Y SLIDER */
-        .viewport { flex-grow: 1; position: relative; overflow: hidden; }
+        /* CONTENEDOR DE SECCIONES */
+        .viewport { 
+            flex-grow: 1; 
+            position: relative; 
+            overflow: hidden; 
+        }
 
         .slider-master {
             display: flex;
             height: 100%;
             width: 700%; 
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.4s ease-out; /* Animación más rápida para evitar trabas */
         }
 
+        /* CADA SECCIÓN TIENE SU PROPIO SCROLL */
         .section {
             width: 14.2857%;
             height: 100vh;
-            padding: 50px 60px;
-            overflow-y: auto; /* Permite scroll si el contenido es largo */
+            padding: 40px 60px;
+            overflow-y: auto; /* IMPORTANTE: Esto permite bajar si el texto es largo */
+            background: var(--fondo);
         }
 
-        h1 { font-family: 'Georgia', serif; font-size: 42px; color: var(--azul-oscuro); margin: 0 0 15px 0; }
+        h1 { font-family: 'Georgia', serif; font-size: 38px; color: var(--azul); margin-bottom: 10px; }
         h1 span { color: var(--dorado); font-style: italic; }
         
-        .intro-p { font-size: 17px; color: #555; max-width: 1000px; line-height: 1.8; margin-bottom: 30px; text-align: justify; }
+        .intro-p { font-size: 17px; color: #444; line-height: 1.8; margin-bottom: 30px; text-align: justify; max-width: 1100px; }
 
-        /* CONTENEDORES DE TARJETAS */
         .cards-row {
             display: flex;
-            gap: 25px;
-            margin-top: 20px;
+            gap: 20px;
             flex-wrap: wrap;
+            margin-top: 20px;
         }
 
         .card {
@@ -96,36 +101,41 @@
             padding: 25px;
             flex: 1;
             min-width: 320px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border: 1px solid #eee;
-            border-top: 4px solid var(--dorado);
-            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--dorado);
+            margin-bottom: 20px;
         }
 
-        .card h3 { color: var(--azul-oscuro); margin-top: 0; font-size: 20px; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
-        .card p, .card li { font-size: 15px; line-height: 1.8; color: #444; text-align: justify; }
+        .card h3 { color: var(--azul); margin-top: 0; font-size: 19px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .card p { font-size: 15px; line-height: 1.7; color: #333; text-align: justify; }
 
         /* GRÁFICA */
-        .analysis-container { display: flex; gap: 30px; flex-wrap: wrap; }
-        .chart-box { background: white; padding: 20px; border-radius: 12px; border: 1px solid #ddd; flex: 1.5; min-height: 400px; }
+        .chart-box { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 12px; 
+            border: 1px solid #ddd; 
+            width: 100%; 
+            height: 400px; 
+            margin-top: 20px;
+        }
 
         /* REFLEXIÓN CRÍTICA */
-        .reflexion-especial {
-            background: var(--azul-oscuro);
+        .reflexion-box {
+            background: var(--azul);
             color: white;
             padding: 40px;
             border-radius: 15px;
             border-left: 10px solid var(--dorado);
-            margin-top: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            margin-top: 30px;
         }
-        .reflexion-especial h3 { color: var(--dorado); font-size: 24px; margin-top: 0; }
-        .reflexion-especial p { color: #ecf0f1; font-size: 16px; line-height: 1.9; }
+        .reflexion-box h3 { color: var(--dorado); font-size: 22px; margin-top: 0; }
+        .reflexion-box p { font-size: 16px; line-height: 1.8; color: #ecf0f1; }
     </style>
 </head>
 <body>
 
-    <nav class="sidebar">
+    <div class="sidebar">
         <h2>Dashboard<br><i>Matemático</i></h2>
         <div class="nav-item active" onclick="jump(0, this)">01. Síntesis</div>
         <div class="nav-item" onclick="jump(1, this)">02. Cronología</div>
@@ -134,33 +144,11 @@
         <div class="nav-item" onclick="jump(4, this)">05. Entropía</div>
         <div class="nav-item" onclick="jump(5, this)">06. Reflexión</div>
         <div class="nav-item" onclick="jump(6, this)">07. Referencias</div>
-    </nav>
+    </div>
 
-    <main class="viewport">
+    <div class="viewport">
         <div class="slider-master" id="slider">
             
-            <section class="section">
+            <div class="section">
                 <h1>Síntesis <span>Curricular</span></h1>
-                <p class="intro-p">El currículo de Matemática en Ecuador ha transitado desde una visión puramente técnica y mecánica hacia una formación integral, lógica y crítica, diseñada para empoderar al estudiante en la resolución de problemas complejos de su entorno social y productivo.</p>
-                
-                <div class="cards-row">
-                    <div class="card">
-                        <h3>1. Evolución Histórica y Epistemológica</h3>
-                        <p>Se ha superado el modelo <b>conductista</b> que priorizaba la repetición de algoritmos sin sentido. Actualmente, nos basamos en el <b>socio-constructivismo</b>, donde el aprendizaje es un proceso de construcción social. Se busca que el estudiante desarrolle un pensamiento formal que le permita modelar situaciones de la vida real, integrando el saber con el "saber hacer" a través de las Destrezas con Criterio de Desempeño.</p>
-                    </div>
-                    <div class="card">
-                        <h3>2. El Enfoque en Destrezas (DCD)</h3>
-                        <p>La implementación de las <b>DCD</b> marca un hito pedagógico. Estas no son simples temas de estudio, sino la combinación de un conocimiento disciplinar, una acción cognitiva y un contexto de aplicación. Esto garantiza una contextualización inicial abierta, permitiendo que la Matemática sea vista como una herramienta culturalmente relevante y no como un conjunto de reglas aisladas.</p>
-                    </div>
-                    <div class="card">
-                        <h3>3. Perfil del Bachiller y Rol Docente</h3>
-                        <p>El currículo demanda un docente <b>mediador y facilitador</b> de experiencias de aprendizaje significativo. El objetivo final es alcanzar el Perfil de Salida del Bachiller ecuatoriano, caracterizado por la justicia, la innovación y la solidaridad, donde la competencia matemática es el eje fundamental para el desarrollo del pensamiento crítico y la toma de decisiones informadas.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section">
-                <h1>Cronología <span>Evolutiva</span></h1>
-                <div class="cards-row">
-                    <div class="card">
-                        <h3>1996: Reforma
+                <p class="intro-
