@@ -3,32 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Matemático V4 - Entropía y Flexibilidad</title>
+    <title>Dashboard Matemático - Versión Final Completa</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --azul: #1a252f;
             --dorado: #d4af37;
             --fondo: #f4f7f6;
             --blanco: #ffffff;
-            --verde-flex: #27ae60;
-            --rojo-rigidez: #c0392b;
+            --verde: #27ae60;
+            --rojo: #c0392b;
         }
 
         body {
             margin: 0;
             display: flex;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             height: 100vh;
             overflow: hidden;
             background: var(--fondo);
         }
 
-        /* NAVEGACIÓN (CONSERVADA) */
+        /* NAVEGACIÓN */
         .sidebar {
-            width: 260px;
+            width: 280px;
             background: var(--azul);
             color: white;
-            padding: 30px 20px;
+            padding: 40px 20px;
             display: flex;
             flex-direction: column;
             z-index: 1000;
@@ -37,7 +38,7 @@
 
         .sidebar h2 {
             font-family: 'Georgia', serif;
-            font-size: 22px;
+            font-size: 24px;
             border-bottom: 2px solid var(--dorado);
             padding-bottom: 10px;
             margin-bottom: 30px;
@@ -53,13 +54,13 @@
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .nav-item:hover { background: rgba(255,255,255,0.05); color: white; }
         .nav-item.active { background: var(--dorado); color: var(--azul); transform: translateX(8px); }
 
-        /* VISOR (CONSERVADO) */
+        /* CONTENIDO */
         .viewport { flex: 1; position: relative; overflow: hidden; }
 
         .slider-master {
@@ -81,7 +82,6 @@
         h1 span { color: var(--dorado); font-style: italic; }
         p { line-height: 1.8; color: #444; font-size: 16px; margin-bottom: 20px; }
 
-        /* COMPONENTES GENERALES */
         .card {
             background: var(--blanco);
             border-radius: 12px;
@@ -93,7 +93,12 @@
 
         .card h3 { margin: 0 0 15px 0; color: var(--azul); font-size: 20px; border-bottom: 1px solid #eee; padding-bottom: 12px; }
 
-        /* ESTILO NUEVO PUNTO 5: ENTROPÍA */
+        /* TABLA COMPARATIVA */
+        .comp-table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
+        .comp-table th, .comp-table td { padding: 15px; border: 1px solid #eee; text-align: left; font-size: 14px; }
+        .comp-table th { background: #f8f9fa; color: var(--azul); }
+
+        /* GRÁFICA PUNTO 5 */
         .analysis-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -101,27 +106,14 @@
             margin-top: 20px;
         }
 
-        .logic-card {
-            border: 2px dashed #ccc;
-            padding: 25px;
-            border-radius: 15px;
-            background: #fff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .highlight-text {
-            background: var(--azul);
-            color: white;
+        .chart-box {
+            background: white;
             padding: 20px;
-            border-radius: 10px;
-            font-weight: bold;
-            margin-top: 20px;
-            border: 1px solid var(--dorado);
+            border-radius: 15px;
+            border: 2px dashed #ccc;
+            height: 380px;
+            min-width: 0; /* Evita que el canvas se desborde */
         }
-
-        .trend-icon { font-size: 40px; margin-bottom: 15px; }
     </style>
 </head>
 <body>
@@ -140,41 +132,84 @@
     <div class="viewport">
         <div class="slider-master" id="slider">
             
-            <div class="section"><h1>Análisis <span>Curricular</span></h1><p>Contenido completo original...</p></div>
-            <div class="section"><h1>Hitos <span>Fundamentales</span></h1><p>Contenido completo original...</p></div>
-            <div class="section"><h1>Dimensiones <span>de Cambio</span></h1><p>Tabla completa original...</p></div>
-            <div class="section"><h1>Niveles de <span>Concreción</span></h1><p>Niveles completos originales...</p></div>
-
             <div class="section">
-                <h1>Entropía vs <span>Flexibilidad</span></h1>
-                <p>Análisis sistémico de la Matemática en Ecuador, pasando de la rigidez lineal a la complejidad adaptativa.</p>
-                
-                <div class="analysis-container">
-                    
-                    <div class="card">
-                        <h3>Transición del Sistema</h3>
-                        <p>El gráfico nos revela un cambio de paradigma fundamental. La Matemática en Ecuador pasó de un currículo rígido, prescriptivo y memorístico en <b>1996</b> a uno flexible, complejo y basado en competencias en <b>2023</b>.</p>
-                        <p>Antes predominaba la repetición de algoritmos y el docente era el centro; ahora se prioriza la resolución de problemas, el contexto y la participación activa del estudiante.</p>
-                    </div>
-
-                    <div class="logic-card">
-                        <div class="trend-icon" style="color: var(--verde-flex);">📈</div>
-                        <p style="color: var(--azul); font-weight: bold;">TENDENCIA ACTUAL</p>
-                        <p>Flexibilidad ➔ Complejidad Adaptativa</p>
-                        
-                        <div class="trend-icon" style="color: var(--rojo-rigidez);">🔒</div>
-                        <p style="color: #666; font-size: 14px;">TENDENCIA PASADA</p>
-                        <p style="color: #666; font-size: 14px;">Rigidez ➔ Baja Entropía Prescriptiva</p>
-                    </div>
+                <h1>Análisis <span>Curricular</span></h1>
+                <div class="card">
+                    <h3>Teoría del Enfoque Actual</h3>
+                    <p>El currículo de Matemática en Ecuador se fundamenta en el <b>socio-constructivismo</b>. Este paradigma propone que el estudiante es el protagonista, construyendo conocimientos significativos mediante la resolución de problemas reales.</p>
                 </div>
-
-                <div class="highlight-text">
-                    <p style="margin:0;">"La entropía curricular no es desorden, es la diversidad necesaria. Al permitir mayor flexibilidad (como en el currículo 2023), el currículo abraza la complejidad del mundo real y se adapta a diferentes contextos, lo que resulta en un aprendizaje significativo."</p>
+                <div class="card">
+                    <h3>Habilidades del Siglo XXI</h3>
+                    <p>Se busca desarrollar el pensamiento lógico-crítico, la capacidad de abstracción y el uso de herramientas tecnológicas para interpretar la complejidad del entorno social y económico.</p>
                 </div>
             </div>
 
-            <div class="section"><h1>06. <span>Reflexión</span></h1></div>
-            <div class="section"><h1>07. <span>Referencias</span></h1></div>
+            <div class="section">
+                <h1>Hitos <span>Fundamentales</span></h1>
+                <div class="card">
+                    <h3>1996: Reforma Consensuada</h3>
+                    <p>Enfoque <b>conductista</b>. El currículo era una lista de contenidos mecánicos y repetitivos. La evaluación se centraba en el resultado final, no en el proceso.</p>
+                </div>
+                <div class="card">
+                    <h3>2010: Actualización y Fortalecimiento</h3>
+                    <p>Transición hacia la <b>pedagogía crítica</b>. Se organizan bloques curriculares y se vincula la matemática con la realidad cotidiana del estudiante.</p>
+                </div>
+                <div class="card">
+                    <h3>2023: Marco de Competencias</h3>
+                    <p>Énfasis en la <b>flexibilidad y autonomía</b>. Se priorizan competencias comunicacionales, digitales y socioemocionales aplicadas al razonamiento lógico.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h1>Dimensiones <span>de Cambio</span></h1>
+                <table class="comp-table">
+                    <tr>
+                        <th>Aspecto</th>
+                        <th>Modelo Tradicional (1996)</th>
+                        <th>Modelo Actual (2023)</th>
+                    </tr>
+                    <tr><td><b>Rol del Docente</b></td><td>Transmisor de información</td><td>Guía y facilitador</td></tr>
+                    <tr><td><b>Contenidos</b></td><td>Rígidos y descontextualizados</td><td>Flexibles y aplicados</td></tr>
+                    <tr><td><b>Metodología</b></td><td>Memorística / Mecánica</td><td>ABP / Resolución de problemas</td></tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h1>Niveles de <span>Concreción</span></h1>
+                <div class="card">
+                    <h3>Nivel 1: Macrocurriculo</h3>
+                    <p>Emitido por el Ministerio. Define las destrezas fundamentales para todo el país.</p>
+                </div>
+                <div class="card">
+                    <h3>Nivel 2: Mesocurriculo</h3>
+                    <p>Adaptación institucional (PEI / PCI) para responder a la realidad de la comunidad educativa.</p>
+                </div>
+                <div class="card">
+                    <h3>Nivel 3: Microcurriculo</h3>
+                    <p>Planificación de aula (PUD). Es el nivel de mayor autonomía docente y adaptación directa.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h1>Entropía y <span>Flexibilidad</span></h1>
+                <p>Análisis visual de cómo la libertad pedagógica ha transformado el sistema educativo:</p>
+                
+                <div class="analysis-container">
+                    <div class="chart-box">
+                        <canvas id="graficaEvolucion"></canvas>
+                    </div>
+                    <div class="card">
+                        <h3>Análisis de la Gráfica</h3>
+                        <p>La línea roja muestra la <b>Rigidez</b> histórica que ha ido desapareciendo, mientras que la línea verde representa la <b>Flexibilidad</b> ganada.</p>
+                        <p style="font-weight: bold; color: var(--azul); border-top: 1px solid #ddd; pt-2;">
+                            "A mayor flexibilidad, mayor aprendizaje significativo."
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section"><h1>06. <span>Reflexión</span></h1><div class="card">Espacio para conclusiones finales.</div></div>
+            <div class="section"><h1>07. <span>Referencias</span></h1><div class="card">Fuentes y bibliografía.</div></div>
 
         </div>
     </div>
@@ -186,6 +221,11 @@
             items.forEach(i => i.classList.remove('active'));
             el.classList.add('active');
         }
-    </script>
-</body>
-</html>
+
+        // Script de la Gráfica
+        window.onload = function() {
+            const ctx = document.getElementById('graficaEvolucion').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['1996', '2010', '2
