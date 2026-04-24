@@ -3,152 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Matemático - Estuard Calderón</title>
+    <title>Dashboard Matemático - Análisis Curricular</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --azul: #1a252f;
+            --azul-side: #1a252f;
             --dorado: #d4af37;
             --fondo: #f4f7f6;
-            --blanco: #ffffff;
+            --texto: #2c3e50;
         }
 
         * { box-sizing: border-box; }
-        
-        body {
-            margin: 0;
-            display: flex;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            height: 100vh;
-            background: var(--fondo);
-            overflow: hidden; /* Evita scroll global */
-        }
+        body { margin: 0; display: flex; font-family: 'Segoe UI', system-ui, sans-serif; height: 100vh; background: var(--fondo); overflow: hidden; }
 
-        /* SIDEBAR FIJO */
-        .sidebar {
-            width: 260px;
-            background: var(--azul);
-            color: white;
-            padding: 30px 15px;
-            display: flex;
-            flex-direction: column;
-            flex-shrink: 0;
-            z-index: 100;
-        }
-
-        .sidebar h2 {
-            font-family: 'Georgia', serif;
-            font-size: 20px;
-            border-bottom: 2px solid var(--dorado);
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-        }
-
-        .nav-item {
-            padding: 12px 15px;
-            margin: 4px 0;
-            cursor: pointer;
-            border-radius: 6px;
-            color: #bdc3c7;
-            font-size: 11px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.2s;
-        }
-
+        /* NAVEGACIÓN LATERAL */
+        .sidebar { width: 260px; background: var(--azul-side); color: white; padding: 30px 15px; display: flex; flex-direction: column; flex-shrink: 0; }
+        .sidebar h2 { font-family: 'Georgia', serif; font-size: 20px; border-bottom: 2px solid var(--dorado); padding-bottom: 10px; margin-bottom: 30px; }
+        .nav-item { padding: 12px 15px; margin: 4px 0; cursor: pointer; border-radius: 6px; color: #bdc3c7; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s; }
         .nav-item:hover { background: rgba(255,255,255,0.1); color: white; }
-        .nav-item.active { background: var(--dorado); color: var(--azul); }
+        .nav-item.active { background: var(--dorado); color: var(--azul-side); }
 
-        /* CONTENEDOR DE SECCIONES */
-        .viewport { 
-            flex-grow: 1; 
-            position: relative; 
-            overflow: hidden; 
-        }
+        /* CONTENEDOR PRINCIPAL */
+        .main-content { flex-grow: 1; height: 100vh; overflow-y: auto; position: relative; scroll-behavior: smooth; }
+        .tab-content { display: none; padding: 50px 60px; animation: fadeIn 0.4s ease; }
+        .tab-content.active { display: block; }
 
-        .slider-master {
-            display: flex;
-            height: 100%;
-            width: 700%; 
-            transition: transform 0.4s ease-out; /* Animación más rápida para evitar trabas */
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* CADA SECCIÓN TIENE SU PROPIO SCROLL */
-        .section {
-            width: 14.2857%;
-            height: 100vh;
-            padding: 40px 60px;
-            overflow-y: auto; /* IMPORTANTE: Esto permite bajar si el texto es largo */
-            background: var(--fondo);
-        }
-
-        h1 { font-family: 'Georgia', serif; font-size: 38px; color: var(--azul); margin-bottom: 10px; }
+        /* ESTILOS ACADÉMICOS */
+        h1 { font-family: 'Georgia', serif; font-size: 42px; color: var(--azul-side); margin: 0 0 20px 0; }
         h1 span { color: var(--dorado); font-style: italic; }
+        .intro-text { font-size: 17px; line-height: 1.8; color: #555; max-width: 1000px; text-align: justify; margin-bottom: 40px; }
+
+        .cards-grid { display: flex; gap: 25px; flex-wrap: wrap; margin-bottom: 30px; }
+        .card { background: white; border-radius: 12px; padding: 30px; flex: 1; min-width: 340px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border-top: 5px solid var(--dorado); }
+        .card h3 { color: var(--azul-side); font-size: 20px; margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+        .card p { font-size: 15px; line-height: 1.8; color: #444; text-align: justify; }
+
+        /* SECCIÓN ENTROPÍA */
+        .chart-container { background: white; border-radius: 15px; padding: 30px; border: 1px solid #ddd; margin: 20px 0; height: 450px; }
         
-        .intro-p { font-size: 17px; color: #444; line-height: 1.8; margin-bottom: 30px; text-align: justify; max-width: 1100px; }
-
-        .cards-row {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        .card {
-            background: var(--blanco);
-            border-radius: 12px;
-            padding: 25px;
-            flex: 1;
-            min-width: 320px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border-top: 5px solid var(--dorado);
-            margin-bottom: 20px;
-        }
-
-        .card h3 { color: var(--azul); margin-top: 0; font-size: 19px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .card p { font-size: 15px; line-height: 1.7; color: #333; text-align: justify; }
-
-        /* GRÁFICA */
-        .chart-box { 
-            background: white; 
-            padding: 20px; 
-            border-radius: 12px; 
-            border: 1px solid #ddd; 
-            width: 100%; 
-            height: 400px; 
-            margin-top: 20px;
-        }
-
         /* REFLEXIÓN CRÍTICA */
-        .reflexion-box {
-            background: var(--azul);
-            color: white;
-            padding: 40px;
-            border-radius: 15px;
-            border-left: 10px solid var(--dorado);
-            margin-top: 30px;
-        }
-        .reflexion-box h3 { color: var(--dorado); font-size: 22px; margin-top: 0; }
-        .reflexion-box p { font-size: 16px; line-height: 1.8; color: #ecf0f1; }
+        .reflexion-box { background: var(--azul-side); color: white; padding: 45px; border-radius: 15px; border-left: 12px solid var(--dorado); position: relative; margin-top: 20px; }
+        .reflexion-box h3 { color: var(--dorado); font-size: 26px; margin-top: 0; }
+        .reflexion-box p { font-size: 17px; line-height: 1.9; color: #ecf0f1; text-align: justify; }
+        .reflexion-box i { position: absolute; right: 40px; top: 40px; font-size: 80px; opacity: 0.1; font-family: serif; }
     </style>
 </head>
 <body>
 
-    <div class="sidebar">
+    <nav class="sidebar">
         <h2>Dashboard<br><i>Matemático</i></h2>
-        <div class="nav-item active" onclick="jump(0, this)">01. Síntesis</div>
-        <div class="nav-item" onclick="jump(1, this)">02. Cronología</div>
-        <div class="nav-item" onclick="jump(2, this)">03. Comparativa</div>
-        <div class="nav-item" onclick="jump(3, this)">04. Concreción</div>
-        <div class="nav-item" onclick="jump(4, this)">05. Entropía</div>
-        <div class="nav-item" onclick="jump(5, this)">06. Reflexión</div>
-        <div class="nav-item" onclick="jump(6, this)">07. Referencias</div>
-    </div>
+        <div class="nav-item active" onclick="showTab(0, this)">01. Síntesis</div>
+        <div class="nav-item" onclick="showTab(1, this)">02. Cronología</div>
+        <div class="nav-item" onclick="showTab(2, this)">03. Comparativa</div>
+        <div class="nav-item" onclick="showTab(3, this)">04. Concreción</div>
+        <div class="nav-item" onclick="showTab(4, this)">05. Entropía</div>
+        <div class="nav-item" onclick="showTab(5, this)">06. Reflexión</div>
+        <div class="nav-item" onclick="showTab(6, this)">07. Referencias</div>
+    </nav>
 
-    <div class="viewport">
-        <div class="slider-master" id="slider">
-            
-            <div class="section">
-                <h1>Síntesis <span>Curricular</span></h1>
-                <p class="intro-
+    <main class="main-content">
+        
+        <section class="tab-content active">
+            <h1>Síntesis <span>Curricular</span></h1>
+            <p class="intro-text">Análisis de la evolución pedagógica en la enseñanza de la Matemática en Ecuador, destacando la transición de modelos rígidos hacia estructuras basadas en la complejidad y la autonomía docente.</p>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Evolución Histórica</h3>
+                    <p>El currículo ha pasado de un enfoque conductista centrado en la instrucción y repetición (1996) hacia un modelo socio-constructivista donde el estudiante es el protagonista activo. Esta evolución busca superar la simple memorización de algoritmos para fomentar una comprensión profunda basada en el contexto y la resolución de problemas reales.</p>
+                </div>
+                <div class="card">
+                    <h3>Cambio de Enfoque</h3>
+                    <p>La transición (2000-2015) introdujo orientaciones más abiertas y una contextualización inicial. El enfoque actual por competencias (2023) prioriza el pensamiento crítico y la pertinencia cultural, posicionando al docente como un mediador y arquitecto cognitivo.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="tab-content">
+            <h1>Cronología <span>del Currículo</span></h1>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>1996: Currículo Rígido</h3>
+                    <p>Caracterizado por una baja entropía, era un sistema predecible, lineal y cerrado. El énfasis recaía en contenidos secuenciales prescritos y la memorización algorítmica, donde el estudiante actuaba como un receptor pasivo.</p>
+                </div>
+                <div class="card">
+                    <h3>2023: Currículo Flexible</h3>
+                    <p>Representa una alta entropía al ser un sistema abierto, complejo y adaptativo. Al organizar el aprendizaje por competencias y subniveles, otorga mayor libertad al docente para innovar y adaptar la enseñanza a las necesidades del aula.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="tab-content">
+            <h1>Entropía <span>y Complejidad</span></h1>
+            <div class="chart-container"><canvas id="chartEntropia"></canvas></div>
+            <div class="card">
+                <h3>Interpretación del Gráfico</h3>
+                <p>A mayor flexibilidad, el currículo abraza la complejidad del mundo real. La línea verde muestra cómo la autonomía docente ha crecido exponencialmente desde 1996, reduciendo la rigidez prescriptiva del Ministerio para fomentar un aprendizaje verdaderamente significativo.</p>
+            </div>
+        </section>
+
+        <section class="tab-content">
+            <h1>Reflexión <span>Crítica</span></h1>
+            <div class="card">
+                <p>¿Cuál ha sido el 'asymptote' (límite) que no hemos podido superar en la enseñanza de la Matemática en Ecuador a pesar de los cambios curriculares?</p>
+            </div>
+            <div class="reflexion-box">
+                <i>"</i>
+                <h3>Disonancia en el Aula</h3>
+                <p>A pesar de la evolución hacia modelos socio-constructivistas, persiste una disonancia entre la prescripción macrocurricular y la realidad fenomenológica del aula (Nivel Micro). La inercia de las evaluaciones estandarizadas y la formación tradicional empujan al docente a regresar a la mecanización del algoritmo descontextualizado.</p>
+                <p><strong>Propuesta 2030:</strong> Un currículo basado en Teoría de Grafos y Lógica Difusa para valorar procesos de aprendizaje graduales y no binarios (aprueba/reprueba).</p>
+            </div>
+        </section>
