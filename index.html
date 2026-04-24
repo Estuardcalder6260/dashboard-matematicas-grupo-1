@@ -3,146 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Matemáticas</title>
+    <title>Dashboard Académico</title>
     <style>
         :root {
-            --bg-sidebar: #f5f4f0;
-            --accent-green: #4a5d4e;
-            --text-dark: #1a1a1a;
-            --text-gray: #4a4a4a;
+            /* NUEVA PALETA DE COLORES: Azul y Dorado */
+            --bg-sidebar: #1a252f;      /* Azul oscuro profundo */
+            --accent-gold: #d4af37;      /* Dorado elegante */
+            --text-light: #ffffff;
+            --text-dark: #2c3e50;
+            --bg-main: #fcfcfc;
         }
 
         body {
             margin: 0;
             display: flex;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             height: 100vh;
-            background-color: white;
+            background-color: var(--bg-main);
         }
 
-        /* Sidebar */
+        /* Sidebar - Ahora es oscura para resaltar */
         .sidebar {
             width: 260px;
             background-color: var(--bg-sidebar);
             padding: 40px 20px;
             display: flex;
             flex-direction: column;
-            border-right: 1px solid #e0e0e0;
+            color: var(--text-light);
         }
 
         .sidebar h2 {
-            font-family: serif;
-            font-style: italic;
-            font-size: 28px;
-            color: var(--accent-green);
-            margin-bottom: 50px;
-            font-weight: normal;
+            font-family: 'Georgia', serif;
+            font-size: 24px;
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 10px;
+            margin-bottom: 40px;
+            text-align: center;
         }
 
         .nav-menu { list-style: none; padding: 0; }
 
         .nav-item {
-            padding: 15px 20px;
+            padding: 12px 15px;
             font-size: 13px;
-            font-weight: 600;
-            color: var(--text-dark);
+            color: #bdc3c7;
             cursor: pointer;
-            letter-spacing: 1px;
             text-transform: uppercase;
-            margin-bottom: 5px;
-            transition: all 0.3s;
-            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: 0.3s;
+            border-radius: 4px;
         }
 
-        .nav-item:hover { background: rgba(0,0,0,0.03); }
+        .nav-item:hover {
+            background: rgba(255,255,255,0.1);
+            color: var(--accent-gold);
+        }
 
         .nav-item.active {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            color: var(--text-light);
+            background: var(--accent-gold);
+            font-weight: bold;
         }
 
-        /* Main Content */
+        /* Contenido Principal */
         .main {
             flex: 1;
-            padding: 60px 80px;
+            padding: 80px;
             overflow-y: auto;
         }
 
         .breadcrumb {
-            font-size: 12px;
+            font-size: 14px;
+            color: var(--accent-gold);
             font-weight: bold;
-            color: var(--accent-green);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 40px;
-            display: flex;
-            align-items: center;
-        }
-
-        .breadcrumb::before {
-            content: "●";
-            margin-right: 15px;
-            font-size: 18px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
         }
 
         h1 {
-            font-family: serif;
-            font-size: 72px;
-            line-height: 0.9;
-            margin: 0 0 40px 0;
-            font-weight: normal;
+            font-family: 'Georgia', serif;
+            font-size: 60px;
             color: var(--text-dark);
+            margin: 0 0 30px 0;
         }
 
         h1 span {
-            display: block;
+            color: var(--accent-gold);
             font-style: italic;
-            color: var(--accent-green);
         }
 
-        /* Bloque de Texto Estilo Destacado */
+        /* Tarjeta de información mejorada */
         .info-card {
-            border-left: 6px solid var(--accent-green);
-            background-color: #f9f9f9;
+            background: white;
             padding: 40px;
-            border-radius: 0 15px 15px 0;
-            max-width: 800px;
+            border-radius: 4px;
+            box-shadow: 10px 10px 0px #eee; /* Sombra sólida moderna */
+            border: 1px solid #ddd;
+            max-width: 850px;
         }
 
         .info-card h2 {
-            font-size: 22px;
-            margin-top: 0;
-            line-height: 1.4;
+            font-size: 20px;
             color: var(--text-dark);
+            line-height: 1.5;
+            margin-top: 0;
         }
 
         .info-card p {
-            font-size: 17px;
-            line-height: 1.6;
-            color: var(--text-gray);
-            margin-bottom: 0;
+            font-size: 16px;
+            color: #555;
+            line-height: 1.8;
         }
     </style>
 </head>
 <body>
 
     <div class="sidebar">
-        <h2>Curricular</h2>
+        <h2>Dashboard <i>Educativo</i></h2>
         <ul class="nav-menu">
-            <li class="nav-item active" onclick="update('01. SÍNTESIS GENERAL', 'Deconstruyendo el <span>pensamiento exacto.</span>', 'El área de Matemática en Ecuador ha experimentado una metamorfosis profunda...')">01. SÍNTESIS</li>
-            <li class="nav-item" onclick="update('02. CRONOLOGÍA', 'Evolución <span>Histórica.</span>', 'Aquí puedes poner cómo ha cambiado el currículo con los años...')">02. CRONOLOGÍA</li>
-            <li class="nav-item" onclick="update('04. CONCRECIÓN', 'Arquitectura del <span>Sistema.</span>', 'Nivel Macro, Meso y Micro. Aquí detallas la autonomía del Estado.')">04. CONCRECIÓN</li>
-            <li class="nav-item" onclick="update('07. REFERENCIAS', 'Fuentes <span>Bibliográficas.</span>', 'Lista de libros y documentos del Ministerio de Educación.')">07. REFERENCIAS</li>
+            <li class="nav-item active" onclick="update('INTRODUCCIÓN', 'Marco <span>Conceptual</span> del Área', 'Aquí inicia la explicación del proyecto de matemáticas...')">01. Inicio</li>
+            <li class="nav-item" onclick="update('HISTORIA', 'Línea de <span>Tiempo</span> Educativa', 'Contenido proporcionado por tus compañeros sobre la evolución...')">02. Cronología</li>
+            <li class="nav-item" onclick="update('ESTRUCTURA', 'Niveles de <span>Concreción</span>', 'Detalles sobre los niveles Macro, Meso y Micro del sistema.')">03. Estructura</li>
         </ul>
     </div>
 
     <div class="main">
-        <div id="breadcrumb" class="breadcrumb">01. SÍNTESIS GENERAL</div>
-        <h1 id="main-title">Deconstruyendo el <span>pensamiento exacto.</span></h1>
+        <div id="breadcrumb" class="breadcrumb">INTRODUCCIÓN</div>
+        <h1 id="main-title">Marco <span>Conceptual</span> del Área</h1>
         
         <div class="info-card">
-            <h2 id="card-desc">El área de Matemática en Ecuador ha experimentado una metamorfosis profunda: de ser concebida como un fin en sí misma...</h2>
-            <p id="card-detail">Este tránsito epistemológico evidencia el abandono progresivo del conductismo de los años 90 hacia la adopción del socio-constructivismo...</p>
+            <h2 id="card-desc">Selecciona una sección del menú lateral para cargar la información detallada de la tarea.</h2>
+            <p id="card-detail">Este dashboard interactivo presenta el análisis curricular de forma dinámica y profesional.</p>
         </div>
     </div>
 
@@ -150,14 +141,5 @@
         function update(label, title, detail) {
             document.getElementById('breadcrumb').innerText = label;
             document.getElementById('main-title').innerHTML = title;
-            document.getElementById('card-desc').innerText = detail.substring(0, 100) + "..."; // Resumen corto
-            document.getElementById('card-detail').innerText = detail;
-
-            // Cambiar clase activa
-            const items = document.querySelectorAll('.nav-item');
-            items.forEach(i => i.classList.remove('active'));
-            event.target.classList.add('active');
-        }
-    </script>
-</body>
-</html>
+            document.getElementById('card-desc').innerText = detail;
+            document.getElementById('card-detail').
