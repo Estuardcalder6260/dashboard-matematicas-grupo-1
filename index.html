@@ -2,43 +2,160 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard Interactivo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Matemáticas</title>
     <style>
-        /* Estilos básicos para que se vea como tu imagen */
-        body { display: flex; font-family: sans-serif; margin: 0; height: 100vh; }
-        .sidebar { width: 250px; background: #f4f7f6; padding: 40px; border-right: 1px solid #ddd; }
-        .main { flex: 1; padding: 60px; }
-        .nav-item { padding: 10px; cursor: pointer; color: #666; margin-bottom: 10px; }
-        .nav-item:hover { color: #000; font-weight: bold; }
-        .active { color: #000; font-weight: bold; border-left: 3px solid #5d7c67; padding-left: 7px; }
-        .content-box { border: 1px solid #eee; padding: 30px; border-radius: 10px; background: #fafafa; margin-top: 20px; }
+        :root {
+            --bg-sidebar: #f5f4f0;
+            --accent-green: #4a5d4e;
+            --text-dark: #1a1a1a;
+            --text-gray: #4a4a4a;
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            height: 100vh;
+            background-color: white;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background-color: var(--bg-sidebar);
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #e0e0e0;
+        }
+
+        .sidebar h2 {
+            font-family: serif;
+            font-style: italic;
+            font-size: 28px;
+            color: var(--accent-green);
+            margin-bottom: 50px;
+            font-weight: normal;
+        }
+
+        .nav-menu { list-style: none; padding: 0; }
+
+        .nav-item {
+            padding: 15px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            transition: all 0.3s;
+            border-radius: 8px;
+        }
+
+        .nav-item:hover { background: rgba(0,0,0,0.03); }
+
+        .nav-item.active {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        /* Main Content */
+        .main {
+            flex: 1;
+            padding: 60px 80px;
+            overflow-y: auto;
+        }
+
+        .breadcrumb {
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb::before {
+            content: "●";
+            margin-right: 15px;
+            font-size: 18px;
+        }
+
+        h1 {
+            font-family: serif;
+            font-size: 72px;
+            line-height: 0.9;
+            margin: 0 0 40px 0;
+            font-weight: normal;
+            color: var(--text-dark);
+        }
+
+        h1 span {
+            display: block;
+            font-style: italic;
+            color: var(--accent-green);
+        }
+
+        /* Bloque de Texto Estilo Destacado */
+        .info-card {
+            border-left: 6px solid var(--accent-green);
+            background-color: #f9f9f9;
+            padding: 40px;
+            border-radius: 0 15px 15px 0;
+            max-width: 800px;
+        }
+
+        .info-card h2 {
+            font-size: 22px;
+            margin-top: 0;
+            line-height: 1.4;
+            color: var(--text-dark);
+        }
+
+        .info-card p {
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--text-gray);
+            margin-bottom: 0;
+        }
     </style>
 </head>
 <body>
 
     <div class="sidebar">
-        <h2>Análisis <br><i style="color: #5d7c67;">Curricular</i></h2>
-        <div class="nav-item" onclick="cambiarContenido('SÍNTESIS', 'Resumen general de la materia...')">01. SÍNTESIS</div>
-        <div class="nav-item" onclick="cambiarContenido('CRONOLOGÍA', 'Línea de tiempo de los cambios...')">02. CRONOLOGÍA</div>
-        <div class="nav-item active" id="btn-default" onclick="cambiarContenido('CONCRECIÓN', 'Aquí va la info de los niveles macro, meso y micro.')">04. CONCRECIÓN</div>
+        <h2>Curricular</h2>
+        <ul class="nav-menu">
+            <li class="nav-item active" onclick="update('01. SÍNTESIS GENERAL', 'Deconstruyendo el <span>pensamiento exacto.</span>', 'El área de Matemática en Ecuador ha experimentado una metamorfosis profunda...')">01. SÍNTESIS</li>
+            <li class="nav-item" onclick="update('02. CRONOLOGÍA', 'Evolución <span>Histórica.</span>', 'Aquí puedes poner cómo ha cambiado el currículo con los años...')">02. CRONOLOGÍA</li>
+            <li class="nav-item" onclick="update('04. CONCRECIÓN', 'Arquitectura del <span>Sistema.</span>', 'Nivel Macro, Meso y Micro. Aquí detallas la autonomía del Estado.')">04. CONCRECIÓN</li>
+            <li class="nav-item" onclick="update('07. REFERENCIAS', 'Fuentes <span>Bibliográficas.</span>', 'Lista de libros y documentos del Ministerio de Educación.')">07. REFERENCIAS</li>
+        </ul>
     </div>
 
     <div class="main">
-        <h1 id="titulo-principal">Arquitectura del Sistema</h1>
-        <div class="content-box">
-            <p id="texto-detalle">Haz clic en una opción de la izquierda para ver la información.</p>
+        <div id="breadcrumb" class="breadcrumb">01. SÍNTESIS GENERAL</div>
+        <h1 id="main-title">Deconstruyendo el <span>pensamiento exacto.</span></h1>
+        
+        <div class="info-card">
+            <h2 id="card-desc">El área de Matemática en Ecuador ha experimentado una metamorfosis profunda: de ser concebida como un fin en sí misma...</h2>
+            <p id="card-detail">Este tránsito epistemológico evidencia el abandono progresivo del conductismo de los años 90 hacia la adopción del socio-constructivismo...</p>
         </div>
     </div>
 
     <script>
-        // Esta es la "magia" que hace que cambie sin que sepas programar
-        function cambiarContenido(titulo, detalle) {
-            document.getElementById('titulo-principal').innerText = titulo;
-            document.getElementById('texto-detalle').innerText = detalle;
-            
-            // Esto cambia el color del botón para saber cuál está seleccionado
+        function update(label, title, detail) {
+            document.getElementById('breadcrumb').innerText = label;
+            document.getElementById('main-title').innerHTML = title;
+            document.getElementById('card-desc').innerText = detail.substring(0, 100) + "..."; // Resumen corto
+            document.getElementById('card-detail').innerText = detail;
+
+            // Cambiar clase activa
             const items = document.querySelectorAll('.nav-item');
-            items.forEach(item => item.classList.remove('active'));
+            items.forEach(i => i.classList.remove('active'));
             event.target.classList.add('active');
         }
     </script>
