@@ -15,249 +15,112 @@
         }
 
         * { box-sizing: border-box; }
-        
-        body {
-            margin: 0;
-            display: flex;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            height: 100vh;
-            background: var(--fondo);
-            overflow: hidden;
-        }
+        body { margin: 0; display: flex; font-family: 'Segoe UI', Tahoma, sans-serif; height: 100vh; background: var(--fondo); overflow: hidden; }
 
-        /* SIDEBAR FIJO */
-        .sidebar {
-            width: 260px;
-            background: var(--azul);
-            color: white;
-            padding: 30px 15px;
-            display: flex;
-            flex-direction: column;
-            flex-shrink: 0;
-        }
-
-        .sidebar h2 {
-            font-family: 'Georgia', serif;
-            font-size: 20px;
-            border-bottom: 2px solid var(--dorado);
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-        }
-
-        .nav-item {
-            padding: 12px 15px;
-            margin: 5px 0;
-            cursor: pointer;
-            border-radius: 6px;
-            color: #bdc3c7;
-            font-size: 11px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.2s;
-        }
-
-        .nav-item:hover { background: rgba(255,255,255,0.1); }
+        /* SIDEBAR ESTÁTICO */
+        .sidebar { width: 260px; background: var(--azul); color: white; padding: 30px 15px; flex-shrink: 0; display: flex; flex-direction: column; }
+        .sidebar h2 { font-family: 'Georgia', serif; font-size: 20px; border-bottom: 2px solid var(--dorado); padding-bottom: 10px; margin-bottom: 30px; }
+        .nav-item { padding: 12px 15px; margin: 5px 0; cursor: pointer; border-radius: 6px; color: #bdc3c7; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s; }
+        .nav-item:hover { background: rgba(255,255,255,0.1); color: white; }
         .nav-item.active { background: var(--dorado); color: var(--azul); }
 
-        /* AREA DE CONTENIDO (CON SCROLL PROPIO) */
-        .content-area {
-            flex-grow: 1;
-            height: 100vh;
-            overflow-y: auto;
-            padding: 50px 60px;
-            position: relative;
-        }
+        /* AREA DE CONTENIDO CON SCROLL INDEPENDIENTE */
+        .content-area { flex-grow: 1; height: 100vh; overflow-y: auto; padding: 40px 60px; scroll-behavior: smooth; }
+        .tab-panel { display: none; width: 100%; max-width: 1200px; margin: 0 auto; }
+        .tab-panel.active { display: block; }
 
-        .tab-panel {
-            display: none; /* Oculto por defecto */
-            width: 100%;
-        }
-
-        .tab-panel.active {
-            display: block; /* Solo se muestra el activo */
-        }
-
-        /* TIPOGRAFÍA Y CARDS */
-        h1 { font-family: 'Georgia', serif; font-size: 42px; color: var(--azul); margin: 0 0 20px 0; }
+        /* TEXTOS ACADÉMICOS */
+        h1 { font-family: 'Georgia', serif; font-size: 42px; color: var(--azul); margin: 0 0 10px 0; }
         h1 span { color: var(--dorado); font-style: italic; }
-        
-        .intro-p { font-size: 17px; line-height: 1.8; color: #555; text-align: justify; margin-bottom: 30px; }
+        .intro-p { font-size: 17px; line-height: 1.8; color: #555; text-align: justify; margin-bottom: 30px; border-left: 4px solid var(--dorado); padding-left: 20px; }
 
-        .cards-grid {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        .card {
-            background: var(--blanco);
-            border-radius: 12px;
-            padding: 25px;
-            flex: 1;
-            min-width: 320px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-top: 5px solid var(--dorado);
-            margin-bottom: 20px;
-        }
-
-        .card h3 { color: var(--azul); margin-top: 0; font-size: 19px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .card p { font-size: 15px; line-height: 1.8; color: #444; text-align: justify; }
+        .cards-row { display: flex; gap: 25px; flex-wrap: wrap; margin-top: 25px; }
+        .card { background: var(--blanco); border-radius: 12px; padding: 30px; flex: 1; min-width: 350px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-top: 5px solid var(--dorado); margin-bottom: 20px; }
+        .card h3 { color: var(--azul); margin-top: 0; font-size: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+        .card p, .card li { font-size: 15px; line-height: 1.8; color: #444; text-align: justify; }
 
         /* GRÁFICA */
-        .chart-container {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #ddd;
-            height: 400px;
-            margin-bottom: 20px;
-        }
+        .chart-box { background: white; padding: 25px; border-radius: 12px; border: 1px solid #ddd; height: 450px; margin: 25px 0; }
 
         /* REFLEXIÓN CRÍTICA */
-        .reflexion-critica {
-            background: var(--azul);
-            color: white;
-            padding: 40px;
-            border-radius: 15px;
-            border-left: 10px solid var(--dorado);
-            margin-top: 30px;
-        }
-        .reflexion-critica h3 { color: var(--dorado); font-size: 24px; margin-top: 0; }
-        .reflexion-critica p { font-size: 17px; line-height: 1.9; color: #ecf0f1; text-align: justify; }
+        .reflexion-pro { background: var(--azul); color: white; padding: 40px; border-radius: 15px; border-left: 12px solid var(--dorado); margin-top: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .reflexion-pro h3 { color: var(--dorado); font-size: 26px; margin-top: 0; font-family: 'Georgia', serif; }
+        .reflexion-pro p { font-size: 17px; line-height: 1.9; color: #ecf0f1; text-align: justify; }
     </style>
 </head>
 <body>
 
     <nav class="sidebar">
         <h2>Dashboard<br><i>Matemático</i></h2>
-        <div class="nav-item active" onclick="changeTab(0, this)">01. Síntesis</div>
-        <div class="nav-item" onclick="changeTab(1, this)">02. Cronología</div>
-        <div class="nav-item" onclick="changeTab(2, this)">03. Comparativa</div>
-        <div class="nav-item" onclick="changeTab(3, this)">04. Concreción</div>
-        <div class="nav-item" onclick="changeTab(4, this)">05. Entropía</div>
-        <div class="nav-item" onclick="changeTab(5, this)">06. Reflexión</div>
-        <div class="nav-item" onclick="changeTab(6, this)">07. Referencias</div>
+        <div class="nav-item active" onclick="jump(0, this)">01. Síntesis</div>
+        <div class="nav-item" onclick="jump(1, this)">02. Cronología</div>
+        <div class="nav-item" onclick="jump(2, this)">03. Comparativa</div>
+        <div class="nav-item" onclick="jump(3, this)">04. Concreción</div>
+        <div class="nav-item" onclick="jump(4, this)">05. Entropía</div>
+        <div class="nav-item" onclick="jump(5, this)">06. Reflexión Crítica</div>
+        <div class="nav-item" onclick="jump(6, this)">07. Referencias</div>
     </nav>
 
     <main class="content-area">
         
         <section id="tab0" class="tab-panel active">
-            <h1>Síntesis <span>Curricular</span></h1>
-            <p class="intro-p">El currículo de Matemática en Ecuador ha evolucionado desde una visión puramente técnica hacia una formación integral, lógica y crítica, diseñada para empoderar al estudiante en la resolución de problemas complejos.</p>
-            <div class="cards-grid">
+            <h1>Análisis <span>Curricular</span></h1>
+            <p class="intro-p">El currículo de Matemática en Ecuador ha transitado desde una visión puramente técnica y mecánica hacia una formación integral, lógica y crítica, diseñada para empoderar al estudiante en la resolución de problemas complejos de su entorno social y productivo.</p>
+            <div class="cards-row">
                 <div class="card">
-                    <h3>1. Evolución Histórica</h3>
-                    <p>Se ha superado el modelo <b>conductista</b> que priorizaba la repetición de algoritmos sin sentido. Actualmente, nos basamos en el <b>socio-constructivismo</b>, donde el aprendizaje es un proceso de construcción social. Se busca que el estudiante desarrolle un pensamiento formal que le permita modelar situaciones de la vida real, integrando el saber con el "saber hacer" a través de las Destrezas con Criterio de Desempeño (DCD).</p>
+                    <h3>1. Evolución Histórica y Epistemológica</h3>
+                    <p>Se ha superado el modelo <b>conductista</b> que priorizaba la repetición de algoritmos sin sentido. Actualmente, nos basamos en el <b>socio-constructivismo</b>, donde el aprendizaje es un proceso de construcción social. Se busca que el estudiante desarrolle un pensamiento formal que le permita modelar situaciones de la vida real, integrando el saber con el "saber hacer" a través de las Destrezas con Criterio de Desempeño.</p>
                 </div>
                 <div class="card">
-                    <h3>2. Cambio de Enfoque</h3>
+                    <h3>2. El Enfoque en Destrezas (DCD)</h3>
                     <p>La implementación de las <b>DCD</b> marca un hito pedagógico. Estas no son simples temas de estudio, sino la combinación de un conocimiento disciplinar, una acción cognitiva y un contexto de aplicación. Esto garantiza una contextualización inicial abierta, permitiendo que la Matemática sea vista como una herramienta culturalmente relevante y no como un conjunto de reglas aisladas.</p>
+                </div>
+                <div class="card">
+                    <h3>3. Perfil del Bachiller y Rol Docente</h3>
+                    <p>El currículo demanda un docente <b>mediador y facilitador</b> de experiencias de aprendizaje significativo. El objetivo final es alcanzar el Perfil de Salida del Bachiller ecuatoriano, caracterizado por la justicia, la innovación y la solidaridad, donde la competencia matemática es el eje fundamental para el desarrollo del pensamiento crítico y la toma de decisiones informadas en una sociedad tecnificada.</p>
                 </div>
             </div>
         </section>
 
         <section id="tab1" class="tab-panel">
-            <h1>Cronología <span>Evolutiva</span></h1>
-            <div class="cards-grid">
+            <h1>Hitos <span>Fundamentales</span></h1>
+            <div class="cards-row">
                 <div class="card">
                     <h3>1996: Reforma Consensuada</h3>
-                    <p>Paradigma Técnico: Centrado en contenidos fijos y mecánica de cálculo. Poca relación con la vida cotidiana y evaluación sumativa centrada solo en el resultado final.</p>
+                    <p><b>Paradigma Técnico:</b> Centrado en contenidos fijos y mecánica de cálculo. El currículo era cerrado y lineal (Baja Entropía). Poca relación con la vida cotidiana y una evaluación punitiva centrada en el resultado final del algoritmo.</p>
                 </div>
                 <div class="card">
-                    <h3>2010: Actualización</h3>
-                    <p>Pedagogía Crítica: Introducción de bloques curriculares y ejes transversales. Se vincula la materia con el entorno social y el Buen Vivir.</p>
+                    <h3>2010: Actualización y Fortalecimiento</h3>
+                    <p><b>Pedagogía Crítica:</b> Introducción de los bloques curriculares y ejes transversales. Se vincula la materia con el entorno social y los principios del Buen Vivir, iniciando la transición hacia un modelo más humano y contextualizado.</p>
                 </div>
                 <div class="card">
-                    <h3>2023: Marco Competencial</h3>
-                    <p>Socio-constructivismo: Máxima flexibilidad por subniveles. El sistema se vuelve abierto y adaptativo, permitiendo ajustes según la diversidad del aula.</p>
+                    <h3>2016 - 2023: Marco Competencial</h3>
+                    <p><b>Socio-constructivismo:</b> Máxima flexibilidad por subniveles. El sistema se vuelve abierto y adaptativo (Alta Entropía Positiva), permitiendo que las instituciones realicen ajustes curriculares según las necesidades específicas de su población estudiantil.</p>
                 </div>
             </div>
         </section>
 
         <section id="tab2" class="tab-panel">
-            <h1>Análisis <span>Comparativo</span></h1>
-            <div class="card">
-                <p>La diferencia fundamental reside en la **gestión de la complejidad**. Mientras que el modelo antiguo era lineal y jerárquico (baja entropía), el modelo actual es una red flexible que permite la adaptación institucional (PCI/PCA). El docente ahora tiene autonomía microcurricular para responder a la fenomenología del aula.</p>
+            <h1>Dimensiones <span>de Cambio</span></h1>
+            <div class="card" style="max-width: 900px;">
+                <p>La diferencia fundamental reside en la **gestión de la complejidad**. Mientras que el modelo antiguo era rígido y jerárquico, el modelo actual es una red flexible que permite la adaptación institucional (PCI/PCA). El docente ahora posee la autonomía microcurricular necesaria para responder a la fenomenología del aula, transformando el currículo prescrito en un currículo vivido y pertinente.</p>
             </div>
         </section>
 
         <section id="tab3" class="tab-panel">
             <h1>Niveles de <span>Concreción</span></h1>
-            <div class="cards-grid">
-                <div class="card"><h3>Macro: Estado</h3><p>Ministerio de Educación: Define los estándares mínimos obligatorios y el perfil de salida nacional.</p></div>
-                <div class="card"><h3>Meso: Institución</h3><p>Unidad Educativa: Contextualiza el currículo mediante el PEI y el PCI según su realidad local.</p></div>
-                <div class="card"><h3>Micro: Aula</h3><p>Docente: Planificación de Unidad Didáctica (PUD) adaptada directamente a los estudiantes.</p></div>
+            <div class="cards-row">
+                <div class="card"><h3>Nivel Macro (Nacional)</h3><p>Ministerio de Educación: Elabora el currículo obligatorio, los estándares de aprendizaje y el perfil de salida nacional que garantiza la equidad en la formación de todos los estudiantes del país.</p></div>
+                <div class="card"><h3>Nivel Meso (Institucional)</h3><p>Unidad Educativa: Comprende el Proyecto Educativo Institucional (PEI) y la Planificación Curricular Institucional (PCI). Es donde se aterriza la norma a la realidad del centro educativo.</p></div>
+                <div class="card"><h3>Nivel Micro (Aula)</h3><p>Docente: Se materializa en la Planificación de Unidad Didáctica (PUD). Es el nivel de mayor impacto, donde se realizan las adaptaciones necesarias para atender la diversidad del grupo.</p></div>
             </div>
         </section>
 
         <section id="tab4" class="tab-panel">
             <h1>Entropía <span>Curricular</span></h1>
-            <div class="chart-container"><canvas id="graficaFinal"></canvas></div>
+            <div class="chart-box"><canvas id="graficaFinal"></canvas></div>
             <div class="card">
-                <p>A mayor flexibilidad (línea verde), existe mayor posibilidad de aprendizaje significativo. La rigidez histórica (línea roja) ha disminuido para dar paso a la complejidad adaptativa.</p>
+                <h3>Análisis Sistémico</h3>
+                <p>A medida que aumenta la <b>Flexibilidad</b> (línea verde), el sistema escolar puede gestionar mejor la diversidad del aula. La rigidez institucional histórica (línea roja) ha disminuido progresivamente para dar paso a un modelo de autonomía pedagógica que favorece el aprendizaje significativo sobre la instrucción mecánica.</p>
             </div>
         </section>
-
-        <section id="tab5" class="tab-panel">
-            <h1>Reflexión <span>Crítica</span></h1>
-            <div class="card">
-                <p>El límite que aún no se ha podido superar en la enseñanza de la Matemática en Ecuador es la distancia entre lo que plantea el currículo y lo que realmente ocurre en el aula. Aunque los documentos promueven un aprendizaje basado en competencias, resolución de problemas y contexto real, en la práctica todavía predomina la memorización y la repetición de algoritmos. Esto sucede por la influencia de evaluaciones estandarizadas, la cultura institucional y la formación tradicional docente.</p>
-            </div>
-            <div class="reflexion-critica">
-                <h3>Visión 2030: Grafos y Lógica Difusa</h3>
-                <p>Si diseñara el currículo 2030, lo basaría en la <b>Teoría de Grafos</b> y la <b>Lógica Difusa</b>. La primera permitiría entender el currículo como una red flexible de aprendizajes conectados, donde cada estudiante construya su propia ruta según sus intereses y contexto. La segunda transformaría la evaluación, dejando atrás el modelo de “aprueba o reprueba” para valorar distintos niveles de desarrollo de una competencia, reconociendo que aprender Matemática es un proceso gradual y continuo.</p>
-            </div>
-        </section>
-
-        <section id="tab6" class="tab-panel">
-            <h1>Referencias <span>Bibliográficas</span></h1>
-            <div class="card">
-                <p>Ministerio de Educación del Ecuador (2016). Currículo de los Niveles de Educación Obligatoria: Matemática. Quito.</p>
-                <p>Investigaciones sobre la evolución de la reforma educativa en el Ecuador (1996-2023).</p>
-            </div>
-        </section>
-
-    </main>
-
-    <script>
-        // FUNCIÓN DE NAVEGACIÓN INSTANTÁNEA (SIN SLIDER QUE SE TRABE)
-        function changeTab(index, element) {
-            // 1. Ocultar todos los paneles
-            const panels = document.querySelectorAll('.tab-panel');
-            panels.forEach(p => p.classList.remove('active'));
-
-            // 2. Mostrar el panel seleccionado
-            document.getElementById('tab' + index).classList.add('active');
-
-            // 3. Actualizar menú lateral
-            document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-            element.classList.add('active');
-
-            // 4. Volver al inicio del scroll en la nueva pestaña
-            document.querySelector('.content-area').scrollTop = 0;
-        }
-
-        // CARGA DE GRÁFICA
-        window.onload = function() {
-            const ctx = document.getElementById('graficaFinal').getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['1996', '2010', '2016', '2023'],
-                    datasets: [
-                        { label: 'Flexibilidad', data: [10, 40, 75, 95], borderColor: '#27ae60', backgroundColor: 'rgba(39, 174, 96, 0.1)', fill: true, tension: 0.4 },
-                        { label: 'Rigidez', data: [95, 65, 30, 5], borderColor: '#c0392b', borderDash: [5,5], tension: 0.4 }
-                    ]
-                },
-                options: { 
-                    responsive: true, 
-                    maintainAspectRatio: false,
-                    scales: { y: { beginAtZero: true, max: 100 } }
-                }
-            });
-        };
-    </script>
-</body>
-</html>
