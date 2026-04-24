@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Curricular - Versión Final</title>
+    <style>
+        :root {
+            --azul: #1a252f;
+            --dorado: #d4af37;
+            --fondo: #f4f7f6;
+            --blanco: #ffffff;
+            --gris-texto: #444;
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            background: var(--fondo);
+        }
+
+        /* BARRA LATERAL */
+        .sidebar {
+            width: 260px;
+            background: var(--azul);
+            color: white;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.2);
+        }
+
+        .sidebar h2 {
+            font-family: 'Georgia', serif;
+            font-size: 22px;
+            border-bottom: 2px solid var(--dorado);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        .nav-item {
+            padding: 15px;
+            margin: 5px 0;
+            cursor: pointer;
+            border-radius: 8px;
+            color: #bdc3c7;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover { background: rgba(255,255,255,0.05); color: white; }
+        .nav-item.active { background: var(--dorado); color: var(--azul); transform: translateX(5px); }
+
+        /* VISOR PRINCIPAL */
+        .viewport { flex: 1; position: relative; overflow: hidden; }
+
+        .slider-master {
+            display: flex;
+            height: 100%;
+            width: 700%; 
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        .section {
+            width: 14.285714%;
+            height: 100%;
+            padding: 60px 80px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        /* TEXTOS Y TÍTULOS */
+        .label { color: var(--dorado); font-weight: bold; font-size: 12px; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; }
+        h1 { font-family: 'Georgia', serif; font-size: 48px; color: var(--azul); margin: 0 0 25px 0; line-height: 1.1; }
+        h1 span { color: var(--dorado); font-style: italic; }
+        p { line-height: 1.8; color: var(--gris-texto); font-size: 16px; margin-bottom: 20px; }
+
+        /* TARJETAS Y TABLAS */
+        .card {
+            background: var(--blanco);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border-left: 6px solid var(--dorado);
+            position: relative;
+        }
+
+        .card h3 { margin: 0 0 15px 0; color: var(--azul); font-size: 20px; border-bottom: 1px solid #eee; padding-bottom: 12px; }
+
+        .comp-table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .comp-table th, .comp-table td { padding: 18px; border: 1px solid #f0f0f0; text-align: left; font-size: 14px; }
+        .comp-table th { background: #f8f9fa; color: var(--azul); font-weight: bold; }
+        .dim-col { background: #fafafa; font-weight: bold; width: 180px; color: var(--azul); }
+
+        /* DISEÑO ESPECÍFICO PUNTO 4 */
+        .nivel-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .circle { background: var(--dorado); color: var(--azul); width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; }
+        .doc-tag { display: inline-block; background: var(--azul); color: white; padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: bold; margin-top: 12px; border: 1px solid var(--dorado); }
+        .detail-box { background: #f9f9f9; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 3px solid #ddd; font-size: 14px; color: #555; }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>Dashboard<br><i>Matemático</i></h2>
+        <div class="nav-item active" onclick="jump(0, this)">01. Síntesis</div>
+        <div class="nav-item" onclick="jump(1, this)">02. Cronología</div>
+        <div class="nav-item" onclick="jump(2, this)">03. Comparativa</div>
+        <div class="nav-item" onclick="jump(3, this)">04. Concreción</div>
+        <div class="nav-item" onclick="jump(4, this)">05. Complejidad</div>
+        <div class="nav-item" onclick="jump(5, this)">06. Reflexión</div>
+        <div class="nav-item" onclick="jump(6, this)">07. Referencias</div>
+    </div>
+
+    <div class="viewport">
+        <div class="slider-master" id="mainSlider">
+            
+            <div class="section">
+                <div class="label">01. INTRODUCCIÓN</div>
+                <h1>Análisis <span>Curricular</span></h1>
+                <p>La enseñanza de la Matemática en Ecuador ha pasado de centrarse en la memorización de fórmulas y procedimientos a concebirse como una herramienta lógica para comprender y transformar la realidad. Este cambio refleja la transición del conductismo hacia enfoques socio-constructivistas.</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="card">
+                        <h3>1. ENFOQUE CRÍTICO</h3>
+                        <p>Busca que el estudiante aplique conceptos en situaciones reales, fomentando el pensamiento lógico sobre la memoria en situaciones reales.</p>
+                    </div>
+                    <div class="card">
+                        <h3>2. FLEXIBILIDAD</h3>
+                        <p>Permite adaptar contenidos según el entorno social, garantizando una educación más pertinente a la realidad local.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="label">02. EVOLUCIÓN HISTÓRICA</div>
+                <h1>Hitos <span>Fundamentales</span></h1>
+                <div class="card">
+                    <h3>1996: Reforma Curricular Consensuada</h3>
+                    <p><b>Paradigma Conductista:</b> Se enfocaba en el desarrollo de destrezas instrumentales mediante la repetición. La matemática era rígida y descontextualizada.</p>
+                </div>
+                <div class="card">
+                    <h3>2010: Actualización y Fortalecimiento</h3>
+                    <p><b>Pedagogía Crítica:</b> Vinculación con el "Buen Vivir". Se humaniza la ciencia y se organizan los contenidos en bloques curriculares lógicos.</p>
+                </div>
+                <div class="card" style="border-left-color: var(--azul);">
+                    <h3>2023: Marco Competencial</h3>
+                    <p><b>Socio-constructivismo:</b> Enfoque en competencias funcionales (digitales, financieras y socioemocionales) para resolver problemas de la vida diaria.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="label">03. COMPARATIVA</div>
+                <h1>Dimensiones <span>de Cambio</span></h1>
+                <table class="comp-table">
+                    <thead>
+                        <tr><th class="dim-col">DIMENSIÓN</th><th>1996</th><th>2010</th><th>2016</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="dim-col">Enfoque</td><td>Conductista</td><td>Pedagogía Crítica</td><td>Constructivista</td></tr>
+                        <tr><td class="dim-col">Estructura</td><td>Lineal y Rígida</td><td>Bloques Curriculares</td><td>Modular por Subniveles</td></tr>
+                        <tr><td class="dim-col">Evaluación</td><td>Sumativa / Exámenes</td><td>Indicadores Esenciales</td><td>Formativa por Criterios</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <div class="label">04. NIVELES DE CONCRECIÓN</div>
+                <h1>Arquitectura del <span>Sistema Curricular</span></h1>
+                <p>Estructura de responsabilidades en la planificación educativa ecuatoriana:</p>
+                
+                <div class="card">
+                    <div class="nivel-header">
+                        <div class="circle">1</div>
+                        <h3>Nivel Macro (Estado)</h3>
+                    </div>
+                    <p>Corresponde al <b>Ministerio de Educación</b>. Es el nivel prescriptivo y obligatorio que define las intenciones educativas del país.</p>
+                    <div class="detail-box">
+                        <b>Responsabilidades:</b> Perfil de salida del bachiller, objetivos de área y Destrezas con Criterio de Desempeño (DCD).
+                    </div>
+                    <div class="doc-tag">Currículo Nacional Obligatorio</div>
+                </div>
+
+                <div class="card">
+                    <div class="nivel-header">
+                        <div class="circle">2</div>
+                        <h3>Nivel Meso (Institución)</h3>
+                    </div>
+                    <p>Las autoridades y docentes de la <b>Institución Educativa</b> adaptan el currículo nacional a su contexto geográfico y cultural.</p>
+                    <div class="detail-box">
+                        <b>Responsabilidades:</b> Contextualización institucional, carga horaria y enfoque pedagógico del centro.
+                    </div>
+                    <div class="doc-tag">Documentos: PEI y PCI</div>
+                </div>
+
+                <div class="card" style="border-left-color: var(--azul);">
+                    <div class="nivel-header">
+                        <div class="circle">3</div>
+                        <h3>Nivel Micro (Aula)</h3>
+                    </div>
+                    <p>Es responsabilidad directa del <b>Docente</b>. Es el nivel de mayor flexibilidad donde se planifica la acción directa con los estudiantes.</p>
+                    <div class="detail-box">
+                        <b>Responsabilidades:</b> Metodologías activas, adaptaciones curriculares (NEE) y evaluación diaria.
+                    </div>
+                    <div class="doc-tag">Documentos: PCA y PUD</div>
+                </div>
+            </div>
+
+            <div class="section"><h1>05. <span>Complejidad</span></h1><div class="card">Análisis en desarrollo...</div></div>
+            <div class="section"><h1>06. <span>Reflexión</span></h1><div class="card">Análisis en desarrollo...</div></div>
+            <div class="section"><h1>07. <span>Referentes</span></h1><div class="card">Análisis en desarrollo...</div></div>
+
+        </div>
+    </div>
+
+    <script>
+        function jump(idx, el) {
+            // Mover el slider con precisión decimal
+            document.getElementById('mainSlider').style.transform = 'translateX(-' + (idx * 14.285714) + '%)';
+            
+            // Actualizar estado activo en la barra lateral
+            const items = document.querySelectorAll('.nav-item');
+            items.forEach(item => item.classList.remove('active'));
+            el.classList.add('active');
+        }
+    </script>
+</body>
+</html>
